@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row">
+        <div class="col m6">
+        </div>    
+        <div class="col m6">
+            <h4 class="center-align">REGISTER</h4>
+            
+             <form   name="regform" data-ng-submit="register()" >
+            <div class="row">
+                
+                   
+                        <div class="input-field col s6">
+                              <input type="text" data-ng-model="User.firstname"  required>
+              <label for="first-name">First Name</label>
+             
+               </div> 
+               
+              
+                                  <div class="input-field col s6">
+                           
+                         <input  type="text" data-ng-model="User.lastname"   required>
+              <label for="last-name">Last Name</label>  
+                         
+                      
+                    </div>
+                    </div>
+                 
+              
+                    <div class="row">
+                       
+                   <div class="input-field col s12">         
+                <input  type="email" data-ng-model="User.email" >
+                            <label for="email">Email</label>
+                             
+                         </div>  
+                     
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                  
+                 <input  type="password" data-ng-model="User.password"  >
+                            <label for="pass">Password</label>
+                          
+                        </div>
+                    </div>
+                    
+                    <!--
+                       <div class="row">
+                       
+                   <div class="input-field col s3">
+                   
+      <input class="with-gap" name="group1" type="radio" data-ng-model="user.gender" value="male"  />
+      <label for="test4">Male</label>
+      
+                  </div>
+                 <div class="input-field col s3">
+                   
+      <input class="with-gap" name="group1" type="radio" data-ng-model="user.gender" value="female"  />
+      <label for="test3">Female</label>
+    
+                  </div>
+                
+                    <div class="input-field col s6">
+                    
+                    
+                  <input type="text" class="datepicker" name="dob" data-ng-model="user.dob" >
+                   <label for="email">DATE OF BIRTH</label>
+                     
+                    </div>
+                      
+                    </div>
+                    
+                    
+                    
+                   -->
+                    <div class="row">
+                     <div class="input-field col s12">
+                            <p class="right-align">
+                                <button class="btn btn-large waves-effect waves-light" type="submit">REGISTER</button>
+                            </p>
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    
+                    
+                </form>
+
+        
+            </div>
+        </div>
+    </div>
+
+
+<script>
+
+
+$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 90, // Creates a dropdown of 15 years to control year,
+    today: 'Today',
+    clear: 'Clear',
+    close: 'Ok',
+    closeOnSelect: false // Close upon selecting a date,
+  });
+</script>
+
