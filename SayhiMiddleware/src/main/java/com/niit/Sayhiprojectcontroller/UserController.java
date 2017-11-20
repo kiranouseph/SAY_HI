@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.niit.SayhiBackend.dao.UserDAO;
-import com.niit.SayhiBackend.model.User;
+import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.model.Users;
 
 @RestController
 
 @RequestMapping("/user")
 public class UserController {
 @Autowired
-UserDAO udao;
+UsersDAO udao;
 	
 	
 @CrossOrigin(origins="http://localhost:8080")
@@ -35,13 +35,13 @@ UserDAO udao;
 		}
 	 
 	 @RequestMapping(value="/register",method=RequestMethod.POST)
-		public ResponseEntity<User> createUser(@RequestBody User user){
+		public ResponseEntity<Users> createUser(@RequestBody Users user){
 			System.out.println("In register cvontrolelr");
 			boolean isSaved=udao.saveUser(user);
 			if(isSaved)
-			return new ResponseEntity<User>(user,HttpStatus.OK);
+			return new ResponseEntity<Users>(user,HttpStatus.OK);
 			else
-				return new ResponseEntity<User>(user,HttpStatus.METHOD_FAILURE);
+				return new ResponseEntity<Users>(user,HttpStatus.METHOD_FAILURE);
 			
 		}
 		

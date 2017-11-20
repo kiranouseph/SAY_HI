@@ -13,29 +13,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.niit.SayhiBackend.dao.UserDAO;
-import com.niit.SayhiBackend.model.User;
+import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.model.Users;
 
 import antlr.collections.List;
 @Repository("UserDAOImpl")
-public class UserDAOImpl implements UserDAO {
+public class UsersDAOImpl implements UsersDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 	@Autowired
-	public UserDAOImpl(SessionFactory sessionfactory)
+	public UsersDAOImpl(SessionFactory sessionfactory)
 	{
 		this.sessionFactory=sessionfactory;
 	}
 	 @Transactional
-		public ArrayList<User> getAllUser() {
+		public ArrayList<Users> getAllUser() {
 			
 			String hql = "from User";
 			Query query =sessionFactory.getCurrentSession().createQuery(hql);		
-			return (ArrayList<User>) query.list();
+			return (ArrayList<Users>) query.list();
 			
 		}
 	  @Transactional
-	  public boolean saveUser(User user) {
+	  public boolean saveUser(Users user) {
 	  	
 	  	try {
 	  		sessionFactory.getCurrentSession().save(user);

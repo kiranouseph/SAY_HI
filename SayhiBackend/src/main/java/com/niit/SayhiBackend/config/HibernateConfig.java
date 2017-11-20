@@ -15,7 +15,7 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.niit.SayhiBackend.model.User;
+import com.niit.SayhiBackend.model.Users;
 
 
 
@@ -37,7 +37,7 @@ public class HibernateConfig
 	        
 	        sessionBuilder.addProperties(getHibernateProperties());
 	     
-	        sessionBuilder.addAnnotatedClass(User.class);
+	        sessionBuilder.addAnnotatedClass(Users.class);
 	        
 
 	      
@@ -51,11 +51,11 @@ public class HibernateConfig
 	    @Bean(name = "datasource")
 	    public DataSource dataSource() {
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	        dataSource.setDriverClassName("org.h2.Driver");
-	        dataSource.setUrl("jdbc:h2:tcp://localhost/~/sayhidb");
+	        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+	        dataSource.setUrl("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))");
 
-	        dataSource.setUsername("sa");
-	        dataSource.setPassword("");
+	        dataSource.setUsername("kiran");
+	        dataSource.setPassword("kiranouseph12");
 	        System.out.println("Data Source Created.....");
 	        return dataSource;
 	       
@@ -64,7 +64,7 @@ public class HibernateConfig
 	    private Properties getHibernateProperties() {
 	        Properties properties = new Properties();
 	        properties.put("hibernate.show_sql", "true");
-	        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
+	        properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
 	        properties.put("hibernate.format_sql", "true");
 	        properties.put("hibernate.hbm2ddl.auto", "update");
 	        properties.put("hibernate.connection.autocommit", true);

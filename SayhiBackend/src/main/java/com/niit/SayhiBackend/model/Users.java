@@ -20,16 +20,16 @@ import java.util.Set;
 @SuppressWarnings("unused")
 @Entity
 @Component
-@Table(name="USER")
-public class User implements Serializable{
+@Table(name="USERS")
+public class Users implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
 	
-
+	 @Column(name = "USERID", nullable = false)
 	private int id;
 	 @Column(name = "fname", nullable = false)
 	    private String firstname;
@@ -38,7 +38,7 @@ public class User implements Serializable{
 	
     @Column(name = "email", nullable = false,unique=true)
     private String email;
-    @Column(name = "password", nullable = false)
+    @Column(name = "pass", nullable = false)
     private String password;
    
   
@@ -67,6 +67,9 @@ public class User implements Serializable{
 		this.lastname = lastname;
 	}
 
+
+
+	
 	public String getPassword() {
 		return password;
 	}
