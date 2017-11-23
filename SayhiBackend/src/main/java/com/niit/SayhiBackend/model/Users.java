@@ -30,17 +30,23 @@ public class Users implements Serializable{
     @GeneratedValue
 	
 	 @Column(name = "USERID", nullable = false)
-	private int id;
-	 @Column(name = "fname", nullable = false)
+	private int userid;
+	 @Column(name = "Firstname", nullable = false)
 	    private String firstname;
-	 @Column(name = "lname", nullable = false)
+	 @Column(name = "Lastname", nullable = false)
 	    private String lastname;
 	
-    @Column(name = "email", nullable = false,unique=true)
+    @Column(name = "Email", nullable = false,unique=true)
     private String email;
-    @Column(name = "pass", nullable = false)
+    @Column(name = "Password", nullable = false)
     private String password;
-   
+    @Column(name = "Role", nullable = false)
+    private String role;
+    @Column(name = "Status", nullable = false)
+    private String status;
+    @Column(name = "Isonline", nullable = false)
+    private String isonline;
+    
   
    
 
@@ -82,16 +88,39 @@ public class Users implements Serializable{
 		return serialVersionUID;
 	}
 
-	public int getId() {
-		return id;
+	
+
+	public int getUserid() {
+		return userid;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
-	
-	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getIsonline() {
+		return isonline;
+	}
+
+	public void setIsonline(String isonline) {
+		this.isonline = isonline;
+	}
 
 	public String getEmail() {
 		return email;

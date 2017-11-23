@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import com.niit.SayhiBackend.model.Users;
 
-import antlr.collections.List;
 
 public interface UsersDAO {
 	 ArrayList<Users> getAllUser();
-
-	boolean saveUser(Users user);
+	 public boolean saveUser(Users user);
+	 public boolean updateOnlineStatus(String status,Users user);
+		public Users getUser(String username);
+	
 }

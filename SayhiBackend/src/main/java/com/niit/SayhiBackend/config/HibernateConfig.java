@@ -1,5 +1,7 @@
  package com.niit.SayhiBackend.config;
 
+
+
 import java.util.Properties;
 
 
@@ -15,12 +17,21 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.SayhiBackend.dao.BlogDAO;
+import com.niit.SayhiBackend.dao.ForumDAO;
+import com.niit.SayhiBackend.dao.JobDAO;
+import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.daoimpl.BlogDAOImpl;
+import com.niit.SayhiBackend.daoimpl.ForumDAOImpl;
+import com.niit.SayhiBackend.daoimpl.JobDAOImpl;
+import com.niit.SayhiBackend.daoimpl.UsersDAOImpl;
+import com.niit.SayhiBackend.model.Blog;
+import com.niit.SayhiBackend.model.BlogComment;
+import com.niit.SayhiBackend.model.Forum;
+import com.niit.SayhiBackend.model.ForumComment;
+import com.niit.SayhiBackend.model.Friend;
+import com.niit.SayhiBackend.model.Job;
 import com.niit.SayhiBackend.model.Users;
-
-
-
-
-
 
 
 @Configuration
@@ -28,16 +39,22 @@ import com.niit.SayhiBackend.model.Users;
 @EnableTransactionManagement
 public class HibernateConfig 
 {
-	
-	    @Autowired
-	    @Bean
-	    public SessionFactory sessionFactory(DataSource dataSource) {
+	@Autowired
+	    @Bean(name="sessionFactory")
+	    public SessionFactory sessionFactory(DataSource dataSource)  {
 	        LocalSessionFactoryBuilder sessionBuilder  = new LocalSessionFactoryBuilder(dataSource);
+
 	        /*sessionBuilder.setProperty("hibernate.show_sql", "true");*/
 	        
 	        sessionBuilder.addProperties(getHibernateProperties());
 	     
-	        sessionBuilder.addAnnotatedClass(Users.class);
+	       sessionBuilder.addAnnotatedClass(Users.class);
+	        sessionBuilder.addAnnotatedClass(Blog.class);
+	       sessionBuilder.addAnnotatedClass(BlogComment.class);
+	        sessionBuilder.addAnnotatedClass(Forum.class);
+	        sessionBuilder.addAnnotatedClass(ForumComment.class);
+	        sessionBuilder.addAnnotatedClass(Friend.class);
+	        sessionBuilder.addAnnotatedClass(Job.class);
 	        
 
 	      
@@ -47,8 +64,8 @@ public class HibernateConfig
 	        
 	        return sessionBuilder.buildSessionFactory();
 	    }
-	    @Autowired
-	    @Bean(name = "datasource")
+	 @Autowired
+	    @Bean(name = "datasource") 
 	    public DataSource dataSource() {
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 	        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
@@ -73,14 +90,46 @@ public class HibernateConfig
 
 	    
 	    
-	    
-	    @Bean
-		@Autowired
+	    @Autowired
+	    @Bean(name="transactionManager")
+	     
 	        public HibernateTransactionManager txManager(SessionFactory sessionFactory) {
 	                return new HibernateTransactionManager(sessionFactory);
 	        }
+	        
+	    @Autowired    
+	    @Bean(name="blogDAO")
+		public BlogDAO getBlogDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("Blog DAO object Created");
+			return new BlogDAOImpl(sessionFactory);
+		}
 	    
-	    	
-	    
+	    @Autowired    
+	    @Bean(name="userDAO")
+	   
+		public UsersDAO getUserDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("User DAO object Created");
+			return new UsersDAOImpl(sessionFactory);
+		}
+	    @Autowired    
+	    @Bean(name="jobDAO")
+	   
+		public JobDAO getJobDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("Job DAO object Created");
+			return new JobDAOImpl(sessionFactory);
+		}
+	    @Autowired    
+	    @Bean(name="forumDAO")
+	   
+		public ForumDAO getForumDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("Forum DAO object Created");
+			return new ForumDAOImpl(sessionFactory);
+		}
+	 
+	 
 
 }

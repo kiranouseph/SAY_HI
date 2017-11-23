@@ -17,7 +17,7 @@ import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Users;
 
 import antlr.collections.List;
-@Repository("UserDAOImpl")
+
 public class UsersDAOImpl implements UsersDAO {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -29,7 +29,7 @@ public class UsersDAOImpl implements UsersDAO {
 	 @Transactional
 		public ArrayList<Users> getAllUser() {
 			
-			String hql = "from User";
+			String hql = "from Users";
 			Query query =sessionFactory.getCurrentSession().createQuery(hql);		
 			return (ArrayList<Users>) query.list();
 			
@@ -46,6 +46,26 @@ public class UsersDAOImpl implements UsersDAO {
 	  		return false;
 	  	}
 	  }
+	public boolean updateOnlineStatus(String status, Users user) {
+		try{
+			user.setIsonline(status);
+			sessionFactory.getCurrentSession().update(user);
+			return true;
+		}
+		catch(Exception e)
+		{
+			
+			return false;
+		}
+		
+	}
+	public Users getUser(String username) {
+		Session session= sessionFactory.openSession();
+		Users user=(Users)session.get(Users.class,username);
+		session.close();
+		return user;
+		
+	}
 
 	
 

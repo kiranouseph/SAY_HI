@@ -1,0 +1,205 @@
+package com.niit.SayhiBackend.daoimpl;
+
+import java.util.ArrayList;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.niit.SayhiBackend.dao.BlogDAO;
+import com.niit.SayhiBackend.model.Blog;
+import com.niit.SayhiBackend.model.BlogComment;
+@Repository("blogDAO")
+public class BlogDAOImpl implements BlogDAO {
+	
+	@Autowired
+	SessionFactory sessionFactory;
+	@Autowired
+	public BlogDAOImpl(SessionFactory sessionFactory)
+	{
+		this.sessionFactory=sessionFactory;
+	}
+@Transactional
+	public boolean addBlog(Blog blog) {
+		try
+		{
+		sessionFactory.getCurrentSession().save(blog);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+		
+	}
+@Transactional
+	public boolean updateBlog(Blog blog) {
+		
+		try
+		{
+		sessionFactory.getCurrentSession().update(blog);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+	}
+@Transactional
+	public boolean deleteBlog(Blog blog) {
+	
+		try
+		{
+		sessionFactory.getCurrentSession().delete(blog);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+	}
+@Transactional
+	public Blog getBlog(int blogId) {
+		Session session=sessionFactory.openSession();
+		Blog blog = (Blog) session.get(Blog.class, blogId);
+		session.close();
+		return blog;
+		
+	}
+@Transactional
+	public ArrayList<Blog> getAllBlogs() {
+	
+		Session session = sessionFactory.openSession();
+		ArrayList<Blog> blogList=(ArrayList<Blog>)session.createQuery("from Blog");
+		session.close();
+		return blogList;
+	}
+@Transactional
+	public boolean approveBlog(Blog blog) {
+		
+		try{
+			blog.setStatus("A");
+			sessionFactory.getCurrentSession().saveOrUpdate(blog);
+			return true;
+			
+		}
+		catch(Exception e)
+		{
+		
+		return false;
+		}
+	}
+@Transactional
+	public boolean rejectBlog(Blog blog) {
+		try{
+			blog.setStatus("Ns");
+			sessionFactory.getCurrentSession().saveOrUpdate(blog);
+			return true;
+			
+		}
+		catch(Exception e)
+		{
+		
+		return false;
+		}
+		
+
+}
+@Transactional
+	public boolean addBlogComment(BlogComment blogcomment) {
+		try
+		{
+		sessionFactory.getCurrentSession().save(blogcomment);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+
+		
+	}
+@Transactional
+public BlogComment getBlogComment(int commentId)
+{
+	Session session=sessionFactory.openSession();
+	BlogComment blogcomment = (BlogComment) session.get(BlogComment.class, commentId);
+	session.close();
+	return blogcomment;
+	
+}
+
+@Transactional
+	public boolean deleteBlogComment(BlogComment blogcomment) {
+		try
+		{
+		sessionFactory.getCurrentSession().saveOrUpdate(blogcomment);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+
+		
+	}
+@Transactional
+	public boolean updateBlogComment(BlogComment blogcomment) {
+		try
+		{
+		sessionFactory.getCurrentSession().delete(blogcomment);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+
+		
+	}
+@Transactional
+	public boolean like(int blogid) {
+		
+		try
+		{
+			Session session=sessionFactory.openSession();
+			Blog blog = (Blog) session.get(Blog.class, blogid);
+			blog.setLikes(blog.getLikes()+1);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+		
+		
+		
+	}
+@Transactional
+	public boolean dislike(int blogid) {
+		try
+		{
+			Session session=sessionFactory.openSession();
+			Blog blog = (Blog) session.get(Blog.class, blogid);
+			blog.setLikes(blog.getDislikes()+1);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+		
+		
+	}
+	
+}
