@@ -32,8 +32,7 @@ public class Forum implements Serializable {
 	@Column(name = "Staus", nullable = false)
     private String status;
 	
-	@Column(name = "CreateDate", nullable = false)
-    private Date createdate;
+
 
 	public int getForumid() {
 		return forumid;
@@ -75,13 +74,7 @@ public class Forum implements Serializable {
 		this.status = status;
 	}
 
-	public Date getCreatedate() {
-		return createdate;
-	}
-
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
-	}
+	
 	
 
 }

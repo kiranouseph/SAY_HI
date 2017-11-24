@@ -20,6 +20,9 @@ public class BlogDAOTest
 	@Autowired
 private static BlogDAO blogDAO;
 	
+	
+	
+	
 	@BeforeClass
 	public static void initialize()
 	{
@@ -30,6 +33,12 @@ private static BlogDAO blogDAO;
 		blogDAO=(BlogDAO)context.getBean("blogDAO");
 	}
 
+	
+	
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void addBlogTest()
@@ -49,6 +58,10 @@ private static BlogDAO blogDAO;
 	
 	}
 	
+	
+	
+	
+	@Ignore
 	@Test
 	public void getblogTest()
 	{
@@ -73,6 +86,10 @@ private static BlogDAO blogDAO;
 		
 		
 	}
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void deleteBlogTest()
@@ -83,6 +100,10 @@ private static BlogDAO blogDAO;
 		
 		
 	}
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void getAllBlogTest()
@@ -96,6 +117,10 @@ private static BlogDAO blogDAO;
 	}
 	
 	}
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void approveBlogTest()
@@ -105,6 +130,10 @@ private static BlogDAO blogDAO;
 		assertTrue("Problem in Approving  Blog",blogDAO.approveBlog(blog));
 		
 	}
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void rejectBlogTest()
@@ -114,6 +143,10 @@ private static BlogDAO blogDAO;
 		assertTrue("Problem in Rejecting  Blog",blogDAO.rejectBlog(blog));
 		
 	}
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void likeBlogTest()
@@ -123,6 +156,9 @@ private static BlogDAO blogDAO;
 		
 	}
 	
+	
+	
+	
 	@Ignore
 	@Test
 	public void dislikeBlogTest()
@@ -131,6 +167,11 @@ private static BlogDAO blogDAO;
 		assertTrue("Problem in Rejecting  Blog",blogDAO.dislike(41));
 		
 	}
+	
+	
+	
+	
+	
 	@Ignore
 	@Test
 	public void addBlogComment()
@@ -144,23 +185,41 @@ private static BlogDAO blogDAO;
 	
 	}
 	
-/*	@Test
+	
+	
+	
+	@Ignore
+	@Test
 	public void getBlogCommentTest()
 	{
-		BlogComment blog=(BlogComment)blogDAO.getBlogComment(41);	
-		System.out.println(BlogComment.ge)
+		BlogComment blogcomment=(BlogComment)blogDAO.getBlogComment(41);
+		System.out.println(blogcomment.getComment());
 		
 	}
+	
+	
+	
+	@Ignore
+	@Test
+	public void updateBlogCommentTest()
+	{
+		BlogComment blogcomment =blogDAO.getBlogComment(41);
+		blogcomment.setComment("amazing");
+		assertTrue("Problem in Updating  Blog",blogDAO.updateBlogComment(blogcomment));		
+		
+	}
+	
+	
 	@Ignore
 	@Test
 	public void deleteBlogCommentTest()
 	{
-		BlogComment blog=(BlogComment)blogDAO.getBlogComment(41);
-		assertTrue("Problem in Updating  Blog",blogDAO.deleteBlog(blog));
+		BlogComment blogcomment=(BlogComment)blogDAO.getBlogComment(41);
+		assertTrue("Problem in deleting  Blog",blogDAO.deleteBlogComment(blogcomment));
 		
 		
 
-	}*/
+	}
 	
 	
 	

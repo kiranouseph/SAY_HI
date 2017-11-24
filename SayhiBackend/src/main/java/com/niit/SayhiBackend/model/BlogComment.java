@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component	
-@Table(name="BlogComment")
+@Table
 public class BlogComment implements Serializable  {
 
 	/**
@@ -26,7 +26,11 @@ public class BlogComment implements Serializable  {
 	 @Column(name = "Comment", nullable = false)
 		private String comment;
 	 @Column(name = "Blogid", nullable = false)
-		private int blogid;	
+		private int blogid;
+	 @Column(name = "Userid", nullable = false)
+		private int Userid;
+	 
+
 	 public int getCommentid() {
 		return commentid;
 	}
@@ -53,9 +57,6 @@ public class BlogComment implements Serializable  {
 		Userid = userid;
 	}
 	
-	 @Column(name = "Userid", nullable = false)
-		private int Userid;
-	 
-	
+	 	
 
 }

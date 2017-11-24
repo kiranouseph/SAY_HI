@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.SayhiBackend.dao.ForumDAO;
+import com.niit.SayhiBackend.model.BlogComment;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComment;
 
@@ -21,6 +22,8 @@ public class ForumDAOImpl implements ForumDAO {
 		this.sessionFactory=sessionFactory;
 	}
 
+	
+	
 	public boolean addForum(Forum forum) {
 		try
 		{
@@ -34,6 +37,8 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+	
+	
 	public boolean updateForum(Forum forum) {
 		try
 		{
@@ -46,6 +51,10 @@ public class ForumDAOImpl implements ForumDAO {
 		return false;
 		}
 	}
+	
+	
+	
+	
 
 	public boolean deleteForum(Forum forum) {
 		try
@@ -60,12 +69,19 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+	
+	
+	
 	public Forum getForum(int forumId) {
 		Session session=sessionFactory.openSession();
 		Forum forum = (Forum) session.get(Forum.class, forumId);
 		session.close();
 		return forum;
 	}
+	
+	
+	
+	
 	public ArrayList<Forum> getAllForum() {
 		Session session = sessionFactory.openSession();
 		ArrayList<Forum> forumList=(ArrayList<Forum>)session.createQuery("from Forum");
@@ -73,6 +89,8 @@ public class ForumDAOImpl implements ForumDAO {
 		return forumList;
 	}
 
+
+	
 	public boolean approveForum(Forum forum) {
 		try{
 			forum.setStatus("A");
@@ -87,6 +105,9 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+	
+	
+	
 	public boolean rejectforum(Forum forum) {
 		try{
 			forum.setStatus("N");
@@ -101,6 +122,9 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+	
+	
+	
 	public boolean addForumComment(ForumComment forumcomment) {
 		
 		try
@@ -115,6 +139,9 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+	
+	
+	
 	public boolean updateForumComment(ForumComment forumcomment) {
 		try
 		{
@@ -128,6 +155,9 @@ public class ForumDAOImpl implements ForumDAO {
 		}
 	}
 
+	
+	
+	
 	public boolean deleteForumComment(ForumComment forumcomment)
 	{
 		try
@@ -141,5 +171,20 @@ public class ForumDAOImpl implements ForumDAO {
 	return false;
 	}
 	}
+
+
+
+	public ForumComment getForumComment(int commentId) {
+		Session session=sessionFactory.openSession();
+		ForumComment forumcomment = (ForumComment) session.get(ForumComment.class, commentId);
+		session.close();
+		return forumcomment;
+	}
+
+
+
+	
+	
+	
 
 }

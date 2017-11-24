@@ -18,6 +18,7 @@ public interface BlogDAO {
 	public boolean addBlogComment(BlogComment blogcomment);
 	public boolean deleteBlogComment(BlogComment blogcomment);
 	public boolean updateBlogComment(BlogComment blogcomment);
+	public BlogComment getBlogComment(int commentId);
 	public boolean like(int blogid);
 	public boolean dislike(int blogid);
 	

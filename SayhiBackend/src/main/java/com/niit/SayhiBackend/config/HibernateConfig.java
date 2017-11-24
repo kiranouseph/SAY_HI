@@ -1,4 +1,4 @@
- package com.niit.SayhiBackend.config;
+package com.niit.SayhiBackend.config;
 
 
 
@@ -17,11 +17,15 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.niit.SayhiBackend.dao.BlogCommentDAO;
 import com.niit.SayhiBackend.dao.BlogDAO;
+import com.niit.SayhiBackend.dao.ForumCommentDAO;
 import com.niit.SayhiBackend.dao.ForumDAO;
 import com.niit.SayhiBackend.dao.JobDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.daoimpl.BlogCommentDAOImpl;
 import com.niit.SayhiBackend.daoimpl.BlogDAOImpl;
+import com.niit.SayhiBackend.daoimpl.ForumCommentDAOImpl;
 import com.niit.SayhiBackend.daoimpl.ForumDAOImpl;
 import com.niit.SayhiBackend.daoimpl.JobDAOImpl;
 import com.niit.SayhiBackend.daoimpl.UsersDAOImpl;
@@ -128,6 +132,22 @@ public class HibernateConfig
 		{
 			System.out.println("Forum DAO object Created");
 			return new ForumDAOImpl(sessionFactory);
+		}
+	    
+	    @Autowired    
+	    @Bean(name="forumCommentDAO")
+		public ForumCommentDAO getForumCommentDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("ForumComment DAO object Created");
+			return new ForumCommentDAOImpl(sessionFactory);
+		}
+	    
+	    @Autowired    
+	    @Bean(name="blogCommentDAO")
+	    public BlogCommentDAO getBlogCommentDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("BlogComment DAO object Created");
+			return new BlogCommentDAOImpl(sessionFactory);
 		}
 	 
 	 
