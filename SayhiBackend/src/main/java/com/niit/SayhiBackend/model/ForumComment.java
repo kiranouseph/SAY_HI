@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Component
-@Table
+@Table(name="ForumComments")
 public class ForumComment implements Serializable{
 
 	/**

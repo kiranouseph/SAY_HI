@@ -45,10 +45,10 @@ private static BlogDAO blogDAO;
 	{
 		Blog blog=new Blog();
 		
-		blog.setBlogid(105);
-		blog.setBlogname("Core Java");
-		blog.setBlogcontent("It is based on Simple Java Concept");
-		blog.setUsername("sunil");
+		blog.setBlogid(1006);
+		blog.setBlogname("Dt");
+		blog.setBlogcontent("halo");
+		blog.setUsername("kiran");
 		blog.setStatus("A");
 		blog.setLikes(3);
 		blog.setDislikes(3);
@@ -74,12 +74,12 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	@Ignore
+@Ignore
 	@Test
 	public void updateBlogTest()
 	{
 		
-		Blog blog=(Blog)blogDAO.getBlog(41);
+		Blog blog=(Blog)blogDAO.getBlog(43);
 		blog.setBlogcontent("it is hibernate based");
 		blog.setBlogname("hibernate core");
 		assertTrue("Problem in Updating  Blog",blogDAO.updateBlog(blog));
@@ -94,7 +94,7 @@ private static BlogDAO blogDAO;
 	@Test
 	public void deleteBlogTest()
 	{
-		Blog blog=(Blog)blogDAO.getBlog(41);
+		Blog blog=(Blog)blogDAO.getBlog(45);
 		assertTrue("Problem in Updating  Blog",blogDAO.deleteBlog(blog));
 		
 		
@@ -121,11 +121,11 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	@Ignore
+    @Ignore
 	@Test
 	public void approveBlogTest()
 	{
-		Blog blog=(Blog)blogDAO.getBlog(41);
+		Blog blog=(Blog)blogDAO.getBlog(43);
 		blog.setStatus("Y");
 		assertTrue("Problem in Approving  Blog",blogDAO.approveBlog(blog));
 		
@@ -138,7 +138,7 @@ private static BlogDAO blogDAO;
 	@Test
 	public void rejectBlogTest()
 	{
-		Blog blog=(Blog)blogDAO.getBlog(41);
+		Blog blog=(Blog)blogDAO.getBlog(43);
 		blog.setStatus("N");
 		assertTrue("Problem in Rejecting  Blog",blogDAO.rejectBlog(blog));
 		
@@ -152,19 +152,24 @@ private static BlogDAO blogDAO;
 	public void likeBlogTest()
 	{
 	
-		assertTrue("Problem in Rejecting  Blog",blogDAO.like(41));
+		Blog blog =blogDAO.getBlog(43);
+		blog.setLikes(blog.getLikes()+1);
+				assertTrue("problemin liking blog",blogDAO.updateBlog(blog));
 		
 	}
 	
 	
 	
 	
-	@Ignore
+	
 	@Test
 	public void dislikeBlogTest()
 	{
 	
-		assertTrue("Problem in Rejecting  Blog",blogDAO.dislike(41));
+		Blog blog =blogDAO.getBlog(43);
+		blog.setDislikes(blog.getDislikes()+1);
+		assertTrue("problemin disliking blog",blogDAO.updateBlog(blog));
+		
 		
 	}
 	

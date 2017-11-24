@@ -83,7 +83,7 @@ public class BlogDAOImpl implements BlogDAO {
 	public boolean approveBlog(Blog blog) {
 		
 		try{
-			blog.setStatus("A");
+			blog.setStatus("Y");
 			sessionFactory.getCurrentSession().saveOrUpdate(blog);
 			return true;
 			
@@ -97,7 +97,7 @@ public class BlogDAOImpl implements BlogDAO {
 @Transactional
 	public boolean rejectBlog(Blog blog) {
 		try{
-			blog.setStatus("Ns");
+			blog.setStatus("N");
 			sessionFactory.getCurrentSession().saveOrUpdate(blog);
 			return true;
 			
@@ -172,7 +172,9 @@ public BlogComment getBlogComment(int commentId)
 		{
 			Session session=sessionFactory.openSession();
 			Blog blog = (Blog) session.get(Blog.class, blogid);
-			blog.setLikes(blog.getLikes()+1);
+			
+			session.update(blog);
+			
 		return true;
 		}
 		catch(Exception e)
@@ -191,6 +193,7 @@ public BlogComment getBlogComment(int commentId)
 			Session session=sessionFactory.openSession();
 			Blog blog = (Blog) session.get(Blog.class, blogid);
 			blog.setLikes(blog.getDislikes()+1);
+			session.update(blog);
 		return true;
 		}
 		catch(Exception e)

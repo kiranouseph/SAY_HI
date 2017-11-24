@@ -41,7 +41,7 @@ UsersDAO udao;
 			if(isSaved)
 			return new ResponseEntity<Users>(user,HttpStatus.OK);
 			else
-				return new ResponseEntity<Users>(user,HttpStatus.METHOD_FAILURE);
+				return new ResponseEntity<Users>(user,HttpStatus.BAD_REQUEST);
 			
 		}
 		
