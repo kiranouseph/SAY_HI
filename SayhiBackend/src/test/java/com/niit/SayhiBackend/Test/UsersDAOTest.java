@@ -75,7 +75,7 @@ public static UsersDAO usersDAO;
 			
 		}
 		
-	
+		
 		@Test
 		public void updateOnlineStatusTest()
 

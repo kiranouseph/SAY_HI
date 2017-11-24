@@ -48,7 +48,7 @@ public class UsersDAOImpl implements UsersDAO {
 	  }
 	public boolean updateOnlineStatus(String status, Users user) {
 		try{
-			user.setIsonline(status);
+			user.setIsonline("Y");
 			sessionFactory.getCurrentSession().update(user);
 			return true;
 		}
