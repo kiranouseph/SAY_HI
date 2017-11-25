@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.SayhiBackend.dao.BlogDAO;
 import com.niit.SayhiBackend.model.Blog;
-import com.niit.SayhiBackend.model.BlogComment;
+import com.niit.SayhiBackend.model.BlogComments;
 @Repository("blogDAO")
 public class BlogDAOImpl implements BlogDAO {
 	
@@ -111,7 +111,7 @@ public class BlogDAOImpl implements BlogDAO {
 
 }
 @Transactional
-	public boolean addBlogComment(BlogComment blogcomment) {
+	public boolean addBlogComment(BlogComments blogcomment) {
 		try
 		{
 		sessionFactory.getCurrentSession().save(blogcomment);
@@ -126,20 +126,20 @@ public class BlogDAOImpl implements BlogDAO {
 		
 	}
 @Transactional
-public BlogComment getBlogComment(int commentId)
+public BlogComments getBlogComment(int commentId)
 {
 	Session session=sessionFactory.openSession();
-	BlogComment blogcomment = (BlogComment) session.get(BlogComment.class, commentId);
+	BlogComments blogcomment = (BlogComments) session.get(BlogComments.class, commentId);
 	session.close();
 	return blogcomment;
 	
 }
 
 @Transactional
-	public boolean deleteBlogComment(BlogComment blogcomment) {
+	public boolean deleteBlogComment(BlogComments blogcomment) {
 		try
 		{
-		sessionFactory.getCurrentSession().saveOrUpdate(blogcomment);
+		sessionFactory.getCurrentSession().delete(blogcomment);
 		return true;
 		}
 		catch(Exception e)
@@ -151,10 +151,10 @@ public BlogComment getBlogComment(int commentId)
 		
 	}
 @Transactional
-	public boolean updateBlogComment(BlogComment blogcomment) {
+	public boolean updateBlogComment(BlogComments blogcomment) {
 		try
 		{
-		sessionFactory.getCurrentSession().delete(blogcomment);
+		sessionFactory.getCurrentSession().update(blogcomment);
 		return true;
 		}
 		catch(Exception e)

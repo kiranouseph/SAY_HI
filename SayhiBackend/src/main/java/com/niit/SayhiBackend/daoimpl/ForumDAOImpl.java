@@ -4,26 +4,29 @@ import java.util.ArrayList;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.SayhiBackend.dao.ForumDAO;
-import com.niit.SayhiBackend.model.BlogComment;
+import com.niit.SayhiBackend.model.BlogComments;
 import com.niit.SayhiBackend.model.Forum;
-import com.niit.SayhiBackend.model.ForumComment;
+import com.niit.SayhiBackend.model.ForumComments;
 
+@Repository("forumDAO")
 public class ForumDAOImpl implements ForumDAO {
 	
 	@Autowired
 	SessionFactory sessionFactory;
-	
+	@Autowired
 	public ForumDAOImpl(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
 	}
 
 	
-	
+	@Transactional
 	public boolean addForum(Forum forum) {
 		try
 		{
@@ -38,11 +41,11 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 
 	
-	
+	@Transactional
 	public boolean updateForum(Forum forum) {
 		try
 		{
-		sessionFactory.getCurrentSession().update(forum);
+		sessionFactory.getCurrentSession().saveOrUpdate(forum);
 		return true;
 		}
 		catch(Exception e)
@@ -55,11 +58,11 @@ public class ForumDAOImpl implements ForumDAO {
 	
 	
 	
-
+	@Transactional
 	public boolean deleteForum(Forum forum) {
 		try
 		{
-		sessionFactory.getCurrentSession().update(forum);
+		sessionFactory.getCurrentSession().delete(forum);
 		return true;
 		}
 		catch(Exception e)
@@ -71,7 +74,7 @@ public class ForumDAOImpl implements ForumDAO {
 
 	
 	
-	
+	@Transactional
 	public Forum getForum(int forumId) {
 		Session session=sessionFactory.openSession();
 		Forum forum = (Forum) session.get(Forum.class, forumId);
@@ -81,19 +84,19 @@ public class ForumDAOImpl implements ForumDAO {
 	
 	
 	
-	
+	@Transactional
 	public ArrayList<Forum> getAllForum() {
 		Session session = sessionFactory.openSession();
-		ArrayList<Forum> forumList=(ArrayList<Forum>)session.createQuery("from Forum");
+		ArrayList<Forum> forumList=(ArrayList<Forum>)session.createQuery("from Forum").list();
 		session.close();
 		return forumList;
 	}
 
 
-	
+	@Transactional
 	public boolean approveForum(Forum forum) {
 		try{
-			forum.setStatus("A");
+			forum.setStatus("Y");
 			sessionFactory.getCurrentSession().saveOrUpdate(forum);
 			return true;
 			
@@ -107,7 +110,7 @@ public class ForumDAOImpl implements ForumDAO {
 
 	
 	
-	
+	@Transactional
 	public boolean rejectforum(Forum forum) {
 		try{
 			forum.setStatus("N");
@@ -124,8 +127,8 @@ public class ForumDAOImpl implements ForumDAO {
 
 	
 	
-	
-	public boolean addForumComment(ForumComment forumcomment) {
+	@Transactional
+	public boolean addForumComment(ForumComments forumcomment) {
 		
 		try
 		{
@@ -141,8 +144,8 @@ public class ForumDAOImpl implements ForumDAO {
 
 	
 	
-	
-	public boolean updateForumComment(ForumComment forumcomment) {
+	@Transactional
+	public boolean updateForumComment(ForumComments forumcomment) {
 		try
 		{
 		sessionFactory.getCurrentSession().saveOrUpdate(forumcomment);
@@ -157,8 +160,8 @@ public class ForumDAOImpl implements ForumDAO {
 
 	
 	
-	
-	public boolean deleteForumComment(ForumComment forumcomment)
+	@Transactional
+	public boolean deleteForumComment(ForumComments forumcomment)
 	{
 		try
 	{
@@ -173,12 +176,29 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 
 
-
-	public ForumComment getForumComment(int commentId) {
+	@Transactional
+	public ForumComments getForumComment(int commentId) {
 		Session session=sessionFactory.openSession();
-		ForumComment forumcomment = (ForumComment) session.get(ForumComment.class, commentId);
+		ForumComments forumcomment = (ForumComments) session.get(ForumComments.class, commentId);
 		session.close();
 		return forumcomment;
+	}
+
+@Transactional
+	public ArrayList<ForumComments> getAllForumComments(int forumid) {
+		Session ssn=sessionFactory.openSession();
+		
+		
+		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumcomid="+forumid);
+		ArrayList<ForumComments> l=(ArrayList<ForumComments>) q.list();
+		
+        
+        ssn.close();
+
+
+		
+		return l;
+		
 	}
 
 

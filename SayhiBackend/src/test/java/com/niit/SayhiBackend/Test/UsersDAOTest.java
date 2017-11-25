@@ -30,7 +30,7 @@ public static UsersDAO usersDAO;
 		usersDAO=(UsersDAO)context.getBean("userDAO");
 	}
 	
-	@Ignore
+@Ignore
 	@Test
 	public void getAllUsersTest()
 	{
@@ -50,9 +50,9 @@ public static UsersDAO usersDAO;
 		public void addUserTest()
 		{
 			Users users =new Users();
-			users.setFirstname("kiran");
+			users.setFirstname("keerthy");
 			users.setLastname("ouseph");
-			users.setEmail("kiranouseph@gmail.com");
+			users.setEmail("kiranouseph111@gmail.com");
 			users.setIsonline("N");
 			users.setPassword("kiranouseph12");
 			users.setRole("ROLE_USER");
@@ -71,7 +71,8 @@ public static UsersDAO usersDAO;
 		public void getUserTest()
 		{
 			
-			Users users=(Users)usersDAO.getUser(42);
+			Users users=(Users)usersDAO.getUser(69);
+			System.out.println(users.getEmail());
 			
 		}
 		
@@ -80,9 +81,9 @@ public static UsersDAO usersDAO;
 		public void updateOnlineStatusTest()
 
 		{
-			Users users=usersDAO.getUser(42);
+			Users users=usersDAO.getUser(69);
 			
-			assertTrue("Problem in updating Online Status",usersDAO.updateOnlineStatus("Y", users));
+			assertTrue("Problem in updating Online Status",usersDAO.updateOnlineStatus(users));
 			
 			
 		}

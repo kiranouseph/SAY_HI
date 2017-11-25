@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -26,7 +27,7 @@ public class JobDAOTest {
 		
 		jobDAO=(JobDAO)context.getBean("jobDAO");
 	}
-
+	@Ignore
 	@Test
 	public void addjob()
 	{
@@ -38,17 +39,17 @@ public class JobDAOTest {
 		job.setStatus("N");
 		assertTrue("Problem in inserting job",jobDAO.addjob(job));		
 	}
-	
+@Ignore
 	@Test
 	public void getJob()
 	{
-		Job job=jobDAO.getjob(41);
+		Job job=jobDAO.getjob(67);
 		System.out.println(job.getJobdesc());
 		
 		
 	}
 	
-	
+@Ignore
 	@Test
 	public void getAllJobs()
 	{
@@ -61,21 +62,22 @@ public class JobDAOTest {
 		}
 		
 	}
-
+@Ignore
 @Test
 public void updateJob()
 {
 
-	Job job=jobDAO.getjob(41);
+	Job job=jobDAO.getjob(67);
 	job.setJobdesc("software developer");
 	assertTrue("problem in updating Job",jobDAO.updatejob(job));
 	
 }
+
 	@Test
 	public void deletejob()
 	{
 		
-		Job job=jobDAO.getjob(41);
+		Job job=jobDAO.getjob(67);
 		assertTrue("problem in deleting Job",jobDAO.deletejob(job));
 	}
 }

@@ -1,0 +1,5 @@
+com\niit\SayhiBackend\AppTest.class
+com\niit\SayhiBackend\Test\UsersDAOTest.class
+com\niit\SayhiBackend\Test\BlogDAOTest.class
+com\niit\SayhiBackend\Test\JobDAOTest.class
+com\niit\SayhiBackend\Test\ForumDAOTest.class

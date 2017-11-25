@@ -46,10 +46,12 @@ public class UsersDAOImpl implements UsersDAO {
 	  		return false;
 	  	}
 	  }
-	public boolean updateOnlineStatus(String status, Users user) {
+	  
+	  @Transactional	  
+	public boolean updateOnlineStatus(Users user) {
 		try{
 			user.setIsonline("Y");
-			sessionFactory.getCurrentSession().update(user);
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
 			return true;
 		}
 		catch(Exception e)
@@ -59,6 +61,7 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 		
 	}
+	  @Transactional
 	public Users getUser(int userid) {
 		Session session= sessionFactory.openSession();
 		Users user=(Users)session.get(Users.class,userid);

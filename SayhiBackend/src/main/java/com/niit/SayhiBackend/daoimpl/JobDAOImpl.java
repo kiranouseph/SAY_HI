@@ -6,19 +6,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.SayhiBackend.dao.JobDAO;
 
 import com.niit.SayhiBackend.model.Job;
-
+@Repository("jobDAO")
 public class JobDAOImpl implements JobDAO {
 	@Autowired
 	SessionFactory sessionFactory;
-	
+	@Autowired
 	public JobDAOImpl(SessionFactory sessionFactory)
 	{
 		this.sessionFactory=sessionFactory;
 	}
+	
+	@Transactional
 	public boolean addjob(Job job) {
 		
 		try
@@ -33,7 +36,7 @@ public class JobDAOImpl implements JobDAO {
 		}
 		
 	}
-
+	@Transactional
 	public boolean updatejob(Job job) {
 
 		try
@@ -47,7 +50,7 @@ public class JobDAOImpl implements JobDAO {
 		return false;
 		}
 	}
-
+	@Transactional
 	public boolean deletejob(Job job) {
 		
 
@@ -63,7 +66,7 @@ public class JobDAOImpl implements JobDAO {
 		}
 		
 	}
-
+	@Transactional
 	public Job getjob(int jobId) {
 		
 		Session session=sessionFactory.openSession();
@@ -73,10 +76,11 @@ public class JobDAOImpl implements JobDAO {
 		
 	}
 
+	@Transactional
 	public ArrayList<Job> getAlljobs() {
 		
 		Session session = sessionFactory.openSession();
-		ArrayList<Job> jobList=(ArrayList<Job>)session.createQuery("from Job");
+		ArrayList<Job> jobList=(ArrayList<Job>)session.createQuery("from Job").list();
 		session.close();
 		return jobList;
 		

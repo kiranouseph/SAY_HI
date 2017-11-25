@@ -13,9 +13,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.niit.SayhiBackend.dao.BlogDAO;
 import com.niit.SayhiBackend.dao.ForumDAO;
 import com.niit.SayhiBackend.model.Blog;
-import com.niit.SayhiBackend.model.BlogComment;
+import com.niit.SayhiBackend.model.BlogComments;
 import com.niit.SayhiBackend.model.Forum;
-import com.niit.SayhiBackend.model.ForumComment;
+import com.niit.SayhiBackend.model.ForumComments;
 
 public class ForumDAOTest {
 
@@ -31,7 +31,7 @@ public class ForumDAOTest {
 		
 		forumDAO=(ForumDAO)context.getBean("forumDAO");
 	}
-	@Ignore
+@Ignore
 	@Test
 	public void addForumTest()
 	{
@@ -45,12 +45,12 @@ public class ForumDAOTest {
 	
 	
 	}
-	@Ignore
+@Ignore
 	@Test
 	public void getForumTest()
 	{
 		
-		Forum forum=forumDAO.getForum(41);
+		Forum forum=forumDAO.getForum(63);
 		System.out.println(forum.getFormcontent());	
 		System.out.println(forum.getFormname());
 	}
@@ -59,7 +59,7 @@ public class ForumDAOTest {
 	public void updateForumTest()
 	{
 		
-	Forum forum=forumDAO.getForum(41);
+	Forum forum=forumDAO.getForum(63);
 	forum.setFormcontent("Kotlin or java");
 	forum.setFormname("Android tech");
 		assertTrue("Problem in Updading forum",forumDAO.updateForum(forum));
@@ -70,7 +70,7 @@ public class ForumDAOTest {
 	@Test
 	public void deleteForumTest()
 	{
-		Forum forum=forumDAO.getForum(41);
+		Forum forum=forumDAO.getForum(63);
 		assertTrue("Problem in deleting forum",forumDAO.deleteForum(forum));
 	}
 	@Ignore
@@ -86,11 +86,11 @@ public class ForumDAOTest {
 	}
 	
 	}
-	@Ignore
+@Ignore
 	@Test
 	public void approveForumTest()
 	{
-		Forum forum =forumDAO.getForum(41);
+		Forum forum =forumDAO.getForum(63);
 		
 		forum.setStatus("Y");
 		assertTrue("Problem in Approving  Forum",forumDAO.approveForum(forum));
@@ -98,11 +98,11 @@ public class ForumDAOTest {
 	}
 	
 	
-	@Ignore
+@Ignore
 	@Test
 	public void rejectForumTest()
 	{
-		Forum forum=forumDAO.getForum(41);
+		Forum forum=forumDAO.getForum(63);
 		forum.setStatus("N");
 	
 		assertTrue("Problem in Rejecting  Forum",forumDAO.rejectforum(forum));
@@ -110,12 +110,12 @@ public class ForumDAOTest {
 	}
 	
 	
-	@Ignore
+@Ignore
 	@Test
 	public void addForumComment()
 	{
-		ForumComment forumcomment =new ForumComment();
-		forumcomment.setComment("V good");
+		ForumComments forumcomment =new ForumComments();
+		forumcomment.setForumcomm("v good");
 		
 		forumcomment.setForumid(41);
 		forumcomment.setUserid(50);
@@ -125,24 +125,37 @@ public class ForumDAOTest {
 	
 	
 	
-	@Ignore
+@Ignore
 	@Test
 	public void getForumCommentTest()
 	{
 		
-		ForumComment forumcomment=forumDAO.getForumComment(41);
-		System.out.println(forumcomment.getComment());
+		ForumComments forumcomment=forumDAO.getForumComment(65);
+		System.out.println(forumcomment.getForumcomm());
 		
 	}
 	
+
+@Test
+public void getForumCommentByForumidTest()
+{
 	
+	ArrayList<ForumComments> forumcomment=(ArrayList<ForumComments>)forumDAO.getAllForumComments(41);
+	for(ForumComments f:forumcomment)
+		
+	{
+		System.out.println(f.getForumcomm());
+	}
+	
+}
+
 	
 	@Ignore
 	@Test
 	public void updateForumCommentTest()
 	{
-		ForumComment forumcomment =new ForumComment();
-		forumcomment.setComment("too good");
+		ForumComments forumcomment =new ForumComments();
+		forumcomment.setForumcomm("Too good");
 		assertTrue("Problem in updating Forumcomment ",forumDAO.updateForumComment(forumcomment));
 		
 		
@@ -150,11 +163,11 @@ public class ForumDAOTest {
 	
 	
 	
-	@Ignore
+@Ignore	
 	@Test
 	public void deleteForumCommentTest()
 	{
-		ForumComment forumcomment=forumDAO.getForumComment(41);
+		ForumComments forumcomment=forumDAO.getForumComment(41);
 		assertTrue("Problem in deleting Forumcomment ",forumDAO.deleteForumComment(forumcomment));
 		
 	}

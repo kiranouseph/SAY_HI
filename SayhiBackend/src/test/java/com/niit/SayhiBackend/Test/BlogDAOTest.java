@@ -8,7 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.niit.SayhiBackend.dao.BlogDAO;
 import com.niit.SayhiBackend.model.Blog;
-import com.niit.SayhiBackend.model.BlogComment;
+import com.niit.SayhiBackend.model.BlogComments;
 
 import junit.framework.TestCase;
 
@@ -161,7 +161,7 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	
+	@Ignore
 	@Test
 	public void dislikeBlogTest()
 	{
@@ -177,14 +177,14 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	@Ignore
+@Ignore
 	@Test
 	public void addBlogComment()
 	{
-		BlogComment blogcomment = new BlogComment();
+		BlogComments blogcomment = new BlogComments();
 		blogcomment.setBlogid(41);
-		blogcomment.setComment("very good");
-		blogcomment.setCommentid(1000);
+		blogcomment.setBlogcomm("v good");
+		blogcomment.setBlogcomid(1000);
 		blogcomment.setUserid(500);
 		assertTrue("Problem in Inserting BlogComment",blogDAO.addBlogComment(blogcomment));
 	
@@ -193,33 +193,33 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	@Ignore
+@Ignore
 	@Test
 	public void getBlogCommentTest()
 	{
-		BlogComment blogcomment=(BlogComment)blogDAO.getBlogComment(41);
-		System.out.println(blogcomment.getComment());
+		BlogComments blogcomment=(BlogComments)blogDAO.getBlogComment(61);
+		System.out.println(blogcomment.getBlogcomm());
 		
 	}
 	
 	
 	
-	@Ignore
+
+@Ignore
 	@Test
 	public void updateBlogCommentTest()
 	{
-		BlogComment blogcomment =blogDAO.getBlogComment(41);
-		blogcomment.setComment("amazing");
+		BlogComments blogcomment =blogDAO.getBlogComment(62);
+		blogcomment.setBlogcomm("amazing");
 		assertTrue("Problem in Updating  Blog",blogDAO.updateBlogComment(blogcomment));		
 		
 	}
 	
 	
-	@Ignore
 	@Test
 	public void deleteBlogCommentTest()
 	{
-		BlogComment blogcomment=(BlogComment)blogDAO.getBlogComment(41);
+		BlogComments blogcomment=(BlogComments)blogDAO.getBlogComment(62);
 		assertTrue("Problem in deleting  Blog",blogDAO.deleteBlogComment(blogcomment));
 		
 		

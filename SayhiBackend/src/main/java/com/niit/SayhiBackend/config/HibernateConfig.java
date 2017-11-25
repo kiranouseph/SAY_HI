@@ -30,11 +30,12 @@ import com.niit.SayhiBackend.daoimpl.ForumDAOImpl;
 import com.niit.SayhiBackend.daoimpl.JobDAOImpl;
 import com.niit.SayhiBackend.daoimpl.UsersDAOImpl;
 import com.niit.SayhiBackend.model.Blog;
-import com.niit.SayhiBackend.model.BlogComment;
+import com.niit.SayhiBackend.model.BlogComments;
 import com.niit.SayhiBackend.model.Forum;
-import com.niit.SayhiBackend.model.ForumComment;
+import com.niit.SayhiBackend.model.ForumComments;
 import com.niit.SayhiBackend.model.Friend;
 import com.niit.SayhiBackend.model.Job;
+
 import com.niit.SayhiBackend.model.Users;
 
 
@@ -54,12 +55,12 @@ public class HibernateConfig
 	     
 	       sessionBuilder.addAnnotatedClass(Users.class);
 	        sessionBuilder.addAnnotatedClass(Blog.class);
-	       sessionBuilder.addAnnotatedClass(BlogComment.class);
+	       sessionBuilder.addAnnotatedClass(BlogComments.class);
 	        sessionBuilder.addAnnotatedClass(Forum.class);
-	        sessionBuilder.addAnnotatedClass(ForumComment.class);
+	        sessionBuilder.addAnnotatedClass(ForumComments.class);
 	        sessionBuilder.addAnnotatedClass(Friend.class);
 	        sessionBuilder.addAnnotatedClass(Job.class);
-	        
+	    
 
 	      
 	       
@@ -112,7 +113,6 @@ public class HibernateConfig
 	    
 	    @Autowired    
 	    @Bean(name="userDAO")
-	   
 		public UsersDAO getUserDAO(SessionFactory sessionFactory)
 		{
 			System.out.println("User DAO object Created");
@@ -120,7 +120,6 @@ public class HibernateConfig
 		}
 	    @Autowired    
 	    @Bean(name="jobDAO")
-	   
 		public JobDAO getJobDAO(SessionFactory sessionFactory)
 		{
 			System.out.println("Job DAO object Created");
@@ -128,7 +127,6 @@ public class HibernateConfig
 		}
 	    @Autowired    
 	    @Bean(name="forumDAO")
-	   
 		public ForumDAO getForumDAO(SessionFactory sessionFactory)
 		{
 			System.out.println("Forum DAO object Created");

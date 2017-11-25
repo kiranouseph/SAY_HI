@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.niit.SayhiBackend.AppTest" time="0" errors="0" skipped="0">
+<testsuite tests="4" failures="0" name="com.niit.SayhiBackend.Test.UsersDAOTest" time="0.06" errors="0" skipped="4">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -61,5 +61,16 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.niit.SayhiBackend.AppTest" name="testApp" time="0"/>
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="addUserTest" time="0.015">
+    <skipped/>
+  </testcase>
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getAllUsersTest" time="0.015">
+    <skipped/>
+  </testcase>
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="updateOnlineStatusTest" time="0.015">
+    <skipped/>
+  </testcase>
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getUserTest" time="0.015">
+    <skipped/>
+  </testcase>
 </testsuite>

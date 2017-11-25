@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component	
 @Table(name="BlogComments")
-public class BlogComment implements Serializable  {
+public class BlogComments implements Serializable  {
 
 	/**
 	 * 
@@ -21,40 +21,38 @@ public class BlogComment implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue 
-    @Column(name = "ID", nullable = false)
-	private int commentid;
-	 @Column(name = "Comment", nullable = false)
-		private String comment;
-	 @Column(name = "Blogid", nullable = false)
-		private int blogid;
-	 @Column(name = "Userid", nullable = false)
-		private int Userid;
-	 
+    @Column(name = "BlogcomId", nullable = false)
+	private int blogcomid;
+	@Column(name = "BlogComm", nullable = false)
+    private String blogcomm;
+	@Column(name = "BlogID", nullable = false)
+    private int blogid;
+	@Column(name = "UserID", nullable = false)
+    private int userid;
+	public int getBlogcomid() {
+		return blogcomid;
+	}
+	public String getBlogcomm() {
+		return blogcomm;
+	}
+	public void setBlogcomm(String blogcomm) {
+		this.blogcomm = blogcomm;
+	}
+	public void setBlogcomid(int blogcomid) {
+		this.blogcomid = blogcomid;
+	}
 
-	 public int getCommentid() {
-		return commentid;
-	}
-	public void setCommentid(int commentid) {
-		this.commentid = commentid;
-	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
 	public int getBlogid() {
 		return blogid;
 	}
 	public void setBlogid(int blogid) {
 		this.blogid = blogid;
 	}
-
 	public int getUserid() {
-		return Userid;
+		return userid;
 	}
 	public void setUserid(int userid) {
-		Userid = userid;
+		this.userid = userid;
 	}
 	
 	 	
