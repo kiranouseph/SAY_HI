@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
     .when("/register", {
         templateUrl : "User/register.html",
         controller : "registercontroller"
+    })
+    .when("/wall", {
+        templateUrl : "User/side.html",
+        controller : "homecontroller"
     });
 });
 

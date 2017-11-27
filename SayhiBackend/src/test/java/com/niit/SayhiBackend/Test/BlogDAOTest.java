@@ -39,15 +39,15 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	@Ignore
+	
 	@Test
 	public void addBlogTest()
 	{
 		Blog blog=new Blog();
 		
 		blog.setBlogid(1006);
-		blog.setBlogname("Dt");
-		blog.setBlogcontent("halo");
+		blog.setBlogname("dt");
+		blog.setBlogcontent("dt haloo");
 		blog.setUsername("kiran");
 		blog.setStatus("A");
 		blog.setLikes(3);
@@ -215,7 +215,7 @@ private static BlogDAO blogDAO;
 		
 	}
 	
-	
+	@Ignore
 	@Test
 	public void deleteBlogCommentTest()
 	{
