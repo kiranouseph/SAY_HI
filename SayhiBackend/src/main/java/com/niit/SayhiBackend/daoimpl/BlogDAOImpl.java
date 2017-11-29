@@ -11,11 +11,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.SayhiBackend.dao.BlogDAO;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
+import com.niit.SayhiBackend.model.ForumComments;
 @Repository("blogDAO")
 public class BlogDAOImpl implements BlogDAO {
 	
 	@Autowired
 	SessionFactory sessionFactory;
+	
+	
 	@Autowired
 	public BlogDAOImpl(SessionFactory sessionFactory)
 	{
@@ -110,6 +113,48 @@ public class BlogDAOImpl implements BlogDAO {
 		
 
 }
+
+
+@Transactional
+public boolean like(int blogid) {
+	
+	try
+	{
+		Session session=sessionFactory.openSession();
+		Blog blog = (Blog) session.get(Blog.class, blogid);
+		
+		session.update(blog);
+		
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}
+	
+	
+	
+}
+@Transactional
+public boolean dislike(int blogid) {
+	try
+	{
+		Session session=sessionFactory.openSession();
+		Blog blog = (Blog) session.get(Blog.class, blogid);
+		blog.setLikes(blog.getDislikes()+1);
+		session.update(blog);
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}
+	
+	
+}
+
 @Transactional
 	public boolean addBlogComment(BlogComments blogcomment) {
 		try
@@ -165,44 +210,24 @@ public BlogComments getBlogComment(int commentId)
 
 		
 	}
+
+
 @Transactional
-	public boolean like(int blogid) {
-		
-		try
-		{
-			Session session=sessionFactory.openSession();
-			Blog blog = (Blog) session.get(Blog.class, blogid);
-			
-			session.update(blog);
-			
-		return true;
-		}
-		catch(Exception e)
-		{
-		System.out.println(e);
-		return false;
-		}
-		
-		
-		
-	}
-@Transactional
-	public boolean dislike(int blogid) {
-		try
-		{
-			Session session=sessionFactory.openSession();
-			Blog blog = (Blog) session.get(Blog.class, blogid);
-			blog.setLikes(blog.getDislikes()+1);
-			session.update(blog);
-		return true;
-		}
-		catch(Exception e)
-		{
-		System.out.println(e);
-		return false;
-		}
-		
-		
-	}
+public ArrayList<BlogComments> getAllBlogComments(int blogid) {
+	Session ssn=sessionFactory.openSession();
 	
+	
+	org.hibernate.Query q= ssn.createQuery("from BlogComments where blogid="+blogid);
+	ArrayList<BlogComments> l=(ArrayList<BlogComments>) q.list();
+	
+    
+    ssn.close();
+
+
+	
+	return l;
+	
+}
+
+
 }

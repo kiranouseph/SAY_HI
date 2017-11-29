@@ -37,6 +37,7 @@ public class Blog implements Serializable {
     private int likes;
 	@Column(name = "Dislikes", nullable = false)
     private int dislikes;
+	
 	public int getDislikes() {
 		return dislikes;
 	}

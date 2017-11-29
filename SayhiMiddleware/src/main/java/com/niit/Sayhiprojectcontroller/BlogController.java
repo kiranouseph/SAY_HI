@@ -24,7 +24,7 @@ public class BlogController {
 	
 
 	@RequestMapping(value="/getAllBlogs",method=RequestMethod.GET,headers="Accept=application/json")
-	public ResponseEntity getAllUser(){
+	public ResponseEntity getAllBlogs(){
 		
 		if(blogDAO.getAllBlogs().isEmpty()){
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No User registerd..");
@@ -86,6 +86,7 @@ public class BlogController {
 		
 	}
 	
+	
 	@RequestMapping(value="/approveBlog/{blogId}",method=RequestMethod.GET)
 	public ResponseEntity approveBlog(@PathVariable("blogId") int blogId){
 		Blog blog=blogDAO.getBlog(blogId);
@@ -98,6 +99,8 @@ public class BlogController {
 			return new ResponseEntity(blog,HttpStatus.BAD_REQUEST);
 		
 	}
+	
+	
 	@RequestMapping(value="/rejectBlog/{blogId}",method=RequestMethod.GET)
 	public ResponseEntity rejectBlog(@PathVariable("blogId") int blogId){
 		Blog blog=blogDAO.getBlog(blogId);
@@ -145,7 +148,7 @@ public class BlogController {
 	
 	@RequestMapping(value="/addBlogComments/{blogId}",method=RequestMethod.POST)
 	public ResponseEntity addBlogComments(@RequestBody BlogComments blogcomment,@PathVariable("blogId") int blogId){
-		blogcomment.setBlogid(82);
+		blogcomment.setBlogid(blogId);
 		boolean isSaved=blogDAO.addBlogComment(blogcomment);
 		if(isSaved)
 		return new ResponseEntity(blogcomment,HttpStatus.OK);
@@ -156,5 +159,56 @@ public class BlogController {
 	
 	
 	
+	@RequestMapping(value="/updateBlogComments",method=RequestMethod.PUT)
+	public ResponseEntity updateBlogComments(@RequestBody BlogComments blogcomment){
+		
+		boolean isSaved=blogDAO.updateBlogComment(blogcomment);
+		if(isSaved)
+		return new ResponseEntity(blogcomment,HttpStatus.OK);
+		else
+			return new ResponseEntity(blogcomment,HttpStatus.BAD_REQUEST);
+		
+	}
 	
+	
+	@RequestMapping(value="/getBlogComment/{blogcommentId}",method=RequestMethod.GET)
+	public ResponseEntity getBlogComment(@PathVariable("blogid") int blogcommentId){
+	
+	
+	if(blogDAO.getBlogComment(blogcommentId)==null){
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No such blogcommnet exists");
+	}
+	return new ResponseEntity(blogDAO.getBlogComment(blogcommentId),HttpStatus.OK);	
+			
+	
+	
+	
+	}
+	
+	
+	@RequestMapping(value="/getAllBlogComments/{blogId}",method=RequestMethod.GET)
+	public ResponseEntity getAllBlogComment(@PathVariable("blogId") int blogId){
+	
+	
+	if(blogDAO.getAllBlogComments(blogId).isEmpty()){
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No comment for this blog exists");
+	}
+	return new ResponseEntity(blogDAO.getAllBlogComments(blogId),HttpStatus.OK);	
+			
+	}
+	
+	
+	
+	@RequestMapping(value="/deleteBlogComment/{blogcommentid}",method=RequestMethod.DELETE)
+	public ResponseEntity deleteBlogComment(@PathVariable("blogcommentid") int blogcommentId){
+	
+	BlogComments blogComments=blogDAO.getBlogComment(blogcommentId);
+	blogDAO.deleteBlogComment(blogComments);
+	if(blogDAO.getBlogComment(blogcommentId)==null)
+	{
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No such blog comment exists");
+	}
+	return new ResponseEntity(blogDAO.getBlogComment(blogcommentId),HttpStatus.OK);	
+			
+	}
 }

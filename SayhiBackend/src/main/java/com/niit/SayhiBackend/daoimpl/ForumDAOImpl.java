@@ -189,7 +189,7 @@ public class ForumDAOImpl implements ForumDAO {
 		Session ssn=sessionFactory.openSession();
 		
 		
-		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumcomid="+forumid);
+		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumid="+forumid);
 		ArrayList<ForumComments> l=(ArrayList<ForumComments>) q.list();
 		
         

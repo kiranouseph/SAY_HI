@@ -23,8 +23,8 @@ public class UserController {
 UsersDAO udao;
 	
 	
-@CrossOrigin(origins="http://localhost:8080")
-	 @RequestMapping(value="/getAllUsers",method=RequestMethod.GET,headers="Accept=application/json")
+
+	 @RequestMapping(value="/getAllUsers",method=RequestMethod.GET)
 		public ResponseEntity getAllUser(){
 			
 			if(udao.getAllUser().isEmpty()){
@@ -45,6 +45,23 @@ UsersDAO udao;
 			
 		}
 		
-	
-
+	 @RequestMapping(value="/getUser/{userid}",method=RequestMethod.GET)
+		public ResponseEntity getUser(@PathVariable("userid") int userId){
+			
+		 if(udao.getUser(userId)==null){
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No such User registerd..");
+			}
+			return new ResponseEntity(udao.getUser(userId),HttpStatus.OK);
+					
+		}
+	 @RequestMapping(value="/updateOnlineStatus/{userid}",method=RequestMethod.GET)
+		public ResponseEntity updateOnlineStatus(@PathVariable("userid") int userId){
+			
+			if(udao.getUser(userId)==null){
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No User registerd..");
+			}
+			return new ResponseEntity(udao.updateOnlineStatus(udao.getUser(userId)),HttpStatus.OK);
+					
+		}
+	 
 }
