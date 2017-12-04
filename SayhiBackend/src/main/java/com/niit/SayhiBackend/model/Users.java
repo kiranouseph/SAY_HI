@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.util.Date;
 import java.util.Set;
 @SuppressWarnings("unused")
 @Entity
@@ -36,7 +37,23 @@ public class Users implements Serializable{
 	 @Column(name = "Lastname", nullable = false)
 	    private String lastname;
 	
-    @Column(name = "Email", nullable = false,unique=true)
+    public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	@Column(name = "Email", nullable = false,unique=true)
     private String email;
     @Column(name = "Password", nullable = false)
     private String password;
@@ -46,6 +63,11 @@ public class Users implements Serializable{
     private String status;
     @Column(name = "Isonline", nullable = false)
     private String isonline;
+    @Column(name = "DOB", nullable = false)
+    private Date dob;
+    @Column(name = "gender", nullable = false)
+    private String gender;
+    
     
   
    

@@ -3,6 +3,7 @@ package com.niit.SayhiBackend.Test;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -58,7 +59,8 @@ public static UsersDAO usersDAO;
 			users.setRole("ROLE_USER");
 			users.setStatus("hello");
 			users.setUserid(1236);
-			
+			users.setDob(new Date());
+			users.setGender("MALE");
 			assertTrue("Problem in Inserting USer",usersDAO.saveUser(users));
 			
 			

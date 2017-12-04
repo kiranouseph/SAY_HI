@@ -3,7 +3,7 @@ app.controller("logincontroller", function ($scope) {
 });
 app.controller("registercontroller", function ($scope,userservice) {
 	 $scope.msg = "Register  page";
-	 $scope.User={firstname:'',lastname:'',email:'',password:''};
+	 $scope.User={firstname:'',lastname:'',email:'',password:'',role:'USER',status:'feels good',isonline:'Y',dob:'',gender:''};
 	 $scope.register=function()
 	 {
 	

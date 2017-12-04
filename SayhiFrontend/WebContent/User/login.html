@@ -1,39 +1,61 @@
 
+<style>
+.sqs-block { 
+      margin-left: -30px; 
+      margin-right: -30px; 
+      margin-top: -30px; 
+      margin-bottom: -30px; 
+      }
+      
+      .card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+      
+     
+</style>
 
 <div class="container">
     <div class="row">
         <div class="col m6">
+     
         </div>    
         <div class="col m6">
-            <h2 class="center-align">Login</h2>
+        <div class="card card-1" style="margin-top:15vh;height:60vh">
+            
             <div class="row">
-                <form class="col s12">
-                    <div class="row">
+                <form class="col s12" >
+                   
                         <div class="input-field col s12">
                             <input id="email" type="email" class="validate">
                             <label for="email">Email</label>
                         </div>
-                    </div>
-                    <div class="row">
+                    
+                 
                         <div class="input-field col s12">
-                            <input id="pass" type="password" class="validate">
+                            <input id="pass" type="password">
                             <label for="pass">Password</label>
                         </div>
-                    </div>
+
                    
-                    
-                    <div class="row">
-                       <div class="input-field col s12">
+                    <div class="input-field col s6">
+                    <a href=""><h5>Forgot password?clich here....</h5></a>
+                    </div>
+                       <div class="input-field col s6">
                             <p class="right-align">
                                 <button class="btn btn-large waves-effect waves-light" type="button" name="action">Login</button>
                             </p>
                         </div>
-                    </div>
+                   
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-
+</div>
 

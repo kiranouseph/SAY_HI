@@ -63,11 +63,12 @@ public class BlogController {
 	@RequestMapping(value="/deleteBlog/{blogid}",method=RequestMethod.DELETE)
 	public ResponseEntity deleteBlog(@PathVariable("blogid") int blogId){
 	
-	Blog blog=blogDAO.getBlog(blogId);
-	blogDAO.deleteBlog(blog);
+	
 	if(blogDAO.getBlog(blogId)==null){
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No such blog exists");
 	}
+	Blog blog=blogDAO.getBlog(blogId);
+	blogDAO.deleteBlog(blog);
 	return new ResponseEntity(blogDAO.getAllBlogs(),HttpStatus.OK);	
 			
 	
