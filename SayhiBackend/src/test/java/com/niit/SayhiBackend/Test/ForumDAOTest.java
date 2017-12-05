@@ -135,7 +135,7 @@ public class ForumDAOTest {
 		
 	}
 	
-
+@Ignore
 @Test
 public void getForumCommentByForumidTest()
 {

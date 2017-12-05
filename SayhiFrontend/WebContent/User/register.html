@@ -63,14 +63,14 @@ input{
                         <div class="input-field col s12">
                   
                  <input  type="password" data-ng-model="User.password"   required>
-                            <label for="pass">Password</label>
+                            <label for="passs">Password</label>
                           
                    
                     </div>
                     
                       <div class="input-field col s12">
                   
-                 <input  type="password" data-ng-model="User.password"   required>
+                 <input  type="password"    required>
                             <label for="pass">Reenter Password</label>
                           
                    
@@ -81,17 +81,17 @@ input{
         <div class="col s6" style="margin-top:25px">
                            
              
-      <input type="radio" id="test5" name="gender"/>
+      <input type="radio" id="test5" name="gender"data-ng-model="users.gender" data-ng-value="male"/>
       <label for="test5">MALE</label>
-        <input type="radio" id="test6" name="gender"/>
+        <input type="radio" id="test6" name="gender" data-ng-model="users.gender" data-ng-value="female"/>
       <label for="test6">FEMALE</label>   
                </div> 
                
               
                                   <div class="input-field col s6">
                            
-                            <input type="text" class="datepicker" name="dob" data-ng-model="user.dob" >
-                   <label for="email">DATE OF BIRTH</label>
+                            <input type="date" class="datepicker" name="dob" data-ng-model="users.dob" >
+                   <label for="dob">DATE OF BIRTH</label>
                      
                          
                       

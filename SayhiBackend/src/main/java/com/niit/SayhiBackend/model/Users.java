@@ -53,7 +53,7 @@ public class Users implements Serializable{
 		this.gender = gender;
 	}
 
-	@Column(name = "Email", nullable = false,unique=true)
+	@Column(name = "Email", nullable = false)
     private String email;
     @Column(name = "Password", nullable = false)
     private String password;
@@ -63,7 +63,7 @@ public class Users implements Serializable{
     private String status;
     @Column(name = "Isonline", nullable = false)
     private String isonline;
-    @Column(name = "DOB", nullable = false)
+    @Column(name = "Dob", nullable = false)
     private Date dob;
     @Column(name = "gender", nullable = false)
     private String gender;

@@ -2,14 +2,20 @@ package com.niit.SayhiBackend.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
+
+
 
 @Entity
 @Component	
@@ -37,6 +43,10 @@ public class Blog implements Serializable {
     private int likes;
 	@Column(name = "Dislikes", nullable = false)
     private int dislikes;
+	
+	@OneToMany(targetEntity=BlogComments.class,mappedBy="blogg",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
+    private Set<BlogComments> blogcomments ;
+	
 	
 	public int getDislikes() {
 		return dislikes;

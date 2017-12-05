@@ -46,7 +46,7 @@ public static UsersDAO usersDAO;
 	}
 	}
 		
-		@Ignore
+	
 		@Test
 		public void addUserTest()
 		{
@@ -78,7 +78,7 @@ public static UsersDAO usersDAO;
 			
 		}
 		
-		
+		@Ignore
 		@Test
 		public void updateOnlineStatusTest()
 

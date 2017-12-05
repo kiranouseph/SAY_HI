@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
- 
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <style>
 
 
 </style>
+</head>
 <body ng-app="SAYHI" >
 <div class="align-right">
 <nav class="navbar navbar-default" >
@@ -26,6 +29,7 @@
      
       <li><a href="#!/login">LOGIN</a></li>
       <li><a href="#!/register">REGISTER</a></li>
+      <li><a href="#!/wall">BLOG</a></li>
     </ul>
   </div>
 </nav>
@@ -41,5 +45,8 @@
 <script src="User/usercontroller.js"></script>
 <script src="pages/homecontroller.js"></script>
 <script src="User/userservices.js"></script>
+<script src="User/blogcontroller.js"></script>
+<script src="User/blogservices.js"></script>
+
 </body>
 </html>
