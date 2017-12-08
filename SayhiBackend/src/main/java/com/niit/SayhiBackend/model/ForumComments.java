@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -25,13 +27,24 @@ public class ForumComments implements Serializable{
 	private int forumcomid;
 	 @Column(name = "ForumComm", nullable = false)
 		private String forumcomm;
-	 @Column(name = "Forumid", nullable = false)
-		private int forumid;	
-	 @Column(name = "Createdate", nullable = false)
-		private int createdate;
-	 @Column(name = "Userid", nullable = false)
-		private int Userid;
+		
+	
+	
 
+	 
+	 
+	 @ManyToOne
+	    @JoinColumn(name="F_id",updatable=true,insertable=true,nullable=false)
+	    private Forum forumm;
+	 
+	 
+	 
+	public Forum getForumm() {
+		return forumm;
+	}
+	public void setForumm(Forum forumm) {
+		this.forumm = forumm;
+	}
 	public int getForumcomid() {
 		return forumcomid;
 	}
@@ -44,24 +57,7 @@ public class ForumComments implements Serializable{
 	public void setForumcomm(String forumcomm) {
 		this.forumcomm = forumcomm;
 	}
-	public int getForumid() {
-		return forumid;
-	}
-	public void setForumid(int forumid) {
-		this.forumid = forumid;
-	}
-	public int getCreatedate() {
-		return createdate;
-	}
-	public void setCreatedate(int createdate) {
-		this.createdate = createdate;
-	}
-	public int getUserid() {
-		return Userid;
-	}
-	public void setUserid(int userid) {
-		Userid = userid;
-	}
+
 	
 	
 

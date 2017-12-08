@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.niit.SayhiBackend.dao.ForumCommentDAO;
-import com.niit.SayhiBackend.dao.ForumDAO;
 
-@Repository("forumCommentDAOImpl")
+
+@Repository("forumCommentDAO")
 public class ForumCommentDAOImpl implements ForumCommentDAO {
 	
 	@Autowired

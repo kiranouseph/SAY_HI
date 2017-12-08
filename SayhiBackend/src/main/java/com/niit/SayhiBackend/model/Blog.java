@@ -1,7 +1,7 @@
 package com.niit.SayhiBackend.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -35,8 +37,7 @@ public class Blog implements Serializable {
     private String blogname;
 	@Column(name = "BlogContent", nullable = false)
     private String blogcontent;
-	@Column(name = "Username", nullable = false)
-    private String username;
+
 	@Column(name = "Staus", nullable = false)
     private String status;
 	@Column(name = "Likes", nullable = false)
@@ -44,10 +45,27 @@ public class Blog implements Serializable {
 	@Column(name = "Dislikes", nullable = false)
     private int dislikes;
 	
+
 	@OneToMany(targetEntity=BlogComments.class,mappedBy="blogg",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
     private Set<BlogComments> blogcomments ;
 	
 	
+	 @ManyToOne
+	    @JoinColumn(name="U_id",updatable=true,insertable=true,nullable=false)
+	    private Users userss;
+	
+	public Set<BlogComments> getBlogcomments() {
+		return blogcomments;
+	}
+	public void setBlogcomments(Set<BlogComments> blogcomments) {
+		this.blogcomments = blogcomments;
+	}
+	public Users getUserss() {
+		return userss;
+	}
+	public void setUserss(Users userss) {
+		this.userss = userss;
+	}
 	public int getDislikes() {
 		return dislikes;
 	}
@@ -73,12 +91,7 @@ public class Blog implements Serializable {
 	public void setBlogcontent(String blogcontent) {
 		this.blogcontent = blogcontent;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+
 	public String getStatus() {
 		return status;
 	}

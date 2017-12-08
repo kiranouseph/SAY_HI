@@ -29,7 +29,6 @@ public class Users implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue
-	
 	 @Column(name = "USERID", nullable = false)
 	private int userid;
 	 @Column(name = "Firstname", nullable = false)
@@ -37,6 +36,31 @@ public class Users implements Serializable{
 	 @Column(name = "Lastname", nullable = false)
 	    private String lastname;
 	
+	 
+	 public Set<Forum> getForumm() {
+		return forumm;
+	}
+
+	public void setForumm(Set<Forum> forumm) {
+		this.forumm = forumm;
+	}
+
+	public Set<Blog> getBlogg() {
+		return blogg;
+	}
+
+	public void setBlogg(Set<Blog> blogg) {
+		this.blogg = blogg;
+	}
+
+	@OneToMany(targetEntity=Forum.class,mappedBy="userss",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
+	    private Set<Forum> forumm ;
+	 
+	
+	 @OneToMany(targetEntity=Blog.class,mappedBy="userss",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
+	    private Set<Blog> blogg ;
+	 
+	 
     public Date getDob() {
 		return dob;
 	}
@@ -151,9 +175,4 @@ public class Users implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	
-
-	
-    
 }

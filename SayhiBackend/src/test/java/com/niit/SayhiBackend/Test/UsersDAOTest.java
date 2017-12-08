@@ -18,7 +18,7 @@ import com.niit.SayhiBackend.model.Users;
 public class UsersDAOTest {
 
 	@Autowired
-public static UsersDAO usersDAO;
+public static UsersDAO userDAO;
 	
 	
 	@BeforeClass
@@ -28,14 +28,14 @@ public static UsersDAO usersDAO;
 		context.scan("com.niit.SayhiBackend");
 		context.refresh();
 		
-		usersDAO=(UsersDAO)context.getBean("userDAO");
+		userDAO=(UsersDAO)context.getBean("userDAO");
 	}
 	
 @Ignore
 	@Test
 	public void getAllUsersTest()
 	{
-		ArrayList<Users> users= usersDAO.getAllUser();
+		ArrayList<Users> users= userDAO.getAllUser();
 		for(Users u:users)
 		{
 			System.out.println(u.getFirstname());
@@ -45,8 +45,7 @@ public static UsersDAO usersDAO;
 		
 	}
 	}
-		
-	
+@Ignore
 		@Test
 		public void addUserTest()
 		{
@@ -61,7 +60,7 @@ public static UsersDAO usersDAO;
 			users.setUserid(1236);
 			users.setDob(new Date());
 			users.setGender("MALE");
-			assertTrue("Problem in Inserting USer",usersDAO.saveUser(users));
+			assertTrue("Problem in Inserting USer",userDAO.saveUser(users));
 			
 			
 			
@@ -73,7 +72,7 @@ public static UsersDAO usersDAO;
 		public void getUserTest()
 		{
 			
-			Users users=(Users)usersDAO.getUser(69);
+			Users users=(Users)userDAO.getUser(1);
 			System.out.println(users.getEmail());
 			
 		}
@@ -83,9 +82,9 @@ public static UsersDAO usersDAO;
 		public void updateOnlineStatusTest()
 
 		{
-			Users users=usersDAO.getUser(69);
+			Users users=userDAO.getUser(1);
 			
-			assertTrue("Problem in updating Online Status",usersDAO.updateOnlineStatus(users));
+			assertTrue("Problem in updating Online Status",userDAO.updateOnlineStatus(users));
 			
 			
 		}

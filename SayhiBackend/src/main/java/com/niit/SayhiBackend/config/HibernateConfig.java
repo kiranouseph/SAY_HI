@@ -73,20 +73,21 @@ public class HibernateConfig
 	    @Bean(name = "datasource") 
 	    public DataSource dataSource() {
 	        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-	        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-	        dataSource.setUrl("jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=orcl)))");
+	        dataSource.setDriverClassName("org.h2.Driver");
+	        dataSource.setUrl("jdbc:h2:tcp://localhost/~/ecomdb");
 
-	        dataSource.setUsername("kiran");
-	        dataSource.setPassword("kiranouseph12");
+	        dataSource.setUsername("sa");
+	        dataSource.setPassword("");
 	        System.out.println("Data Source Created.....");
 	        return dataSource;
+
 	       
 	        }
 
 	    private Properties getHibernateProperties() {
 	        Properties properties = new Properties();
 	        properties.put("hibernate.show_sql", "true");
-	        properties.put("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
+	        properties.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 	  
 	        properties.put("hibernate.format_sql", "true");
 	        properties.put("hibernate.hbm2ddl.auto", "update");
@@ -103,7 +104,7 @@ public class HibernateConfig
 	                return new HibernateTransactionManager(sessionFactory);
 	        }
 	        
-	    @Autowired    
+	   @Autowired    
 	    @Bean(name="blogDAO")
 		public BlogDAO getBlogDAO(SessionFactory sessionFactory)
 		{

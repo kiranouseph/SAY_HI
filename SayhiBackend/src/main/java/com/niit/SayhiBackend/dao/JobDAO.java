@@ -2,7 +2,7 @@ package com.niit.SayhiBackend.dao;
 
 import java.util.ArrayList;
 
-import com.niit.SayhiBackend.model.Blog;
+
 import com.niit.SayhiBackend.model.Job;
 
 public interface JobDAO {

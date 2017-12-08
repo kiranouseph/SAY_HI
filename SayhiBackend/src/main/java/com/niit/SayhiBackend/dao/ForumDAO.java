@@ -2,7 +2,7 @@ package com.niit.SayhiBackend.dao;
 
 import java.util.ArrayList;
 
-import com.niit.SayhiBackend.model.BlogComments;
+
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
 

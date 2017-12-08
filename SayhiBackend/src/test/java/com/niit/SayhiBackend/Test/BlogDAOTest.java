@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.niit.SayhiBackend.dao.BlogDAO;
+import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
+import com.niit.SayhiBackend.model.Users;
 
 import junit.framework.TestCase;
 
@@ -19,7 +21,8 @@ public class BlogDAOTest
 {
 	@Autowired
 private static BlogDAO blogDAO;
-	
+	@Autowired
+private static UsersDAO userDAO;	
 	
 	
 	
@@ -31,6 +34,8 @@ private static BlogDAO blogDAO;
 		context.refresh();
 		
 		blogDAO=(BlogDAO)context.getBean("blogDAO");
+		userDAO=(UsersDAO)context.getBean("userDAO");
+	
 	}
 
 	
@@ -38,23 +43,26 @@ private static BlogDAO blogDAO;
 	
 	
 	
-	
-	
+@Ignore
 	@Test
 	public void addBlogTest()
 	{
 		Blog blog=new Blog();
 		
 		blog.setBlogid(1006);
-		blog.setBlogname("dt");
-		blog.setBlogcontent("dt haloo");
-		blog.setUsername("kiran");
+		blog.setBlogname("yahoo");
+		blog.setBlogcontent("fdesggfdg");
+	
 		blog.setStatus("A");
 		blog.setLikes(3);
 		blog.setDislikes(3);
+		Users users=(Users)userDAO.getUser(1);
+		blog.setUserss(users);
+		System.out.println(users.getEmail());
+		assertTrue("Problem in inserting   Blog",blogDAO.addBlog(blog));
 		
 		
-		assertTrue("Problem in Inserting Blog",blogDAO.addBlog(blog));
+		
 	
 	}
 	
@@ -182,10 +190,11 @@ private static BlogDAO blogDAO;
 	public void addBlogComment()
 	{
 		BlogComments blogcomment = new BlogComments();
-		blogcomment.setBlogid(41);
+		Blog blog=blogDAO.getBlog(4);
+		blogcomment.setBlogg(blog);
 		blogcomment.setBlogcomm("v good");
 		blogcomment.setBlogcomid(1000);
-		blogcomment.setUserid(500);
+	
 		assertTrue("Problem in Inserting BlogComment",blogDAO.addBlogComment(blogcomment));
 	
 	}

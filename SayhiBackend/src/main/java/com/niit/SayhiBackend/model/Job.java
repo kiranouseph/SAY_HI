@@ -25,10 +25,26 @@ public class Job implements Serializable {
     @GeneratedValue 
     @Column(name="Job")
 	private int jobid;
-	 @Column(name="JobProfile")
+	 public int getSalary() {
+		return salary;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public String getQualification() {
+		return qualification;
+	}
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+	@Column(name="JobProfile")
 		private String jobprofile;
 	 @Column(name="JobDesc")
 		private String jobdesc;
+	 @Column(name="salary")
+	 private int salary;
+	 @Column(name="Qualifications")
+	 private String qualification;
 	 public int getJobid() {
 		return jobid;
 	}
@@ -47,30 +63,10 @@ public class Job implements Serializable {
 	public void setJobdesc(String jobdesc) {
 		this.jobdesc = jobdesc;
 	}
-	public String getQuanlification() {
-		return quanlification;
-	}
-	public void setQuanlification(String quanlification) {
-		this.quanlification = quanlification;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Date getCreatedate() {
-		return createdate;
-	}
-	public void setCreatedate(Date createdate) {
-		this.createdate = createdate;
-	}
-	@Column(name="Qualification")
-		private String quanlification;
-	 @Column(name="Status")
-		private String status;
-	 @Column(name="CreateDate")
-		private Date createdate;
+
+	
+	
+
 	
 
 }

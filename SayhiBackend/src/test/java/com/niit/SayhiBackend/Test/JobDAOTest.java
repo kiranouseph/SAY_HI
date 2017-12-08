@@ -35,8 +35,7 @@ public class JobDAOTest {
 		job.setJobdesc("Devops");
 		job.setJobid(8523);
 		job.setJobprofile("Web App developer");
-		job.setQuanlification("Graduation");
-		job.setStatus("N");
+		
 		assertTrue("Problem in inserting job",jobDAO.addjob(job));		
 	}
 @Ignore

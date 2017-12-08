@@ -2,6 +2,7 @@ package com.niit.SayhiBackend.daoimpl;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.SayhiBackend.dao.BlogDAO;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
-import com.niit.SayhiBackend.model.ForumComments;
+import com.niit.SayhiBackend.model.Users;
+
 @Repository("blogDAO")
 public class BlogDAOImpl implements BlogDAO {
 	
@@ -228,6 +230,9 @@ public ArrayList<BlogComments> getAllBlogComments(int blogid) {
 	return l;
 	
 }
+
+
+
 
 
 }

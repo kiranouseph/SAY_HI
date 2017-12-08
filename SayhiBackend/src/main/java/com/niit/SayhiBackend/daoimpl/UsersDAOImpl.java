@@ -2,13 +2,12 @@ package com.niit.SayhiBackend.daoimpl;
 
 import java.util.ArrayList;
 
-import org.hibernate.Criteria;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Users;
 
-import antlr.collections.List;
 
+@Repository("userDAO")
 public class UsersDAOImpl implements UsersDAO {
 	@Autowired
 	SessionFactory sessionFactory;
@@ -61,11 +60,24 @@ public class UsersDAOImpl implements UsersDAO {
 		}
 		
 	}
-	  @Transactional
+	  
+	@Transactional 
 	public Users getUser(int userid) {
-		Session session= sessionFactory.openSession();
-		Users user=(Users)session.get(Users.class,userid);
-		session.close();
+		
+		System.err.println(userid);
+		Users user=new Users();
+		try{
+			Session session= sessionFactory.openSession();
+			Query query=session.createQuery("from Users where userid="+userid);
+			 user=(Users)query.list().get(0);
+			session.close();
+			
+		}
+		catch(Exception e)
+		{
+			
+			
+		}
 		return user;
 		
 	}

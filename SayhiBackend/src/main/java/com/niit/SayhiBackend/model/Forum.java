@@ -1,12 +1,18 @@
 package com.niit.SayhiBackend.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -27,13 +33,19 @@ public class Forum implements Serializable {
     private String formname;
 	@Column(name = "FormContent", nullable = false)
     private String formcontent;
-	@Column(name = "Username", nullable = false)
-    private String username;
+
 	@Column(name = "Staus", nullable = false)
     private String status;
 	
+	@OneToMany(targetEntity=ForumComments.class,mappedBy="forumm",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
+    private Set<ForumComments> forumcomments ;
 
-
+	
+	 @ManyToOne
+	    @JoinColumn(name="U_id",updatable=true,insertable=true,nullable=false)
+	    private Users userss;
+	 
+	 
 	public int getForumid() {
 		return forumid;
 	}
@@ -44,6 +56,22 @@ public class Forum implements Serializable {
 
 	public String getFormname() {
 		return formname;
+	}
+
+	public Set<ForumComments> getForumcomments() {
+		return forumcomments;
+	}
+
+	public void setForumcomments(Set<ForumComments> forumcomments) {
+		this.forumcomments = forumcomments;
+	}
+
+	public Users getUserss() {
+		return userss;
+	}
+
+	public void setUserss(Users userss) {
+		this.userss = userss;
 	}
 
 	public void setFormname(String formname) {
@@ -58,13 +86,6 @@ public class Forum implements Serializable {
 		this.formcontent = formcontent;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public String getStatus() {
 		return status;

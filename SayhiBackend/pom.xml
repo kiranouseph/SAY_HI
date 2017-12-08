@@ -14,18 +14,19 @@
    <spring.version>4.0.1.RELEASE</spring.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-     <hibernate.version>4.3.5.Final</hibernate.version>
-		<slf4j.version>1.7.5</slf4j.version>
+    
   </properties>
 
   <dependencies>
-    <dependency>
+		<dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <version>4.2</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
+
+<!-- https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.0-api -->
+<dependency>
     <groupId>org.hibernate.javax.persistence</groupId>
     <artifactId>hibernate-jpa-2.0-api</artifactId>
     <version>1.0.0.Final</version>
@@ -87,11 +88,13 @@
         <artifactId>slf4j-log4j12</artifactId>
         <version>1.5.2</version>
     </dependency>
-    <dependency>
+		
+		<dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0</version>
         </dependency>
+
   </dependencies>
   
   

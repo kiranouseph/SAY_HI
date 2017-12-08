@@ -12,16 +12,20 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.niit.SayhiBackend.dao.BlogDAO;
 import com.niit.SayhiBackend.dao.ForumDAO;
+import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
+import com.niit.SayhiBackend.model.Users;
 
 public class ForumDAOTest {
 
 	
 	@Autowired
 	private static ForumDAO forumDAO;
+	@Autowired
+	private static UsersDAO userDAO;
 	@BeforeClass
 	public static void initialize()
 	{
@@ -30,17 +34,20 @@ public class ForumDAOTest {
 		context.refresh();
 		
 		forumDAO=(ForumDAO)context.getBean("forumDAO");
+		userDAO=(UsersDAO)context.getBean("userDAO");
 	}
 @Ignore
 	@Test
 	public void addForumTest()
 	{
 		Forum forum=new Forum();
+		Users user=userDAO.getUser(1);
+		forum.setUserss(user);
 		forum.setFormcontent("Java or .Net");
 		forum.setFormname("JAVA");
 		forum.setForumid(1500);
 		forum.setStatus("N");
-		forum.setUsername("kiran");
+		
 		assertTrue("Problem in adding Forum  ",forumDAO.addForum(forum));
 	
 	
@@ -114,11 +121,12 @@ public class ForumDAOTest {
 	@Test
 	public void addForumComment()
 	{
+		Forum forum=forumDAO.getForum(1);
 		ForumComments forumcomment =new ForumComments();
 		forumcomment.setForumcomm("v good");
+		forumcomment.setForumm(forum);
 		
-		forumcomment.setForumid(41);
-		forumcomment.setUserid(50);
+		
 		assertTrue("Problem in adding Forumcomment ",forumDAO.addForumComment(forumcomment));
 		
 	}

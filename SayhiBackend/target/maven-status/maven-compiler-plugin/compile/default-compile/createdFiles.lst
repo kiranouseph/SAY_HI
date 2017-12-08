@@ -1,11 +1,13 @@
 com\niit\SayhiBackend\dao\BlogDAO.class
 com\niit\SayhiBackend\dao\ForumCommentDAO.class
 com\niit\SayhiBackend\App.class
+com\niit\SayhiBackend\model\BlogComments.class
 com\niit\SayhiBackend\model\Forum.class
 com\niit\SayhiBackend\model\Blog.class
 com\niit\SayhiBackend\dao\BlogCommentDAO.class
 com\niit\SayhiBackend\daoimpl\BlogDAOImpl.class
 com\niit\SayhiBackend\dao\ForumDAO.class
+com\niit\SayhiBackend\model\ForumComments.class
 com\niit\SayhiBackend\daoimpl\UsersDAOImpl.class
 com\niit\SayhiBackend\daoimpl\ForumDAOImpl.class
 com\niit\SayhiBackend\daoimpl\BlogCommentDAOImpl.class

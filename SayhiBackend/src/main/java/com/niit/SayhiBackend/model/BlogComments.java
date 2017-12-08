@@ -27,18 +27,22 @@ public class BlogComments implements Serializable  {
     @GeneratedValue 
     @Column(name = "BlogcomId", nullable = false)
 	private int blogcomid;
+	
 	@Column(name = "BlogComm", nullable = false)
     private String blogcomm;
-	@Column(name = "BlogID", nullable = false)
-    private int blogid;
-	@Column(name = "UserID", nullable = false)
-    private int userid;
 	
+
 	@ManyToOne
     @JoinColumn(name="B_id",updatable=true,insertable=true,nullable=false)
     private Blog blogg;
 	
 	
+	public Blog getBlogg() {
+		return blogg;
+	}
+	public void setBlogg(Blog blogg) {
+		this.blogg = blogg;
+	}
 	public int getBlogcomid() {
 		return blogcomid;
 	}
@@ -52,19 +56,5 @@ public class BlogComments implements Serializable  {
 		this.blogcomid = blogcomid;
 	}
 
-	public int getBlogid() {
-		return blogid;
-	}
-	public void setBlogid(int blogid) {
-		this.blogid = blogid;
-	}
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-	
-	 	
 
 }
