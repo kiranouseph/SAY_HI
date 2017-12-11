@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.niit.SayhiBackend.Test.BlogDAOTest
 -------------------------------------------------------------------------------
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 13, Time elapsed: 9.332 sec
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 13, Time elapsed: 5.422 sec

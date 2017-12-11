@@ -45,14 +45,20 @@ public class Blog implements Serializable {
 	@Column(name = "Dislikes", nullable = false)
     private int dislikes;
 	
+	@Column(name = "Username", nullable = false)
+    private String username;
 
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	@OneToMany(targetEntity=BlogComments.class,mappedBy="blogg",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
     private Set<BlogComments> blogcomments ;
 	
 	
-	 @ManyToOne
-	    @JoinColumn(name="U_id",updatable=true,insertable=true,nullable=false)
-	    private Users userss;
+	
 	
 	public Set<BlogComments> getBlogcomments() {
 		return blogcomments;
@@ -60,12 +66,7 @@ public class Blog implements Serializable {
 	public void setBlogcomments(Set<BlogComments> blogcomments) {
 		this.blogcomments = blogcomments;
 	}
-	public Users getUserss() {
-		return userss;
-	}
-	public void setUserss(Users userss) {
-		this.userss = userss;
-	}
+
 	public int getDislikes() {
 		return dislikes;
 	}

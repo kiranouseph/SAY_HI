@@ -80,7 +80,7 @@ public class BlogDAOImpl implements BlogDAO {
 	public ArrayList<Blog> getAllBlogs() {
 	
 		Session session = sessionFactory.openSession();
-		ArrayList<Blog> blogList=(ArrayList<Blog>)session.createQuery("from Blog").list();
+		ArrayList<Blog> blogList=(ArrayList<Blog>)session.createQuery("from Blog where status='YES'").list();
 		session.close();
 		return blogList;
 	}

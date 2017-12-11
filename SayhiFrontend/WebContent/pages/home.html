@@ -1,0 +1,99 @@
+<style>
+
+
+.photo-profile{
+    border:1px solid #DDD;    
+}
+
+
+
+
+
+</style>
+<div data-ng-controller="blogcontroller">
+
+<div class="row">
+
+    <div class="col s12" style="margin-left: 5%;margin-right: 5%" >
+      <ul class="tabs">
+        <li class="tab col s4"><a href="#test1">BLOGS</a></li>
+        <li class="tab col s4"><a href="#test2">FORUMS</a></li>
+        <li class="tab col s4 "><a href="#test3">JOBS</a></li>
+        
+      </ul>
+    </div>
+    <div id="test1" class="col s12" style="margin-left: 5%;margin-right: 5%">
+  
+
+<div data-ng-controller="blogcontroller">
+
+
+  
+  
+  
+<div data-ng-repeat="blogg in blogs">
+<div class="card card-1" style="margin-top:2vh; padding: 30px;margin-right: 5%" >
+
+
+           
+                    
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <a href="#" class="anchor-username"><h4 class="media-heading">{{blogg.username}}</h4></a> 
+                              
+                              </div>
+                            </div>
+             
+             
+                   <h3>{{blogg.blogname}}</h3>
+                    <h3>{{blogg.username}}</h3>
+                 
+              
+              
+            
+                   <h4>{{ blogg.blogcontent | limitTo: 100 }}</h4>
+                   <a  data-ng-click="maximum(blog.blogid)"><h4>{{blogg.blogcontent.length > 20 ? '...' : ''}}</h4></a>
+             
+
+
+</div>
+</div>
+
+</div>
+
+
+
+  </div>
+    <div id="test2" class="col s12" style="margin-left: 5%;margin-right: 5%">
+    
+    
+    </div>
+    <div id="test3" class="col s12" style="margin-left: 5%;margin-right: 5%">
+    
+    
+    </div>
+  
+  </div>
+
+  
+               
+
+</div>
+
+<script>
+
+$(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
+       
+$(document).ready(function(){
+    // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+    $('.modal').modal();
+  });
+     
+</script>

@@ -15,9 +15,24 @@ app.config(function($routeProvider) {
         templateUrl : "User/register.html",
         
     })
+   .when("/jobmanage", {
+        templateUrl : "Job/jobmanage.html",
+        
+    })
+      .when("/mywall", {
+        templateUrl : "pages/mywall.html",
+        
+    })
+
 
     .when("/blog", {
-        templateUrl : "Blog/blog.html",
+        templateUrl : "pages/home.html",
+        controller : "blogcontroller"
+    })
+    
+    
+      .when("/blogview", {
+        templateUrl : "blog/blogview.html",
         controller : "blogcontroller"
     });
     

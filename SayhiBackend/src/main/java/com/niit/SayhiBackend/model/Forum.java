@@ -39,11 +39,9 @@ public class Forum implements Serializable {
 	
 	@OneToMany(targetEntity=ForumComments.class,mappedBy="forumm",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
     private Set<ForumComments> forumcomments ;
+	@Column(name = "Username", nullable = false)
+    private String username;
 
-	
-	 @ManyToOne
-	    @JoinColumn(name="U_id",updatable=true,insertable=true,nullable=false)
-	    private Users userss;
 	 
 	 
 	public int getForumid() {
@@ -66,13 +64,7 @@ public class Forum implements Serializable {
 		this.forumcomments = forumcomments;
 	}
 
-	public Users getUserss() {
-		return userss;
-	}
 
-	public void setUserss(Users userss) {
-		this.userss = userss;
-	}
 
 	public void setFormname(String formname) {
 		this.formname = formname;

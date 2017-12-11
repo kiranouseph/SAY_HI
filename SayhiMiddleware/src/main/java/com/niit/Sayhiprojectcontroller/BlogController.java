@@ -39,8 +39,7 @@ public class BlogController {
 		{
 			System.out.println(blo.getBlogcontent());
 			System.out.println(blo.getBlogname());
-			System.out.println( blo.getUserss().getEmail() );
-			System.out.println(blo.getUserss().getLastname());
+		
 		}
 				return blogs;
 				
@@ -52,12 +51,11 @@ public class BlogController {
 	
 	
 	
-	@RequestMapping(value="/addBlog/{uid}",method=RequestMethod.POST)
-	public ResponseEntity<String> addBlog(@RequestBody Blog blog,@PathVariable("uid") int userid){
-	System.out.println(userid);
-	Users user=userDAO.getUser(userid);
-	
-		blog.setUserss(user);
+	@RequestMapping(value="/addBlog/{uemail}",method=RequestMethod.POST)
+	public ResponseEntity<String> addBlog(@RequestBody Blog blog,@PathVariable("uemail") String email){
+	String emaill=email+".com";
+	blog.setUsername(emaill);
+		
 		
 		boolean isSaved=blogDAO.addBlog(blog);
 		if(isSaved)
@@ -72,19 +70,21 @@ public class BlogController {
 
 	}
 	
-	/*@RequestMapping(value="/getBlog/{blogid}",method=RequestMethod.GET)
+	@RequestMapping(value="/getBlogById/{blogid}",method=RequestMethod.GET)
 	public ResponseEntity<Blog> getBlog(@PathVariable("blogid") int blogId){
 	
-	
-	if(blogDAO.getBlog(blogId)==null){
-		
+	Blog tempblog=blogDAO.getBlog(blogId);
+	if(tempblog==null){
+		return new ResponseEntity<Blog>(tempblog,HttpStatus.BAD_REQUEST);		
 	}
-	return new ResponseEntity<Blog>(blogDAO.getBlog(blogId),HttpStatus.OK);	
-			
+	else
+	{
+	return new ResponseEntity<Blog>(tempblog,HttpStatus.OK);	
+	}		
 	
 	
 	
-	}*/
+	}
 	
 	
 	@RequestMapping(value="/deleteBlog/{blogid}",method=RequestMethod.GET)

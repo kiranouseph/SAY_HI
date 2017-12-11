@@ -8,20 +8,31 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 		{
 			console.log("Blogs retrieve successfully")
 			$scope.blogs=response.data;
+			console.log($scope.blogs)
 						
 		},function(error)
 		{
 			console.log("Error on retrieving blogs")
 		});
 		
-	
+	 $scope.maximum=function(idd)
+	 {
+		 console.log("in add max method"+idd)
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
+			$scope.blogByid=response.data; 
+								
+			},function(error){
+			
+			});
+		 
+	 }
 	 
 	 
 
-	 $scope.addBlog=function(idd)
+	 $scope.addBlog=function(iddd)
 	 {
 		console.log("in add blog method"+$scope.Blog.blogname)
-		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/addBlog/"+idd,$scope.Blog).then(function(response){
+		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/addBlog/"+iddd,$scope.Blog).then(function(response){
 			 console.log("Blog added successfully")
 								
 			},function(error){

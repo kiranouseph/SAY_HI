@@ -42,7 +42,7 @@ public class ForumDAOTest {
 	{
 		Forum forum=new Forum();
 		Users user=userDAO.getUser(1);
-		forum.setUserss(user);
+		
 		forum.setFormcontent("Java or .Net");
 		forum.setFormname("JAVA");
 		forum.setForumid(1500);

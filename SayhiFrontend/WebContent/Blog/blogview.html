@@ -1,0 +1,137 @@
+
+<style>
+
+
+.sqs-block { 
+      margin-left: -30px; 
+      margin-right: -30px; 
+      margin-top: -30px; 
+      margin-bottom: -30px; 
+      }
+      
+input{ 
+      margin-left: 5px; 
+      margin-right: 5px; 
+      margin-top: 5px; 
+      margin-bottom: 5px; 
+      }
+      
+      
+      /*-- Global Selectors --*/
+a{
+    color:#47649F;
+}
+
+body{
+    font-family:'helvetica';    
+}
+
+/*-- Bootstrap Override Style --*/
+
+
+/*-- Content Style --*/
+.post-footer-option li{
+    float:left;
+    margin-right:50px;
+    padding-bottom:15px;
+}
+
+.post-footer-option li a{
+    color:#AFB4BD;
+    font-weight:500;
+    font-size:1.3rem;
+}
+
+.photo-profile{
+    border:1px solid #DDD;    
+}
+
+.anchor-username h4{
+    font-weight:bold;    
+}
+
+.anchor-time{
+    color:#ADB2BB;
+    font-size:1.2rem;
+}
+
+.post-footer-comment-wrapper{
+    background-color:#F6F7F8;
+}
+      </style>
+      
+      <div data-ng-controller="blogcontroller">
+<div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
+
+<div class="container">
+	<div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-body">
+               <section class="post-heading">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <a href="#" class="anchor-username"><h4 class="media-heading">{{blogById.username}}</h4></a> 
+                                <a href="#" class="anchor-time">51 mins</a>
+                              </div>
+                            </div>
+                        </div>
+                         <div class="col-md-1">
+                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                         </div>
+                    </div>             
+               </section>
+                 <section >
+                   <p>{{blogById.blogname}}</p>
+               </section>
+               <section class="post-body">
+                   <p>{{blogById.blogcontent}}</p>
+               </section>
+               <section class="post-footer">
+                   <hr>
+                   <div class="post-footer-option container">
+                        <ul class="list-unstyled">
+                       
+                              <li> <div data-ng-click="approveBlog()" data-ng-show="currentuser.role=='ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> APPROVE</a></div></li>
+                               <li> <div  data-ng-click="rejectBlog()" data-ng-show="currentuser.role=='ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> REJECT</a></div></li>
+                            
+                              <li><div data-ng-click="likeBlog()" data-ng-hide="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>Like</a></div></li>
+                              <li><div data-ng-click="dislikeBlog()" data-ng-hide="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> Dislike</a></div></li>  
+                              
+                              <li><div data-ng-click="deleteBlog()" data-ng-show="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> DELETE</a></div></li>
+                              <li><div data-ng-click="likeBlog()" data-ng-show="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> EDIT</a></div></li>                          </ul>
+                   </div>
+                   <div class="post-footer-comment-wrapper">
+                       <div class="comment-form">
+                           
+                       </div>
+                       <div class="comment">
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a> 
+                                <a href="#" class="anchor-time">51 mins</a>
+                              </div>
+                            </div>
+                       </div>
+                   </div>
+               </section>
+            </div>
+        </div>   
+	</div>
+</div>
+
+</div>
+
+
+</div>

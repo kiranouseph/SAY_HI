@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="4" failures="0" name="com.niit.SayhiBackend.Test.UsersDAOTest" time="17.401" errors="0" skipped="4">
+<testsuite tests="6" failures="0" name="com.niit.SayhiBackend.Test.UsersDAOTest" time="4.008" errors="0" skipped="6">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_131\jre\bin"/>
@@ -27,7 +27,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 8"/>
-    <property name="classworlds.conf" value="C:\Users\user\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf5671795015151879172.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\user\eclipse-workspace\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2242182886291334954.tmp"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
     <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_131\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_131/bin/server;C:/Program Files/Java/jre1.8.0_131/bin;C:/Program Files/Java/jre1.8.0_131/lib/amd64;D:\app\kiran\product\12.2.0\dbhome_1\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Apache\maven\bin;C:\Windows\System32;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,18 +61,24 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="updateOnlineStatusTest" time="4.349">
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="updateOnlineStatusTest" time="0.667">
     <skipped/>
     <system-out>Data Source Created.....
 </system-out>
   </testcase>
-  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getUserTest" time="4.35">
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="addUserTest" time="0.667">
     <skipped/>
   </testcase>
-  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="addUserTest" time="4.351">
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="checklogin" time="0.667">
     <skipped/>
   </testcase>
-  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getAllUsersTest" time="4.351">
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getuserbyemail" time="0.669">
+    <skipped/>
+  </testcase>
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getAllUsersTest" time="0.669">
+    <skipped/>
+  </testcase>
+  <testcase classname="com.niit.SayhiBackend.Test.UsersDAOTest" name="getUserTest" time="0.669">
     <skipped/>
   </testcase>
 </testsuite>

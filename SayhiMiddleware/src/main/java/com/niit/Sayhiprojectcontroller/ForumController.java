@@ -41,7 +41,7 @@ public class ForumController {
 	public ResponseEntity<Forum> addForum(@RequestBody Forum forum,@PathVariable("uid") int uid){
 		System.out.println(uid);
 		Users users=usersDAO.getUser(uid);
-		forum.setUserss(users);
+		
 		boolean isSaved=forumDAO.addForum(forum);
 		if(isSaved)
 		return new ResponseEntity<Forum>(forum,HttpStatus.OK);

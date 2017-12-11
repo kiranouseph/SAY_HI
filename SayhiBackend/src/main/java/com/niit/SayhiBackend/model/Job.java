@@ -1,7 +1,7 @@
 package com.niit.SayhiBackend.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

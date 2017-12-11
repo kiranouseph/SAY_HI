@@ -56,10 +56,10 @@ public static UsersDAO userDAO;
 			users.setIsonline("N");
 			users.setPassword("kiranouseph12");
 			users.setRole("ROLE_USER");
-			users.setStatus("hello");
+			
 			users.setUserid(1236);
-			users.setDob(new Date());
-			users.setGender("MALE");
+			
+		
 			assertTrue("Problem in Inserting USer",userDAO.saveUser(users));
 			
 			
@@ -82,9 +82,29 @@ public static UsersDAO userDAO;
 		public void updateOnlineStatusTest()
 
 		{
-			Users users=userDAO.getUser(1);
+			Users users=userDAO.getUser(2);
 			
 			assertTrue("Problem in updating Online Status",userDAO.updateOnlineStatus(users));
+			
+			
+		}
+		@Ignore
+		@Test
+		public void checklogin()
+		{
+			Users user=(Users)userDAO.getUser(2);
+			System.out.println(user.getEmail());
+			
+			assertTrue("Problem in login Status",userDAO.checkLogin(user));
+			
+		}
+		@Ignore
+		@Test
+		public void getuserbyemail()
+		{
+			Users user=(Users)userDAO.getUserbyemail("kiranouseph@gmail.com");
+			System.out.println(user.getEmail());
+			
 			
 			
 		}

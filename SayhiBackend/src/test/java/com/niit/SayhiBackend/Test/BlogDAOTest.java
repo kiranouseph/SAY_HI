@@ -57,7 +57,7 @@ private static UsersDAO userDAO;
 		blog.setLikes(3);
 		blog.setDislikes(3);
 		Users users=(Users)userDAO.getUser(1);
-		blog.setUserss(users);
+		
 		System.out.println(users.getEmail());
 		assertTrue("Problem in inserting   Blog",blogDAO.addBlog(blog));
 		
