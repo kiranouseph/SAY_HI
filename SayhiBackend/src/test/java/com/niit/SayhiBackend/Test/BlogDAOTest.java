@@ -190,8 +190,8 @@ private static UsersDAO userDAO;
 	public void addBlogComment()
 	{
 		BlogComments blogcomment = new BlogComments();
-		Blog blog=blogDAO.getBlog(4);
-		blogcomment.setBlogg(blog);
+		
+		blogcomment.setBlogid(4);
 		blogcomment.setBlogcomm("v good");
 		blogcomment.setBlogcomid(1000);
 	

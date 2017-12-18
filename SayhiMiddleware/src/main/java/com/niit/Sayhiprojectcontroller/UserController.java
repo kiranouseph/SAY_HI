@@ -31,13 +31,12 @@ JobDAO jobDAO;
 	
 
 	 @RequestMapping(value="/getAllUsers",method=RequestMethod.GET)
-		public ResponseEntity<ArrayList<Users>> getAllUser(){
-			
-			if(userDAO.getAllUser().isEmpty()){
-				
-			}
-			return new ResponseEntity<ArrayList<Users>>(userDAO.getAllUser(),HttpStatus.OK);
-					
+		public ArrayList<Users> getAllUser(){
+		 System.out.println("in rest controller getallusers");
+			ArrayList<Users> user=(ArrayList<Users>)userDAO.getAllUser();
+			System.out.println("in rest controller getallusers");
+
+		return user;		
 		}
 	 
 	 

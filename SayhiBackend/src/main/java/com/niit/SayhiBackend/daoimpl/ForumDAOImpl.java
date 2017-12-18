@@ -13,6 +13,7 @@ import com.niit.SayhiBackend.dao.ForumDAO;
 import com.niit.SayhiBackend.model.BlogComments;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
+import com.niit.SayhiBackend.model.ForumRequests;
 
 @Repository("forumDAO")
 public class ForumDAOImpl implements ForumDAO {
@@ -93,37 +94,6 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 
 
-	@Transactional
-	public boolean approveForum(Forum forum) {
-		try{
-			forum.setStatus("Y");
-			sessionFactory.getCurrentSession().saveOrUpdate(forum);
-			return true;
-			
-		}
-		catch(Exception e)
-		{
-		
-		return false;
-		}
-	}
-
-	
-	
-	@Transactional
-	public boolean rejectforum(Forum forum) {
-		try{
-			forum.setStatus("N");
-			sessionFactory.getCurrentSession().saveOrUpdate(forum);
-			return true;
-			
-		}
-		catch(Exception e)
-		{
-		
-		return false;
-		}
-	}
 
 	
 	
@@ -184,12 +154,13 @@ public class ForumDAOImpl implements ForumDAO {
 		return forumcomment;
 	}
 
+	
 @Transactional
-	public ArrayList<ForumComments> getAllForumComments(int forumid) {
+public ArrayList<ForumComments> getAllForumCommentsById(int forumid) {
 		Session ssn=sessionFactory.openSession();
 		
 		
-		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumid="+forumid);
+		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumm="+forumid);
 		ArrayList<ForumComments> l=(ArrayList<ForumComments>) q.list();
 		
         
@@ -200,6 +171,85 @@ public class ForumDAOImpl implements ForumDAO {
 		return l;
 		
 	}
+
+@Transactional
+public boolean addForumRequest(ForumRequests forumrequest) {
+	try
+	{
+		sessionFactory.getCurrentSession().save(forumrequest);
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}
+}
+
+@Transactional
+public boolean acceptForumRequest(ForumRequests forumrequest) {
+	try
+	{
+	sessionFactory.getCurrentSession().saveOrUpdate(forumrequest);
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}
+}
+
+@Transactional
+public boolean blockUser(ForumRequests forumrequest) {
+	try
+	{
+	sessionFactory.getCurrentSession().saveOrUpdate(forumrequest);
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}	
+}
+
+@Transactional
+public ArrayList<ForumRequests> getAllForumRequest() {
+	Session session = sessionFactory.openSession();
+	ArrayList<ForumRequests> forumReqList=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where status='A'").list();
+	session.close();
+	return forumReqList;
+
+}
+
+@Transactional
+public ForumRequests getForumRequest(int ForumReqId) {
+	
+	Session session=sessionFactory.openSession();
+	ForumRequests forumReq = (ForumRequests) session.get(ForumRequests.class, ForumReqId);
+	session.close();
+	return forumReq;
+	
+}
+
+@Transactional
+public ArrayList<ForumRequests> getAllMyForum(int myid) {
+	Session session = sessionFactory.openSession();
+	ArrayList<ForumRequests> myforums=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where userid="+myid+" and status='YES'").list();
+	session.close();
+	return myforums;
+	
+}
+
+
+public ArrayList<ForumRequests> checkIfMyForum(int ForumId, int myid) {
+	
+	Session session = sessionFactory.openSession();
+	ArrayList<ForumRequests> myforums=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where userid="+myid+" and forumid="+ForumId+" ").list();
+	session.close();
+	return myforums;
+}
 
 
 

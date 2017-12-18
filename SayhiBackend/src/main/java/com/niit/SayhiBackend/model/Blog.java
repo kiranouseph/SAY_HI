@@ -20,14 +20,14 @@ import org.springframework.stereotype.Component;
 
 
 @Entity
-@Component	
+
 @Table(name="Blog")
-public class Blog implements Serializable {
+public class Blog  {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	
 	
 	@Id
     @GeneratedValue 
@@ -42,8 +42,19 @@ public class Blog implements Serializable {
     private String status;
 	@Column(name = "Likes", nullable = false)
     private int likes;
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
+	}
 	@Column(name = "Dislikes", nullable = false)
     private int dislikes;
+	
+	
+	@Column(name = "Views", nullable = false)
+    private int views;
+	
 	
 	@Column(name = "Username", nullable = false)
     private String username;
@@ -54,18 +65,10 @@ public class Blog implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	@OneToMany(targetEntity=BlogComments.class,mappedBy="blogg",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
-    private Set<BlogComments> blogcomments ;
+
 	
 	
-	
-	
-	public Set<BlogComments> getBlogcomments() {
-		return blogcomments;
-	}
-	public void setBlogcomments(Set<BlogComments> blogcomments) {
-		this.blogcomments = blogcomments;
-	}
+
 
 	public int getDislikes() {
 		return dislikes;

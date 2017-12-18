@@ -25,18 +25,7 @@ public class Job implements Serializable {
     @GeneratedValue 
     @Column(name="Job")
 	private int jobid;
-	 public int getSalary() {
-		return salary;
-	}
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-	public String getQualification() {
-		return qualification;
-	}
-	public void setQualification(String qualification) {
-		this.qualification = qualification;
-	}
+	
 	@Column(name="JobProfile")
 		private String jobprofile;
 	 @Column(name="JobDesc")
@@ -45,6 +34,37 @@ public class Job implements Serializable {
 	 private int salary;
 	 @Column(name="Qualifications")
 	 private String qualification;
+	 
+	 @Column(name="Company")
+	 private String company;
+	 
+	 @Column(name="CompanyDesc")
+	 private String companydesc;
+	 
+	 public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getCompanydesc() {
+		return companydesc;
+	}
+	public void setCompanydesc(String companydesc) {
+		this.companydesc = companydesc;
+	}
+	public int getSalary() {
+			return salary;
+		}
+		public void setSalary(int salary) {
+			this.salary = salary;
+		}
+		public String getQualification() {
+			return qualification;
+		}
+		public void setQualification(String qualification) {
+			this.qualification = qualification;
+		}
 	 public int getJobid() {
 		return jobid;
 	}

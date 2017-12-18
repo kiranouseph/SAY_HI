@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.SayhiBackend.dao.JobDAO;
 
 import com.niit.SayhiBackend.model.Job;
+import com.niit.SayhiBackend.model.JobApplications;
 @Repository("jobDAO")
 public class JobDAOImpl implements JobDAO {
 	@Autowired
@@ -85,5 +86,38 @@ public class JobDAOImpl implements JobDAO {
 		return jobList;
 		
 	}
+
+
+	@Transactional
+	public boolean applyJob(JobApplications jobapplications){
+		try
+		{
+		sessionFactory.getCurrentSession().save(jobapplications);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+		
+		
+	}
+	@Transactional
+	public ArrayList<JobApplications> myjobs(int myid) {
+		Session session = sessionFactory.openSession();
+		ArrayList<JobApplications> jobapllicationlist=(ArrayList<JobApplications>)session.createQuery("from JobApplications where userid="+myid).list();
+		session.close();
+		return jobapllicationlist;
+	}
+	
+	@Transactional
+	public ArrayList<JobApplications> checkIfApplied(int jobid, int myid) {
+		Session session = sessionFactory.openSession();
+		ArrayList<JobApplications> checkifapplied=(ArrayList<JobApplications>)session.createQuery("from JobApplications where userid="+myid+" and jobid="+jobid).list();
+	session.close();
+	return checkifapplied;
+	}
+	
 
 }

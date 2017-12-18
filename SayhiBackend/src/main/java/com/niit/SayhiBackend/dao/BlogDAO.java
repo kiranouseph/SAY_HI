@@ -23,6 +23,6 @@ public interface BlogDAO {
 	public ArrayList<BlogComments> getAllBlogComments(int blogid);
 	public boolean like(int blogid);
 	public boolean dislike(int blogid);
-	
+	public boolean incview(int blogid);
 	
 }

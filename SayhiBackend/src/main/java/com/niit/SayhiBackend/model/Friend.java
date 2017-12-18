@@ -1,3 +1,4 @@
+
 package com.niit.SayhiBackend.model;
 
 import java.io.Serializable;
@@ -6,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -26,31 +29,49 @@ public class Friend implements Serializable {
     @Column(name="FriendReqId")
 	private int friendreqid;
     
-	@Column(name="UserId")
-	private int userid;
-	@Column(name="FriendId")
-	private  int friendid;
-	@Column(name="Status")
-	private  int staus;
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-	public int getFriendid() {
-		return friendid;
-	}
-	public void setFriendid(int friendid) {
-		this.friendid = friendid;
-	}
-	public int getStaus() {
-		return staus;
-	}
-	public void setStaus(int staus) {
-		this.staus = staus;
-	}
+	
+	
+    private int U_ID;
 
+
+	
+	
+    private int FRI_ID;
+	
+	
+	
+	
+	
+	@Column(name="Status")
+	private  String status;
+	
+	
+	
+	public int getU_ID() {
+		return U_ID;
+	}
+	public void setU_ID(int u_ID) {
+		U_ID = u_ID;
+	}
+	public int getFRI_ID() {
+		return FRI_ID;
+	}
+	public void setFRI_ID(int fRI_ID) {
+		FRI_ID = fRI_ID;
+	}
+	public int getFriendreqid() {
+		return friendreqid;
+	}
+	public void setFriendreqid(int friendreqid) {
+		this.friendreqid = friendreqid;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	
 	
 

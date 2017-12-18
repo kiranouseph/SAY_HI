@@ -17,7 +17,10 @@ import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
+import com.niit.SayhiBackend.model.ForumRequests;
 import com.niit.SayhiBackend.model.Users;
+
+import oracle.net.aso.f;
 
 public class ForumDAOTest {
 
@@ -41,12 +44,12 @@ public class ForumDAOTest {
 	public void addForumTest()
 	{
 		Forum forum=new Forum();
-		Users user=userDAO.getUser(1);
 		
-		forum.setFormcontent("Java or .Net");
-		forum.setFormname("JAVA");
-		forum.setForumid(1500);
-		forum.setStatus("N");
+		
+		forum.setFormcontent("Ruby on raisl");
+		forum.setFormname("fgvfdhb");
+		
+		
 		
 		assertTrue("Problem in adding Forum  ",forumDAO.addForum(forum));
 	
@@ -57,30 +60,33 @@ public class ForumDAOTest {
 	public void getForumTest()
 	{
 		
-		Forum forum=forumDAO.getForum(63);
+		Forum forum=forumDAO.getForum(1);
 		System.out.println(forum.getFormcontent());	
 		System.out.println(forum.getFormname());
 	}
-	@Ignore
+
+
+@Ignore
 	@Test
 	public void updateForumTest()
 	{
 		
-	Forum forum=forumDAO.getForum(63);
+	Forum forum=forumDAO.getForum(1);
 	forum.setFormcontent("Kotlin or java");
 	forum.setFormname("Android tech");
 		assertTrue("Problem in Updading forum",forumDAO.updateForum(forum));
 		
 		
 	}
-	@Ignore
+	
+@Ignore
 	@Test
 	public void deleteForumTest()
 	{
-		Forum forum=forumDAO.getForum(63);
+		Forum forum=forumDAO.getForum(1);
 		assertTrue("Problem in deleting forum",forumDAO.deleteForum(forum));
 	}
-	@Ignore
+@Ignore
 	@Test
 	public void getAllForumTest()
 	{
@@ -93,38 +99,15 @@ public class ForumDAOTest {
 	}
 	
 	}
-@Ignore
-	@Test
-	public void approveForumTest()
-	{
-		Forum forum =forumDAO.getForum(63);
-		
-		forum.setStatus("Y");
-		assertTrue("Problem in Approving  Forum",forumDAO.approveForum(forum));
-		
-	}
-	
-	
-@Ignore
-	@Test
-	public void rejectForumTest()
-	{
-		Forum forum=forumDAO.getForum(63);
-		forum.setStatus("N");
-	
-		assertTrue("Problem in Rejecting  Forum",forumDAO.rejectforum(forum));
-		
-	}
-	
 	
 @Ignore
 	@Test
 	public void addForumComment()
 	{
-		Forum forum=forumDAO.getForum(1);
+		
 		ForumComments forumcomment =new ForumComments();
-		forumcomment.setForumcomm("v good");
-		forumcomment.setForumm(forum);
+		forumcomment.setForumcomm("nicely written");
+		forumcomment.setForumid(2);
 		
 		
 		assertTrue("Problem in adding Forumcomment ",forumDAO.addForumComment(forumcomment));
@@ -138,7 +121,7 @@ public class ForumDAOTest {
 	public void getForumCommentTest()
 	{
 		
-		ForumComments forumcomment=forumDAO.getForumComment(65);
+		ForumComments forumcomment=forumDAO.getForumComment(2);
 		System.out.println(forumcomment.getForumcomm());
 		
 	}
@@ -148,7 +131,7 @@ public class ForumDAOTest {
 public void getForumCommentByForumidTest()
 {
 	
-	ArrayList<ForumComments> forumcomment=(ArrayList<ForumComments>)forumDAO.getAllForumComments(41);
+	ArrayList<ForumComments> forumcomment=(ArrayList<ForumComments>)forumDAO.getAllForumCommentsById(2);
 	for(ForumComments f:forumcomment)
 		
 	{
@@ -156,13 +139,12 @@ public void getForumCommentByForumidTest()
 	}
 	
 }
-
+@Ignore
 	
-	@Ignore
 	@Test
 	public void updateForumCommentTest()
 	{
-		ForumComments forumcomment =new ForumComments();
+		ForumComments forumcomment =forumDAO.getForumComment(2);
 		forumcomment.setForumcomm("Too good");
 		assertTrue("Problem in updating Forumcomment ",forumDAO.updateForumComment(forumcomment));
 		
@@ -170,14 +152,67 @@ public void getForumCommentByForumidTest()
 	}
 	
 	
-	
-@Ignore	
+@Ignore
 	@Test
 	public void deleteForumCommentTest()
 	{
-		ForumComments forumcomment=forumDAO.getForumComment(41);
+		ForumComments forumcomment=forumDAO.getForumComment(4);
 		assertTrue("Problem in deleting Forumcomment ",forumDAO.deleteForumComment(forumcomment));
 		
 	}
+
+@Ignore
+@Test
+public void addForumRequestTest()
+{
+	ForumRequests forumrequest=new ForumRequests();
+
+
+forumrequest.setForumid(1);
+forumrequest.setUserid(1);
+assertTrue("Problem in inserting forumreq ",forumDAO.addForumRequest(forumrequest));
 	
+	
+}
+
+
+@Ignore
+@Test
+public void acceptForumRequestTest()
+{
+ForumRequests forumrequest=forumDAO.getForumRequest(1);
+forumrequest.setStatus("YES");
+assertTrue("Problem in  forumreq ",forumDAO.acceptForumRequest(forumrequest));
+}
+
+@Ignore
+@Test
+public void blockUserTest()
+{
+	ForumRequests forumrequest=forumDAO.getForumRequest(1);
+	forumrequest.setStatus("NO");
+	assertTrue("Problem in  forumreq ",forumDAO.blockUser(forumrequest));	
+	
+}
+
+
+@Ignore
+@Test
+public void getForumRequestTest()
+{
+	ForumRequests forumrequest=forumDAO.getForumRequest(1);
+	System.out.println(forumrequest.getForumid());
+	
+}
+
+@Ignore
+@Test
+public void getAllForumRequestTest()
+{
+	ArrayList<ForumRequests> forumrequests=forumDAO.getAllForumRequest();
+	for(ForumRequests f:forumrequests)
+	{
+		System.out.println(f.getForreqid());
+	}
+}
 }

@@ -12,5 +12,6 @@ public interface UsersDAO {
 	 public boolean updateOnlineStatus(Users user);
 		public Users getUser(int userid);
 		public boolean checkLogin(Users user);
+		public Users getUserbyId(int uderid);
 		public Users getUserbyemail(String email);
 }

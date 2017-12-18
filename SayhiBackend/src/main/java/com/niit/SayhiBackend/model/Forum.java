@@ -25,6 +25,10 @@ public class Forum implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
+
+	
+
 	@Id
     @GeneratedValue 
     @Column(name = "ForumID", nullable = false)
@@ -34,16 +38,10 @@ public class Forum implements Serializable {
 	@Column(name = "FormContent", nullable = false)
     private String formcontent;
 
-	@Column(name = "Staus", nullable = false)
-    private String status;
-	
-	@OneToMany(targetEntity=ForumComments.class,mappedBy="forumm",cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
-    private Set<ForumComments> forumcomments ;
-	@Column(name = "Username", nullable = false)
-    private String username;
 
-	 
-	 
+	
+
+
 	public int getForumid() {
 		return forumid;
 	}
@@ -55,15 +53,6 @@ public class Forum implements Serializable {
 	public String getFormname() {
 		return formname;
 	}
-
-	public Set<ForumComments> getForumcomments() {
-		return forumcomments;
-	}
-
-	public void setForumcomments(Set<ForumComments> forumcomments) {
-		this.forumcomments = forumcomments;
-	}
-
 
 
 	public void setFormname(String formname) {
@@ -79,13 +68,7 @@ public class Forum implements Serializable {
 	}
 
 
-	public String getStatus() {
-		return status;
-	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	
 	

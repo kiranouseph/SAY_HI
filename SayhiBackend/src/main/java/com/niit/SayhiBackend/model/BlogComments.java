@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
 
 
 @Entity
-@Component	
+
 @Table(name="BlogComments")
-public class BlogComments implements Serializable  {
+public class BlogComments  {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	
 	@Id
     @GeneratedValue 
     @Column(name = "BlogcomId", nullable = false)
@@ -32,16 +32,28 @@ public class BlogComments implements Serializable  {
     private String blogcomm;
 	
 
-	@ManyToOne
-    @JoinColumn(name="B_id",updatable=true,insertable=true,nullable=false)
-    private Blog blogg;
+
+	@Column(name = "Blogid", nullable = false)
+	private int blogid;
+	
+	@Column(name = "Userid", nullable = false)
+	private int userid;
 	
 	
-	public Blog getBlogg() {
-		return blogg;
+	
+	
+
+	public int getBlogid() {
+		return blogid;
 	}
-	public void setBlogg(Blog blogg) {
-		this.blogg = blogg;
+	public void setBlogid(int blogid) {
+		this.blogid = blogid;
+	}
+	public int getUserid() {
+		return userid;
+	}
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 	public int getBlogcomid() {
 		return blogcomid;

@@ -40,6 +40,11 @@ public class Users implements Serializable{
 	 
 	 
 	 
+	
+
+
+
+
 	@Column(name = "Email", nullable = false)
     private String email;
 	
@@ -51,8 +56,14 @@ public class Users implements Serializable{
     
    
     
-    @Column(name = "Isonline", nullable = false)
+  
+
+
+
+	@Column(name = "Isonline", nullable = false)
     private String isonline;
+    
+
 
 
 

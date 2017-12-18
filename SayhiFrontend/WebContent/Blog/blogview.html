@@ -63,12 +63,16 @@ body{
       <div data-ng-controller="blogcontroller">
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
-<div class="container">
-	<div class="col-md-5">
+
+	<div class="col-md-10">
         <div class="panel panel-default">
             <div class="panel-body">
                <section class="post-heading">
                     <div class="row">
+                    
+                    
+                    
+                    
                         <div class="col-md-11">
                             <div class="media">
                               <div class="media-left">
@@ -77,8 +81,8 @@ body{
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="#" class="anchor-username"><h4 class="media-heading">{{blogById.username}}</h4></a> 
-                                <a href="#" class="anchor-time">51 mins</a>
+                                <a href="#" class="anchor-username"><h4 class="media-heading">{{blogByid.username}}</h4></a> 
+                               
                               </div>
                             </div>
                         </div>
@@ -88,24 +92,24 @@ body{
                     </div>             
                </section>
                  <section >
-                   <p>{{blogById.blogname}}</p>
+                   <p>{{blogByid.blogname}}</p>
                </section>
                <section class="post-body">
-                   <p>{{blogById.blogcontent}}</p>
+                   <p>{{blogByid.blogcontent}}</p>
                </section>
                <section class="post-footer">
                    <hr>
                    <div class="post-footer-option container">
                         <ul class="list-unstyled">
                        
-                              <li> <div data-ng-click="approveBlog()" data-ng-show="currentuser.role=='ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> APPROVE</a></div></li>
-                               <li> <div  data-ng-click="rejectBlog()" data-ng-show="currentuser.role=='ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> REJECT</a></div></li>
+                              <li> <div data-ng-click="approveBlog()" data-ng-show="currentuser.role=='ROLE_ADMIN'"><a data-ng-click="approveBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i> APPROVE</a></div></li>
+                               <li> <div  data-ng-click="rejectBlog()" data-ng-show="currentuser.role=='ROLE_ADMIN'"><a data-ng-click="rejetcBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-down"></i> REJECT</a></div></li>
                             
-                              <li><div data-ng-click="likeBlog()" data-ng-hide="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>Like</a></div></li>
-                              <li><div data-ng-click="dislikeBlog()" data-ng-hide="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> Dislike</a></div></li>  
+                              <li><div data-ng-click="likeBlog()" data-ng-hide="currentuser.email==blogById.username"><a data-ng-click="likeBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i>Like</a></div></li>
+                              <li><div data-ng-click="dislikeBlog()" data-ng-hide="currentuser.email==blogById.username"><a data-ng-click="dislikeBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-down"></i> Dislike</a></div></li>  
                               
-                              <li><div data-ng-click="deleteBlog()" data-ng-show="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> DELETE</a></div></li>
-                              <li><div data-ng-click="likeBlog()" data-ng-show="currentuser.email=blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> EDIT</a></div></li>                          </ul>
+                              <li><div data-ng-click="deleteBlog()" data-ng-show="currentuser.email==blogById.username"><a data-ng-click="deleteBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i> DELETE</a></div></li>
+                              <li><div data-ng-click="likeBlog()" data-ng-show="currentuser.email==blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> EDIT</a></div></li>                          </ul>
                    </div>
                    <div class="post-footer-comment-wrapper">
                        <div class="comment-form">
@@ -129,7 +133,7 @@ body{
             </div>
         </div>   
 	</div>
-</div>
+
 
 </div>
 

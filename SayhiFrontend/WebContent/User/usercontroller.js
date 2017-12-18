@@ -2,7 +2,7 @@
 
 app.controller("registercontroller", function ($scope,$location,$http,$rootScope) {
 	 $scope.msg = "Register  page";
-	 $scope.Users={firstname:'',lastname:'',email:'',password:'',role:'User',isonline:'NO'};
+	 $scope.Users={firstname:'',lastname:'',email:'',password:'',role:'ROLE_USER',isonline:'NO'};
 	 $scope.register=function()
 	 {
 		 console.log("in register controller angualar");
@@ -26,8 +26,7 @@ app.controller("registercontroller", function ($scope,$location,$http,$rootScope
 		 console.log("in login method");
 		 $http.post("http://localhost:8080/SayhiMiddleware/user/login",$scope.Users).then(function(response)
 				 {
-			 console.log($scope.Users.email)
-			 console.log($scope.Users.password)
+			
 			 
 			 $scope.Usersdet=response.data;
 			 $rootScope.currentuser=response.data;

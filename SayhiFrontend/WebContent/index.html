@@ -39,76 +39,47 @@
       <a class="navbar-brand" href="#!/wall">SAY_HI</a>
     </div>
     <ul class="nav navbar-nav navbar-right">
+    
+      <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
+      <a href="#!/mywall"  style="color: black">Hi {{currentuser.email}}</a>  
+       </div> </li>
      
-     <li><div>
-  <a href=""  style="color: black">Messages</a>    
-     </div>
-     
-      </li>
-       <li><div>
-       
-        <a href=""  style="color: black">Friend requests</a>
-       
-       </div>
-     
-      </li>
-       <li><div>
-       
-      <a href=""  style="color: black">Notifications</a>
-       
-       </div>
-            </li>
   
       
       
-      
-     <li><div data-ng-hide="currentuser.role=='ADMIN' || currentuser.role=='User'">
+     <li><div data-ng-hide="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER'">
       <a href="#!/login"  style="color: black">LOGIN</a>
       </div></li>
       
       
-       <li><div data-ng-hide="currentuser.role=='ADMIN' || currentuser.role=='User'">
+       <li><div data-ng-hide="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER'">
      <a href="#!/register"  style="color:black">REGISTER</a>
       </div></li>
       
       
-      <li><div data-ng-show="currentuser.role=='ADMIN'">
-     <a href="#!/logout">LOG OUT</a>
+      <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
+     <a data-ng-click="logout()" data-ng-controller="logoutcontroller">LOGOUT</a>
       </div></li>
+    
       
       
-        <li><div data-ng-show="currentuser.role=='User'">
-        
-        
-              <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{currentuser.email}}
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#!/mywall">MY WALL</a></li>
-    <li><a href="#!/editme">EDIT DETAILS</a></li>
-    <li><a data-ng-click="logout()" data-ng-controller="logoutcontroller">LOGOUT</a></li>
-   
-  </ul>
-</div>
-      </div></li>
+    
       
       
-      <li><div data-ng-show="currentuser.role=='ADMIN'">
+      <li><div data-ng-show="currentuser.role=='ROLE_ADMIN'">
       <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">REQUESTS
   <span class="caret"></span></button>
   <ul class="dropdown-menu">
-    <li><a href="#!/blogreq">BLOG</a></li>
-    <li><a href="#!/forumreq">FORUM</a></li>
-    <li><a href="#!/jobreq">JOBS</a></li>
-    <li><a href="#!/eventreq">EVENTS</a></li>
-  </ul>
+    <li><a >BLOG</a></li>
+    <li><a href="#!/forumrequests">FORUM</a></li>
+      </ul>
 </div>
       
       </div></li> 
       
       
-           <li><div data-ng-show="currentuser.role=='ADMIN'">
+           <li><div data-ng-show="currentuser.role=='ROLE_ADMIN'">
       <div class="dropdown">
   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">MANAGE
   <span class="caret"></span></button>
@@ -149,10 +120,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 <script src="js/main.js"></script>
 <script src="User/usercontroller.js"></script>
-
+<script src="Friend/friendcontroller.js"></script>
 <script src="Job/jobcontroller.js"></script>
 <script src="Blog/blogcontroller.js"></script>
-
+<script src="forum/forumcontroller.js"></script>
 
 </body>
 </html>

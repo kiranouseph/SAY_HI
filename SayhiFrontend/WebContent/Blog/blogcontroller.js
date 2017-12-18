@@ -1,8 +1,18 @@
-app.controller("blogcontroller", function ($scope,$http,$location) {
+app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 
-	 $scope.Blog={blogname:'',blogcontent:'',status:'N',likes:'0',dislikes:'0',userss:{firstname:'',lastname:'',email:'',password:'',role:'',status:'',isonline:'',dob:'',gender:''}};
+	 $scope.Blog={blogname:'',blogcontent:'',status:'A',likes:'0',dislikes:'0',views:'0',username:$rootScope.currentuser.email};
 	$scope.BlogComments={blogcomm:'',blogg:''};
-	
+	function fetchBlog(idd)
+	{
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
+				$scope.blogByid=response.data; 
+									
+				},function(error){
+				
+				});
+	};
+	function fetchAllBlogs()
+	{
 	$http.get("http://localhost:8080/SayhiMiddleware/blogs/getAllBlogs")
 		.then(function(response)
 		{
@@ -14,30 +24,50 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 		{
 			console.log("Error on retrieving blogs")
 		});
-		
+	};
+	fetchAllBlogs();
+	
 	 $scope.maximum=function(idd)
 	 {
 		 console.log("in add max method"+idd)
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-			$scope.blogByid=response.data; 
-								
+		 
+		 
+		  $http.get("http://localhost:8080/SayhiMiddleware/blogs/incview/"+idd).then(function(response){
+			
 			},function(error){
 			
 			});
+		 
+		 
+		 
+		 
+		 
+		 
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
+			$scope.blogByid=response.data; 
+			console.log("blogname"+$scope.blogByid.blogname)
+			console.log("username"+$scope.blogByid.username)
+			},function(error){
+			
+			});
+		 
+		 
+		 $location.path('/blogview')
 		 
 	 }
 	 
 	 
 
-	 $scope.addBlog=function(iddd)
+	 $scope.addBlog=function()
 	 {
 		console.log("in add blog method"+$scope.Blog.blogname)
-		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/addBlog/"+iddd,$scope.Blog).then(function(response){
+		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/addBlog",$scope.Blog).then(fetchAllBlogs(),function(response){
 			 console.log("Blog added successfully")
 								
 			},function(error){
 				console.error("Error while creating blog")
 			});
+		$location.path('/blog')
 		 
 	 }
 	 
@@ -50,7 +80,7 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 	 $scope.editBlog=function(idd)
 	 {
 		console.log("in edit blog method")
-		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/updateBlog/"+idd,$scope.Blog).then(function(response){
+		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/updateBlog/"+idd,$scope.Blog).then(fetchBlog(idd),function(response){
 			 console.log("Blog updated successfully");
 								
 			},function(error){
@@ -62,7 +92,7 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 	 $scope.deleteBlog=function(idd)
 	 {
 		console.log("in delete blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/deleteBlog/"+idd).then(function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/deleteBlog/"+idd).then(fetchBlog(idd),function(response){
 			 console.log("Blog deleted successfully");
 								
 			},function(error){
@@ -75,7 +105,7 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 	 $scope.approveBlog=function(idd)
 	 {
 		console.log("in approve blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/approveBlog/"+idd).then(function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/approveBlog/"+idd).then(fetchBlog(idd),fetchAllBlogs(),function(response){
 			 console.log("Blog approved successfully");
 								
 			},function(error){
@@ -87,7 +117,7 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 	 $scope.rejetcBlog=function(idd)
 	 {
 		console.log("in reject blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/rejectBlog/"+idd).then(function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/rejectBlog/"+idd).then(fetchBlog(idd),fetchAllBlogs(),function(response){
 			 console.log("Blog rejected successfully");
 								
 			},function(error){
@@ -99,7 +129,7 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 	 $scope.likeBlog=function(idd)
 	 {
 		console.log("in like blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/likeBlog/"+idd).then(function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/likeBlog/"+idd).then(fetchBlog(idd),function(response){
 			 console.log("Blog liked successfully");
 								
 			},function(error){
@@ -112,7 +142,7 @@ app.controller("blogcontroller", function ($scope,$http,$location) {
 	 $scope.dislikeBlog=function(idd)
 	 {
 		console.log("in like blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/dislikeBlog/"+idd).then(function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/dislikeBlog/"+idd).then(fetchBlog(idd),function(response){
 			 console.log("Blog disliked successfully");
 								
 			},function(error){

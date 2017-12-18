@@ -30,7 +30,7 @@ public class BlogController {
 	
 	
 
-	@RequestMapping(value="/getAllBlogs",method=RequestMethod.GET)
+	@RequestMapping(value="/getAllBlogs",method=RequestMethod.GET,headers = "Accept=application/json")
 	public ArrayList<Blog> getAllBlogs(){
 		
 		System.out.println("in getall blogs");
@@ -39,6 +39,7 @@ public class BlogController {
 		{
 			System.out.println(blo.getBlogcontent());
 			System.out.println(blo.getBlogname());
+			
 		
 		}
 				return blogs;
@@ -51,10 +52,10 @@ public class BlogController {
 	
 	
 	
-	@RequestMapping(value="/addBlog/{uemail}",method=RequestMethod.POST)
-	public ResponseEntity<String> addBlog(@RequestBody Blog blog,@PathVariable("uemail") String email){
-	String emaill=email+".com";
-	blog.setUsername(emaill);
+	@RequestMapping(value="/addBlog",method=RequestMethod.POST)
+	public ResponseEntity<String> addBlog(@RequestBody Blog blog){
+	
+	
 		
 		
 		boolean isSaved=blogDAO.addBlog(blog);
@@ -69,6 +70,7 @@ public class BlogController {
 		}
 
 	}
+	
 	
 	@RequestMapping(value="/getBlogById/{blogid}",method=RequestMethod.GET)
 	public ResponseEntity<Blog> getBlog(@PathVariable("blogid") int blogId){
@@ -181,12 +183,23 @@ public class BlogController {
 	}	
 
 	
-	
+	@RequestMapping(value="/incview/{blogId}",method=RequestMethod.GET)
+	public ResponseEntity<String> incview(@PathVariable("blogId") int blogId){
+		
+		Blog blog=blogDAO.getBlog(blogId);
+		blog.setViews(blog.getViews()+1);
+		boolean isSaved=blogDAO.updateBlog(blog);
+		if(isSaved)
+		return new ResponseEntity<String>("Blog view incremented successfully",HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Problem in view incrementing blog",HttpStatus.BAD_REQUEST);
+		
+	}
 	
 	@RequestMapping(value="/addBlogComments/{blogId}",method=RequestMethod.POST)
 	public ResponseEntity<String> addBlogComments(@RequestBody BlogComments blogcomment,@PathVariable("blogId") int blogId){
-		Blog blog=blogDAO.getBlog(blogId);
-		blogcomment.setBlogg(blog);
+		
+		blogcomment.setBlogid(blogId);
 		boolean isSaved=blogDAO.addBlogComment(blogcomment);
 		if(isSaved)
 		return new ResponseEntity<String>("Blogcomment added successfully",HttpStatus.OK);

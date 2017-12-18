@@ -27,13 +27,58 @@ app.config(function($routeProvider) {
 
     .when("/blog", {
         templateUrl : "pages/home.html",
-        controller : "blogcontroller"
+       
+       
+    })
+  
+    
+    .when("/newblog", {
+        templateUrl : "Blog/newblog.html",
+       
+       
+    })
+  
+       .when("/newforum", {
+        templateUrl : "forum/newforum.html",
+       
+       
+    })
+  
+       .when("/newjob", {
+        templateUrl : "Job/newjob.html",
+       
+       
+    })
+  
+    
+     .when("/forumview", {
+        templateUrl : "forum/forumview.html",
+        controller:"forumcontroller",
+        
+    })
+    
+        
+     .when("/jobview", {
+        templateUrl : "Job/jobview.html",
+        controller:"jobcontroller",
+        
     })
     
     
+    
+     .when("/forumrequests", {
+        templateUrl : "forum/forumrequests.html",
+       
+        
+    })
+      .when("/forummanage", {
+        templateUrl : "forum/forummanage.html",
+        
+    })
+    
       .when("/blogview", {
-        templateUrl : "blog/blogview.html",
-        controller : "blogcontroller"
+        templateUrl : "Blog/blogview.html",
+        controller : "blogcontroller",
     });
     
 });

@@ -15,6 +15,7 @@ import com.niit.SayhiBackend.dao.ForumDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
+import com.niit.SayhiBackend.model.ForumRequests;
 import com.niit.SayhiBackend.model.Users;
 
 @RestController
@@ -26,21 +27,19 @@ public class ForumController {
 	UsersDAO usersDAO;
 	
 	
-	@RequestMapping(value="/getAllForums",method=RequestMethod.GET,headers="Accept=application/json")
-	public ResponseEntity<ArrayList<Forum>> getAllForums(){
+	@RequestMapping(value="/getAllForums",method=RequestMethod.GET)
+	public  ArrayList<Forum> getAllForums(){
 		
-		if(forumDAO.getAllForum().isEmpty()){
-			
-		}
-		return new ResponseEntity<ArrayList<Forum>>(forumDAO.getAllForum(),HttpStatus.OK);
+		ArrayList<Forum> forum=forumDAO.getAllForum();
+		
+		return  forum;
 				
 	}
 	
 	
-	@RequestMapping(value="/addForum/{uid}",method=RequestMethod.POST,headers="Accept=application/json")
-	public ResponseEntity<Forum> addForum(@RequestBody Forum forum,@PathVariable("uid") int uid){
-		System.out.println(uid);
-		Users users=usersDAO.getUser(uid);
+	@RequestMapping(value="/addForum",method=RequestMethod.POST)
+	public ResponseEntity<Forum> addForum(@RequestBody Forum forum){
+		
 		
 		boolean isSaved=forumDAO.addForum(forum);
 		if(isSaved)
@@ -51,7 +50,7 @@ public class ForumController {
 	}
 	
 	
-	@RequestMapping(value="/getForum/{forumid}",method=RequestMethod.GET)
+	@RequestMapping(value="/getForumById/{forumid}",method=RequestMethod.GET)
 	public ResponseEntity<Forum> getForum(@PathVariable("forumid") int forumId){
 	
 	
@@ -67,8 +66,12 @@ public class ForumController {
 	
 	
 	
+
 	
-	@RequestMapping(value="/deleteForum/{forumid}",method=RequestMethod.DELETE)
+	
+	
+	
+	@RequestMapping(value="/deleteForum/{forumid}",method=RequestMethod.GET)
 	public ResponseEntity<Forum> deleteForum(@PathVariable("forumid") int forumId){
 	
 	Forum forum=forumDAO.getForum(forumId);
@@ -83,7 +86,7 @@ public class ForumController {
 	
 	}
 
-	@RequestMapping(value="/updateForum",method=RequestMethod.PUT)
+	@RequestMapping(value="/updateForum",method=RequestMethod.POST)
 	public ResponseEntity<Forum> updateForum(@RequestBody Forum forum){
 		
 		boolean isSaved=forumDAO.updateForum(forum);
@@ -95,38 +98,14 @@ public class ForumController {
 	}
 	
 	
-	@RequestMapping(value="/approveForum/{forumId}",method=RequestMethod.GET)
-	public ResponseEntity<Forum> approveBlog(@PathVariable("forumId") int forumId){
-		Forum forum=forumDAO.getForum(forumId);
-		forum.setStatus("Y");
-		
-		boolean isSaved=forumDAO.updateForum(forum);
-		if(isSaved)
-		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
-		else
-			return new ResponseEntity<Forum>(forum,HttpStatus.BAD_REQUEST);
-		
-	}
+
 	
-	
-	@RequestMapping(value="/rejectForum/{forumId}",method=RequestMethod.GET)
-	public ResponseEntity<Forum> rejectBlog(@PathVariable("forumId") int forumId){
-		Forum forum=forumDAO.getForum(forumId);
-		forum.setStatus("N");
-		
-		boolean isSaved=forumDAO.updateForum(forum);
-		if(isSaved)
-		return new ResponseEntity<Forum>(forum,HttpStatus.OK);
-		else
-			return new ResponseEntity<Forum>(forum,HttpStatus.BAD_REQUEST);
-		
-	}
-	
+
 	
 	@RequestMapping(value="/addForumComments/{forumId}",method=RequestMethod.POST)
 	public ResponseEntity<ForumComments> addForumcomments(@RequestBody ForumComments forumcomments,@PathVariable("forumId") int forumId){
-Forum forum=forumDAO.getForum(forumId);
-forumcomments.setForumm(forum);
+
+forumcomments.setForumid(forumId);
 		boolean isSaved=forumDAO.addForumComment(forumcomments);
 		if(isSaved)
 		return new ResponseEntity<ForumComments>(forumcomments,HttpStatus.OK);
@@ -181,14 +160,85 @@ forumDAO.deleteForumComment(forumComments);
 	public ResponseEntity<ArrayList<ForumComments>> getAllForumComment(@PathVariable("forumId") int forumId){
 	
 	
-	if(forumDAO.getAllForumComments(forumId).isEmpty()){
+	if(forumDAO.getAllForumCommentsById(forumId).isEmpty()){
 		
 	}
-	return new ResponseEntity<ArrayList<ForumComments>>(forumDAO.getAllForumComments(forumId),HttpStatus.OK);	
+	return new ResponseEntity<ArrayList<ForumComments>>(forumDAO.getAllForumCommentsById(forumId),HttpStatus.OK);	
 			
 	
 	
 	
 	}
+	
+	@RequestMapping(value="/myforums/{myid}")
+	public ResponseEntity<ArrayList<ForumRequests>> getmyforums(@PathVariable("myid") int myid)
+	{
+		return new ResponseEntity<ArrayList<ForumRequests>>(forumDAO.getAllMyForum(myid),HttpStatus.OK);
+	}
+	
+	
+	
+	@RequestMapping(value="/checkIfMyForum/{forumid}/{myid}",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<ForumRequests>> getcheckifmyforum(@PathVariable("forumid") int forumId,@PathVariable("myid") int myid){
+		ForumRequests f=new ForumRequests();
+	ArrayList<ForumRequests> foru=forumDAO.checkIfMyForum(forumId, myid);
+	return new ResponseEntity<ArrayList<ForumRequests>>(foru,HttpStatus.OK);	
+			
+	
+	
+	
+	}
+	
+	
+	@RequestMapping(value="/addForum/{forumid}/{myid}",method=RequestMethod.GET)
+	public ResponseEntity<ForumRequests> addForumReq(@PathVariable("forumid") int forumId,@PathVariable("myid") int myid){
+	
+	
+	
+	ForumRequests fr=new ForumRequests();
+	fr.setForumid(forumId);
+	fr.setUserid(myid);
+	fr.setStatus("NO");
+	
+	
+		boolean isSaved=forumDAO.addForumRequest(fr);
+		if(isSaved)
+		{
+			return new ResponseEntity<ForumRequests>(fr,HttpStatus.OK);	
+		}
+		else
+		{
+			return new ResponseEntity<ForumRequests>(fr,HttpStatus.BAD_REQUEST);
+		}
+				
+	
+	
+	
+	}
+	
+	
+	@RequestMapping(value="/getForumRequests",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<ForumRequests>> getForumrequests()
+    {
+		ArrayList<ForumRequests> ff=forumDAO.getAllForumRequest();
+		for(ForumRequests fff:ff)
+		{
+			System.err.println(fff.getForumname());
+			System.err.println(fff.getUsername());
+			
+		}
+	return new ResponseEntity<ArrayList<ForumRequests>>(forumDAO.getAllForumRequest(),HttpStatus.OK);		
+	}
+	
+	
+	@RequestMapping(value="/approveForumRequests/{forumReqId}",method=RequestMethod.GET)
+	public void approveForumRequets(@PathVariable("forumReqId") int forumreqid)
+	{
+		ForumRequests fr=forumDAO.getForumRequest(forumreqid);
+		fr.setStatus("YES");
+boolean IsSaved=forumDAO.acceptForumRequest(fr);
+	}
+	
+	
 
 }

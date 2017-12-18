@@ -1,22 +1,22 @@
-<div data-ng-controller="forumcontroller">
-<div data-ng-repeat="forumrequests in forumreq ">
-<div class="card card-1" style="margin-top:15vh>
+<div data-ng-controller="forumrequestcontroller">
+
+<div class="card card-1" style="margin-top:25px;margin-right: 25px;margin-left: 25px">
  <table>
         <thead>
           <tr>
               <th>NAME</th>
-              <th>BLOGNAME</th>
+              <th>FORUMNAME</th>
               
-              <th>ALLOW USE</th>
+              <th></th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>//forumreq.user.firstname</td>
-            <td>//blogreq.blogname</td>
-            <td>VIEW</td>
-            <td>APPROVE</td>
+          <tr  data-ng-repeat="forumreq in forumrequests">
+            <td>{{forumreq.username}}</td>
+            <td>{{forumreq.forumname}}</td>
+           
+            <td>  <div class="btn-group"> <a data-ng-click="acceptforumrequests(forumreq.forreqid)"  class="btn btn-primary">ACCEPT</a></div> </td>
           </tr>
        
         </tbody>
@@ -26,5 +26,5 @@
  
  
  </div>
-</div>
+
 </div>

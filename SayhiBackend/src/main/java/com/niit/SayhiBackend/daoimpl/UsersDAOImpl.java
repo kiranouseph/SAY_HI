@@ -84,13 +84,13 @@ public class UsersDAOImpl implements UsersDAO {
 	
 	
 	@Transactional 
-	public Users getUserbyemail(String email) {
+	public Users getUserbyId(int userid) {
 		
 		
 		Users user=new Users();
 		try{
 			Session session= sessionFactory.openSession();
-			Query query=session.createQuery("from Users where email='"+email+"'");
+			Query query=session.createQuery("from Users where userid="+userid);
 			 user=(Users)query.list().get(0);
 			session.close();
 			
@@ -115,6 +115,7 @@ public class UsersDAOImpl implements UsersDAO {
 			
 			if(user1==null)
 			{
+				
 				return false;
 			}
 			else
@@ -127,6 +128,23 @@ public class UsersDAOImpl implements UsersDAO {
 		{
 			return false;
 		}
+	}
+	public Users getUserbyemail(String email) {
+		Users user=new Users();
+		try{
+			Session session= sessionFactory.openSession();
+			Query query=session.createQuery("from Users where email='"+email+"'");
+			 user=(Users)query.list().get(0);
+			session.close();
+			
+		}
+		catch(Exception e)
+		{
+			
+			
+		}
+		return user;
+		
 	}
 
 

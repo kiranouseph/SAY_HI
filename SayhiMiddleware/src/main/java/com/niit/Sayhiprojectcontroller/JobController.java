@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.niit.SayhiBackend.dao.JobDAO;
 
 import com.niit.SayhiBackend.model.Job;
+import com.niit.SayhiBackend.model.JobApplications;
 
 @RestController
 @RequestMapping("/jobs")
 public class JobController {
 @Autowired
 JobDAO jobDAO;
-
-
-
 
 @RequestMapping(value="/addJob",method=RequestMethod.POST)
 public ResponseEntity<String> addJob(@RequestBody Job job){
@@ -35,32 +33,31 @@ public ResponseEntity<String> addJob(@RequestBody Job job){
 	
 }
 
-
-
-@RequestMapping(value="/getJob/{jobid}",method=RequestMethod.GET)
+@RequestMapping(value="/getJob/{jobid}",method=RequestMethod.GET,headers = "Accept=application/json")
 public ResponseEntity<Job> getBlog(@PathVariable("jobid") int jobId){
 
-
+System.out.println("In get job controller"+jobId);
 if(jobDAO.getjob(jobId)==null){
-	return new ResponseEntity<Job>(jobDAO.getjob(jobId),HttpStatus.OK);	
+	return new ResponseEntity<Job>(jobDAO.getjob(jobId),HttpStatus.BAD_REQUEST);	
+	
 }
 else
 {
-return new ResponseEntity<Job>(jobDAO.getjob(jobId),HttpStatus.OK);	
+	return new ResponseEntity<Job>(jobDAO.getjob(jobId),HttpStatus.OK);	
 }
 
 
 }
 
-@RequestMapping(value="/getAllJobs",method=RequestMethod.GET)
-public ResponseEntity<ArrayList<Job>> getAllJobs(){
-	
-	if(jobDAO.getAlljobs().isEmpty()){
-		return new ResponseEntity<ArrayList<Job>>(jobDAO.getAlljobs(),HttpStatus.OK);
+@RequestMapping(value="/getAllJobs",method=RequestMethod.GET,headers = "Accept=application/json")
+public ArrayList<Job> getAllJobs(){
+	ArrayList<Job> jobs=(ArrayList<Job>)jobDAO.getAlljobs();
+	if(jobs.isEmpty()){
+		return null;
 	}
 	else
 	{
-		return new ResponseEntity<ArrayList<Job>>(jobDAO.getAlljobs(),HttpStatus.OK);	
+		return jobs;	
 	}
 	
 			
@@ -95,7 +92,40 @@ public ResponseEntity<String> updateBlog(@RequestBody Job job){
 }
 
 
+@RequestMapping(value="/applyJob/{jobid}/{myid}",method=RequestMethod.GET)
+public ResponseEntity<String> applyJob(@PathVariable("jobid") int jobid,@PathVariable("myid") int myid)
+{
+	JobApplications jobapplications=new JobApplications();
+	jobapplications.setJobid(jobid);
+	jobapplications.setUserid(myid);
+	boolean isSaved=jobDAO.applyJob(jobapplications);
+	if(isSaved)
+	{
+		return new ResponseEntity<String>("job applied successfully",HttpStatus.OK);
+	}
+	else
+	{
+		return new ResponseEntity<String>("job apply failed",HttpStatus.BAD_REQUEST);
+	}
+}
 
 
+@RequestMapping(value="/myjobs/{myid}",method=RequestMethod.GET)
+public ArrayList<Job> myjobs(@PathVariable("myid") int myid)
+{ArrayList<Job> myjobs=new ArrayList<Job>();
+	ArrayList<JobApplications> jobappli =jobDAO.myjobs(myid);
+	for(JobApplications jobapp:jobappli)
+	{
+		
+		myjobs.add(jobDAO.getjob(jobapp.getJobapplyid()));
+		
+	}
+	return myjobs;
+}
 
+@RequestMapping(value="/checkifapplied/{jobid}/{myid}",method=RequestMethod.GET)
+public ArrayList<JobApplications> checkifapplied(@PathVariable("jobid") int jobid,@PathVariable("myid") int myid)
+{
+	return jobDAO.checkIfApplied(jobid, myid);
+}
 }

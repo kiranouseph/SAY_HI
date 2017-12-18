@@ -45,19 +45,20 @@ public static UsersDAO userDAO;
 		
 	}
 	}
-@Ignore
+
 		@Test
 		public void addUserTest()
 		{
 			Users users =new Users();
-			users.setFirstname("keerthy");
-			users.setLastname("ouseph");
-			users.setEmail("kiranouseph111@gmail.com");
+			users.setFirstname("plavin ");
+			users.setLastname("paul");
+			users.setEmail("palvin@gmail.com");
 			users.setIsonline("N");
-			users.setPassword("kiranouseph12");
+			users.setPassword("palvin1212");
 			users.setRole("ROLE_USER");
 			
 			users.setUserid(1236);
+			
 			
 		
 			assertTrue("Problem in Inserting USer",userDAO.saveUser(users));
@@ -92,7 +93,7 @@ public static UsersDAO userDAO;
 		@Test
 		public void checklogin()
 		{
-			Users user=(Users)userDAO.getUser(2);
+			Users user=(Users)userDAO.getUser(6);
 			System.out.println(user.getEmail());
 			
 			assertTrue("Problem in login Status",userDAO.checkLogin(user));
@@ -102,7 +103,7 @@ public static UsersDAO userDAO;
 		@Test
 		public void getuserbyemail()
 		{
-			Users user=(Users)userDAO.getUserbyemail("kiranouseph@gmail.com");
+			Users user=(Users)userDAO.getUserbyId(1);
 			System.out.println(user.getEmail());
 			
 			

@@ -230,6 +230,22 @@ public ArrayList<BlogComments> getAllBlogComments(int blogid) {
 	return l;
 	
 }
+public boolean incview(int blogid) {
+	try
+	{
+		Session session=sessionFactory.openSession();
+		Blog blog = (Blog) session.get(Blog.class, blogid);
+		
+		session.update(blog);
+		
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}	
+}
 
 
 
