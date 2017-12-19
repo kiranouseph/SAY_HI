@@ -24,5 +24,6 @@ public interface BlogDAO {
 	public boolean like(int blogid);
 	public boolean dislike(int blogid);
 	public boolean incview(int blogid);
+	public ArrayList<Blog> getAllBlogRequests();
 	
 }

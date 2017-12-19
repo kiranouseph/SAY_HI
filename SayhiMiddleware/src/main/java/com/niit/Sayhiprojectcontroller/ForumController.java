@@ -89,6 +89,7 @@ public class ForumController {
 	@RequestMapping(value="/updateForum",method=RequestMethod.POST)
 	public ResponseEntity<Forum> updateForum(@RequestBody Forum forum){
 		
+		
 		boolean isSaved=forumDAO.updateForum(forum);
 		if(isSaved)
 		return new ResponseEntity<Forum>(forum,HttpStatus.OK);

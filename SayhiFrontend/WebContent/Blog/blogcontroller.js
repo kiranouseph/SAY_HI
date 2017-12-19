@@ -2,15 +2,7 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 
 	 $scope.Blog={blogname:'',blogcontent:'',status:'A',likes:'0',dislikes:'0',views:'0',username:$rootScope.currentuser.email};
 	$scope.BlogComments={blogcomm:'',blogg:''};
-	function fetchBlog(idd)
-	{
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-				$scope.blogByid=response.data; 
-									
-				},function(error){
-				
-				});
-	};
+
 	function fetchAllBlogs()
 	{
 	$http.get("http://localhost:8080/SayhiMiddleware/blogs/getAllBlogs")
@@ -29,7 +21,7 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	
 	 $scope.maximum=function(idd)
 	 {
-		 console.log("in add max method"+idd)
+		 console.log("in add max method------"+idd)
 		 
 		 
 		  $http.get("http://localhost:8080/SayhiMiddleware/blogs/incview/"+idd).then(function(response){
@@ -38,20 +30,21 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 			
 			});
 		 
-		 
-		 
-		 
-		 
-		 
+		 console.log("view incremented")
+
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-			$scope.blogByid=response.data; 
-			console.log("blogname"+$scope.blogByid.blogname)
-			console.log("username"+$scope.blogByid.username)
-			},function(error){
-			
-			});
+				$scope.blogByid=response.data;
+				 console.log("-----"+$scope.blogByid.username+"-----"+$scope.blogByid.blogname)
+				console.log("blog fetched successfully")				
+				},function(error){
+					console.log("error in fetching blog")
+				});
+	
+		
 		 
+		
 		 
+		
 		 $location.path('/blogview')
 		 
 	 }
@@ -71,7 +64,19 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 		 
 	 }
 	 
-	 
+	 $scope.fetchforedit=function()
+	 {
+		 
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
+				$scope.blogforedit=response.data; 
+				console.log("blogname"+$scope.blogforedit.blogname)
+				console.log("username"+$scope.blogforedit.username)
+			
+				},function(error){
+				
+				});
+			 
+	 }
 	 
 	 
 	 
@@ -193,4 +198,44 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 
 	 
 	 
+});
+
+
+
+app.controller("blogrequestcontroller", function ($scope,$http,$location,$rootScope) {
+	function fetchAllblogreq()
+	{
+	
+	 $http.get("http://localhost:8080/SayhiMiddleware/blogs/blogrequests")
+	    .then(function(response)
+	    		{
+	    	
+	    
+		 $scope.blogequests=response.data;
+	
+		 $location.path('/blogrequests')
+							
+		},function(error){
+			
+		});
+	}
+	fetchAllblogreq();
+	
+	 $scope.acceptblogrequests=function(id)
+	 {
+		 
+		 console.log('in acceptblog request method')
+		
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/approveblogRequests/"+id).then(fetchAllblogreq(),function(response){
+			 
+		console.log("accepted successfully")
+			 $location.path('/blogrequests')
+								
+			},function(error){
+				console.error("Error while accepting blogrequests Forum");
+			});
+		 
+	 }
+	
+	
 });

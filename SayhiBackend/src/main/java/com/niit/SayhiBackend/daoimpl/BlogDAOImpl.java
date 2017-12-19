@@ -45,7 +45,7 @@ public class BlogDAOImpl implements BlogDAO {
 		
 		try
 		{
-		sessionFactory.getCurrentSession().update(blog);
+		sessionFactory.getCurrentSession().saveOrUpdate(blog);
 		return true;
 		}
 		catch(Exception e)
@@ -230,6 +230,8 @@ public ArrayList<BlogComments> getAllBlogComments(int blogid) {
 	return l;
 	
 }
+
+@Transactional
 public boolean incview(int blogid) {
 	try
 	{
@@ -248,6 +250,16 @@ public boolean incview(int blogid) {
 }
 
 
+@Transactional
+public ArrayList<Blog> getAllBlogRequests()
+{
+	
+	Session session = sessionFactory.openSession();
+	ArrayList<Blog> blogreq=(ArrayList<Blog>)session.createQuery("from Blog where status='A'").list();
+	session.close();
+	return blogreq;	
+	
+}
 
 
 

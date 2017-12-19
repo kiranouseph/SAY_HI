@@ -114,6 +114,8 @@ public class BlogController {
 		
 		tempblog.setBlogcontent(blog.getBlogcontent());
 		tempblog.setBlogname(blog.getBlogname());
+		tempblog.setStatus("A");
+		
 		
 		boolean isSaved=blogDAO.updateBlog(tempblog);
 		if(isSaved)
@@ -269,4 +271,28 @@ public class BlogController {
 		return new ResponseEntity<String>("Problem in deleting blogcomment",HttpStatus.BAD_REQUEST);
 	}		
 	}
+	
+	
+	
+	
+	@RequestMapping(value="/blogrequests",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<Blog>> getBlogRequest()
+	{
+		ArrayList<Blog> blogreq=(ArrayList<Blog>)blogDAO.getAllBlogRequests(); 
+	return new ResponseEntity<ArrayList<Blog>>(blogreq,HttpStatus.OK);
+	
+	}
+	
+	@RequestMapping(value="/approveblogRequests/{blogid}",method=RequestMethod.GET)
+	public ResponseEntity<Blog> approveBlogRequest(@PathVariable("blogid") int blogid)
+	{
+	Blog blog=blogDAO.getBlog(blogid);
+	blog.setStatus("YES");
+	blogDAO.updateBlog(blog);
+	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
+	
+	}
+	
+	
+	
 }

@@ -54,15 +54,48 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 			console.log('jobname'+$scope.jobbyid.company)
 				console.log('jobname'+$scope.jobbyid.salary)
 				
-				$http.get('http://localhost:8080/SayhiMiddleware/jobs/checkifapplied/'+idd+"/"+$rootScope.currentuser.userid).then(function(response) {
-				$scope.checkifapplied=response.data;
 				
-				
-				});
-			$location.path("/jobview")
-		});
+					});
+		
+		$http.get('http://localhost:8080/SayhiMiddleware/jobs/checkifapplied/'+idd+"/"+$rootScope.currentuser.userid).then(function(response) {
+			$scope.checkifapplied=response.data;
+			
+			
+			});
+		$location.path("/jobview")
+
 	}
 	
+	$scope.fetchjobforedit=function()
+	{
+		
+		$http.get('http://localhost:8080/SayhiMiddleware/jobs/getJob/'+idd).then(function(response) {
+			console.log('getjob method ok')
+			$scope.jobforedit=response.data;
+			console.log('jobname'+$scope.jobbyid.company)
+				console.log('jobname'+$scope.jobbyid.salary)
+				
+				
+					});
+		
+		
+	}
+	
+	
+	$scope.editjob=function(idd)
+	{
+		
+		$http.get('http://localhost:8080/SayhiMiddleware/jobs/updateJob/'+idd).then(function(response) {
+		
+			 console.log("job updated successfully");
+				
+		},function(error){
+			console.error("Error while updating job");
+		
+		});
+		
+		
+	}
 	
 	
 	

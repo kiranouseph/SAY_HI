@@ -2,12 +2,6 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 	console.log("in forum controller")
 	$scope.Forum={formname:'',formcontent:''};
 	
-	
-	
-		
-	
-	
-	
 	function fetchAllForums()
 	{
 		console.log("in fetch all forums method")
@@ -90,12 +84,26 @@ else if($scope.forr.status=='YES')
 $location.path('/forumview');
 }
 
+$scope.fetchforumforedit=function(idd)
+{
+	console.log("in forum fetch for edit  method")
+	 $http.get("http://localhost:8080/SayhiMiddleware/forums/getForumById/"+idd).then(function(response){
+		 
 
+			$scope.forumforedit=response.data; 
+		 console.log("Forum retrieve successfully")
+		 console.log("Forum name"+$scope.forumforedit)
+		 console.log("Forum content"+$scope.forumforedit)
+			},function(error){
+				console.log("Error on retrieving forum")
+			});
+
+}
 
 	 $scope.editForum=function(idd)
 	 {
 		console.log("in edit blog method")
-		 $http.post("http://localhost:8080/SayhiMiddleware/forums/updateForum/"+$scope.Forum).then(fetchForum(idd),function(response){
+		 $http.post("http://localhost:8080/SayhiMiddleware/forums/updateForum/"+id,$scope.Forum).then(fetchAllForums(),function(response){
 			 console.log("Forum updated successfully");
 								
 			},function(error){

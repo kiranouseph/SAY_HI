@@ -71,14 +71,26 @@ app.config(function($routeProvider) {
        
         
     })
+    
+    
+      .when("/blogrequests", {
+        templateUrl : "Blog/blogrequests.html",
+       
+        
+    })
+    
+    
       .when("/forummanage", {
         templateUrl : "forum/forummanage.html",
         
     })
-    
+    .when("/blogmanage", {
+        templateUrl : "Blog/blogmanage.html",
+        
+    })
       .when("/blogview", {
         templateUrl : "Blog/blogview.html",
-        controller : "blogcontroller",
+  
     });
     
 });
