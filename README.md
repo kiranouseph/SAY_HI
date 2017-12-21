@@ -8,3 +8,4 @@ we can send recieve messages through a group chat
 we can send friend request and can view the friend requests of me and can accept it 
 we can uppload  our profile pic and thus we can be more popular in the platform
 And at last it works like a social  newtwork with some limited functions.
+
