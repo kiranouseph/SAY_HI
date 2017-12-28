@@ -22,7 +22,7 @@
 		<tr  data-ng-repeat="blog in blogs">
 			<td> {{blog.blogname}} </td>
 			<td>{{blog.username}}</td>
-			<td> VIEW FULL</td>
+			<td><div class="btn-group"> <a  data-ng-click="maximum(blog.blogid)" class="btn btn-primary">VIEW FULL</a></div> </td>
 			
 		</tr>
 

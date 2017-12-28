@@ -48,8 +48,21 @@ public class BlogController {
 	
 	
 	}
-
 	
+	
+	
+	@RequestMapping(value="/getAllMyBlogs/{userid}",method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<Blog>> getAllMyBlogs(@PathVariable("userid") int userid){
+		
+		Users user=userDAO.getUser(userid);
+		ArrayList<Blog> myblogs=blogDAO.getAllMyBlogs(user.getEmail());
+		return new ResponseEntity<ArrayList<Blog>>(myblogs,HttpStatus.OK);
+	
+	
+	
+	}
+
+
 	
 	
 	@RequestMapping(value="/addBlog",method=RequestMethod.POST)
@@ -108,12 +121,14 @@ public class BlogController {
 	
 	}
 	
-	@RequestMapping(value="/updateBlog/{blogid}",method=RequestMethod.POST)
-	public ResponseEntity<String> updateBlog(@RequestBody Blog blog,@PathVariable("blogid") int blogid){
+	@RequestMapping(value="/updateBlog/{blogid}/{blogname}/{blogcontent}",method=RequestMethod.GET)
+	public ResponseEntity<String> updateBlog(@PathVariable("blogid") int blogid,@PathVariable("blogname") String blogname,@PathVariable("blogcontent") String blogcontent){
+		System.out.println(blogid+"  "+blogname+" "+blogcontent);
+		
 		Blog tempblog=blogDAO.getBlog(blogid);
 		
-		tempblog.setBlogcontent(blog.getBlogcontent());
-		tempblog.setBlogname(blog.getBlogname());
+		tempblog.setBlogcontent(blogcontent);
+		tempblog.setBlogname(blogname);
 		tempblog.setStatus("A");
 		
 		
@@ -198,16 +213,23 @@ public class BlogController {
 		
 	}
 	
-	@RequestMapping(value="/addBlogComments/{blogId}",method=RequestMethod.POST)
-	public ResponseEntity<String> addBlogComments(@RequestBody BlogComments blogcomment,@PathVariable("blogId") int blogId){
-		
-		blogcomment.setBlogid(blogId);
+	@RequestMapping(value="/addBlogComments/{blogid}/{username}/{blogcomm}",method=RequestMethod.GET)
+	public ResponseEntity<String> addBlogComments(@PathVariable("blogid") int blogid,@PathVariable("username") String username,@PathVariable("blogcomm") String blogcomm){
+		System.out.println(blogid+username+blogcomm);
+BlogComments blogcomment=new BlogComments();
+blogcomment.setBlogid(blogid);
+blogcomment.setUsername(username);
+blogcomment.setBlogcomm(blogcomm);
+
 		boolean isSaved=blogDAO.addBlogComment(blogcomment);
 		if(isSaved)
+		{
 		return new ResponseEntity<String>("Blogcomment added successfully",HttpStatus.OK);
+		}
 		else
+		{
 			return new ResponseEntity<String>("Problem in adding blog comment",HttpStatus.BAD_REQUEST);
-		
+		}
 	}
 	
 	

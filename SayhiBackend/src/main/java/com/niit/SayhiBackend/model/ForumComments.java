@@ -35,8 +35,9 @@ public class ForumComments implements Serializable{
 	 
 	 @Column(name = "Forumid", nullable = false)
 	    private int forumid;
-	 @Column(name = "Userid", nullable = false)
-	  private int userid;
+	
+	 @Column(name = "Username", nullable = false)
+	  private String username;
 	 
 	 
 	 
@@ -49,11 +50,13 @@ public class ForumComments implements Serializable{
 	public void setForumid(int forumid) {
 		this.forumid = forumid;
 	}
-	public int getUserid() {
-		return userid;
+
+
+	public String getUsername() {
+		return username;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public int getForumcomid() {
 		return forumcomid;

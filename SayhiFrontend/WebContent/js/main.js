@@ -81,13 +81,27 @@ app.config(function($routeProvider) {
     
     
       .when("/forummanage", {
-        templateUrl : "forum/forummanage.html",
+        templateUrl : "pages/home.html",
         
     })
     .when("/blogmanage", {
         templateUrl : "Blog/blogmanage.html",
         
     })
+    
+    
+      .when("/blogforedit", {
+        templateUrl : "Blog/updateblog.html",
+        
+    })
+    
+     .when("/forumforedit", {
+        templateUrl : "forum/updateforum.html",
+        
+    })
+    
+    
+    
       .when("/blogview", {
         templateUrl : "Blog/blogview.html",
   

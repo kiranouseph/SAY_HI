@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.niit.SayhiBackend.dao.BlogCommentDAO;
 import com.niit.SayhiBackend.dao.BlogDAO;
+import com.niit.SayhiBackend.dao.EventDAO;
 import com.niit.SayhiBackend.dao.ForumCommentDAO;
 import com.niit.SayhiBackend.dao.ForumDAO;
 import com.niit.SayhiBackend.dao.FriendDAO;
@@ -26,6 +27,7 @@ import com.niit.SayhiBackend.dao.JobDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.daoimpl.BlogCommentDAOImpl;
 import com.niit.SayhiBackend.daoimpl.BlogDAOImpl;
+import com.niit.SayhiBackend.daoimpl.EventDAOImpl;
 import com.niit.SayhiBackend.daoimpl.ForumCommentDAOImpl;
 import com.niit.SayhiBackend.daoimpl.ForumDAOImpl;
 import com.niit.SayhiBackend.daoimpl.FriendDAOImpl;
@@ -33,6 +35,8 @@ import com.niit.SayhiBackend.daoimpl.JobDAOImpl;
 import com.niit.SayhiBackend.daoimpl.UsersDAOImpl;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
+import com.niit.SayhiBackend.model.EventParticipants;
+import com.niit.SayhiBackend.model.Events;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
 import com.niit.SayhiBackend.model.ForumRequests;
@@ -65,7 +69,9 @@ public class HibernateConfig
 	        sessionBuilder.addAnnotatedClass(Job.class);
 	        sessionBuilder.addAnnotatedClass(ForumRequests.class);
 	        sessionBuilder.addAnnotatedClass(JobApplications.class);
-	      
+	        sessionBuilder.addAnnotatedClass(Events.class); 
+	        sessionBuilder.addAnnotatedClass(EventParticipants.class);
+	        
 	       
 	        
 	       
@@ -161,7 +167,15 @@ public class HibernateConfig
 			System.out.println("BlogComment DAO object Created");
 			return new FriendDAOImpl(sessionFactory);
 		}
-	 
+	    
+	    @Autowired    
+	    @Bean(name="eventDAO")
+	    public EventDAO getEventDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("Events DAO object Created");
+			return new EventDAOImpl(sessionFactory);
+		}
+	 	 
 	 
 
 }

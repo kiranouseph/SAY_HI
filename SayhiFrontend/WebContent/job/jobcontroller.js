@@ -1,5 +1,6 @@
 app.controller("jobcontroller", function ($scope,$http,$location,$rootScope) {
 $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',companydesc:''};	
+
 	function fetchAllJobs()
 	{
 		console.log("fetched all jobs")
@@ -21,8 +22,8 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		
 		
 		
-	}
-	;
+	};
+	
 	fetchAllJobs();
 	
 	$scope.insertJobs = function()
@@ -38,7 +39,7 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 	
 	$scope.applyJob = function(idd)
 	{
-		console.log('apply job');
+		console.log('apply job'+idd);
 		$http.get('http://localhost:8080/SayhiMiddleware/jobs/applyJob/'+idd+"/"+$rootScope.currentuser.userid).then(fetchAllJobs(), function(response) {
 			console.log("successful jobs applied");
 			$location.path("/blog")
@@ -47,21 +48,27 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 	
 	$scope.getjob = function(idd)
 	{
-		console.log('in getjob method'+idd)
+		
 		$http.get('http://localhost:8080/SayhiMiddleware/jobs/getJob/'+idd).then(function(response) {
-			console.log('getjob method ok')
-			$scope.jobbyid=response.data;
-			console.log('jobname'+$scope.jobbyid.company)
-				console.log('jobname'+$scope.jobbyid.salary)
+			$rootScope.gjob=response.data;
+			console.log($rootScope.gjob.jobprofile+$rootScope.gjob.company)
+		
+		
+	},function(error){
+		console.log("Error on retrieving job")
+	});
+	
 				
 				
-					});
+					
 		
 		$http.get('http://localhost:8080/SayhiMiddleware/jobs/checkifapplied/'+idd+"/"+$rootScope.currentuser.userid).then(function(response) {
-			$scope.checkifapplied=response.data;
+			$rootScope.gcheck=response.data;
+			console.log(gcheck)
 			
 			
 			});
+		
 		$location.path("/jobview")
 
 	}

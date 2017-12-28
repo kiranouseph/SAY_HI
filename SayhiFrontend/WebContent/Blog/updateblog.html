@@ -6,19 +6,24 @@
             
             <div class="row">
             <div data-ng-controller="blogcontroller">
-                <form class="col s12" data-ng-submit="editBlog(blogforedit.blogid)" >
+                <form class="col s12" data-ng-submit="editBlog()" >
+                   
+                  
                    
                            <div class="input-field col s6">  
                            <div class="left-align">       
-                <input  type="text" id="blogname"  data-ng-model="Blog.blogname" data-ng-value="blogforedit.blogname"required >
+                <input  type="text" id="blogname"  data-ng-model="Blog.blogname" data-ng-value="eblog.blogname"required >
                             <label for="blogname"></label>
                              </div>
                          </div>  
-                 
+                         
+                         
+                        
+                   
                                <div class="input-field col s12">
                   
                   
-                   <textarea id="blogcontent" class="materialize-textarea" data-ng-model="blogforedit.blogcontent" required></textarea>
+                   <textarea id="blogcontent" class="materialize-textarea" data-ng-model="Blog.blogcontent" data-ng-value="eblog.blogcontent" required></textarea>
           <label for="blogcontent"></label>
           
           

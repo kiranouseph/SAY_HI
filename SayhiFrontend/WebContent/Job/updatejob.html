@@ -7,6 +7,16 @@
             <div data-ng-controller="jobcontroller">
                 <form class="col s12" data-ng-submit="editjob(jobforedit.jobid)" >
                    
+                       <div class="input-field col s6">  
+                           <div class="left-align">       
+                <input type="hidden" id="jobid" data-ng-model="Job.jobid" value="{{jobforedit.jobid}}" data-ng-init="Job.jobid=jobforedit.jobid"/>
+                            <label for="jobidid"></label>
+                             </div>
+                         </div> 
+                         
+                         
+                   
+                   
                            <div class="input-field col s6">  
                            <div class="left-align">       
                 <input  type="text" id="jobprofile"  data-ng-model="Job.jobprofile"  data-ng-value="jobforedit.jobprofile" required >

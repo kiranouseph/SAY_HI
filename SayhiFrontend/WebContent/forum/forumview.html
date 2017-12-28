@@ -83,7 +83,7 @@ body{
                             </div>
                         </div>
                          <div class="col-md-1">
-                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
+                            
                          </div>
                     </div>             
                </section>
@@ -94,52 +94,126 @@ body{
                <section class="post-body">
                    <p>{{ForumByid.formcontent}}</p>
                    
-                   <div data-ng-repeat="fo in foru" data-ng-if="foru.length == 0">
-<button>JOIN FORUM</button>                   
                    
+                   <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchforumforedit(ForumByid.forumid)> EDIT</a></div>
+                   
+                   
+                   <div  data-ng-if="fcheck.length > 0">
+                   <div data-ng-repeat="f in fcheck">
+<div data-ng-show="f.status=='A'"><button>PENDING REQUEST</button></div>      
+<div data-ng-show="f.status=='YES'"><button>ENJOY DISCUSSION</button></div>                       
+                   </div>
                    </div>
                    
-                   <div data-ng-repeat="fo in foru" data-ng-if="foru.length > 0">
+                   <div data-ng-if="fcheck.length < 1">
                    
-                   <div data-ng-if="fo.status=='A'">
-                   
-                   <button>PENDING</button>
+                <a href="" data-ng-click="sendforumrequests()">SEND REQUEST</a>
                    
                    </div>
-                   
-                   <div data-ng-if="fo.status=='A'">
-                   <button>ENJOY DISCUSSION</button>
-                   </div>
-                   
-                   </div>
-                   
+                  
                    
                </section>
                <section class="post-footer">
-                   <hr>
-                   <div class="post-footer-option container">
-                        <ul class="list-unstyled">
-                       
-                              <li> <div data-ng-click="approveBlog()" data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> EDIT</a></div></li>
-                               <li> <div  data-ng-click="rejectBlog()" data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> DELETE</a></div></li>
-                            
-                             
-                                                      </ul>
-                   </div>
+                 
+               
                    <div class="post-footer-comment-wrapper">
                        <div class="comment-form">
                            
                        </div>
                        <div class="comment">
                             <div class="media">
+                              
+                              <div class="media-body">
+                               
+                              <div  data-ng-if="fcheck.length > 0">
+                   <div data-ng-repeat="f in fcheck">
+                   <div data-ng-show="f.status=='YES'">
+                               
+                               
+                               
+                               
+                                         <h3>Comments</h3>
+                                
+                                <div class="row">
+                                 <form class="col s12" data-ng-submit="addForumComment()" >
+                                 
+                                 
+                                 
+                                <div class="input-field col s6">  
+                           <div class="left-align">       
+                <input  type="text" id="forumcomment"  data-ng-model="ForumComments.forumcomm" required >
+                            <label for="forumcomment">Type your opinion</label>
+                             </div>
+                         </div>  
+                         
+              
+                                
+            
+                               
+                               
+                               <div class="input-field col s6">
+                            <p class="right-align">
+                                <button class="btn btn-large waves-effect waves-light" type="submit" >SUBMIT</button>
+                            </p>
+                        </div> 
+                                
+                                
+                                
+                                
+                                
+                                </form>
+                                </div>
+                                
+                                
+                                
+                                
+                                
+                                                          <div data-ng-repeat="comm in gforumcomm">
+                                
+                                
+                                
+                                
+                                <section class="post-heading">
+                    <div class="row">
+                    
+                    
+                    
+                    
+                        <div class="col-md-11">
+                            <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a> 
-                                <a href="#" class="anchor-time">51 mins</a>
+                                <h4>{{comm.username}}</h4>
+                                 <h4>{{comm.forumcomm}}</h4>
+                               
+                              </div>
+                            </div>
+                        </div>
+                      
+                    </div>             
+               </section>
+               
+               
+               
+               
+                                
+                                </div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                               </div>
+                               </div>
+                               </div>
+                                
+                                
                               </div>
                             </div>
                        </div>

@@ -1,7 +1,7 @@
 app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 	console.log("in forum controller")
 	$scope.Forum={formname:'',formcontent:''};
-	
+	$scope.ForumComments={forumcomm:'',forumid:'',userid:'',username:''};
 	function fetchAllForums()
 	{
 		console.log("in fetch all forums method")
@@ -22,6 +22,63 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 	fetchAllForums();
 	
 	
+	
+	function myallforums()
+	{
+		console.log("in all my forums method")
+	
+		$http.get("http://localhost:8080/SayhiMiddleware/forums/myforums/"+$rootScope.currentuser.userid)
+		.then(function(response)
+		{
+			
+			$rootScope.myforums=response.data;
+			
+						
+		},function(error)
+		{
+			console.log("Error on retrieving blogs")
+		});	
+		
+		
+	}
+	myallforums();
+	
+	
+	
+	
+	
+	
+	function fetchForumByIdd(idd)
+	{
+		
+		 $http.get("http://localhost:8080/SayhiMiddleware/forums/getForumById/"+idd).then(function(response){
+				
+
+				$rootScope.ForumByid=response.data; 
+			
+				},function(error){
+					console.log("Error on retrieving forum")
+				});
+		
+		
+
+	$http.get("http://localhost:8080/SayhiMiddleware/forums/checkIfMyForum/"+idd+"/"+$rootScope.currentuser.userid).then(function(response){
+		$rootScope.fcheck=response.data;
+		
+		
+			
+
+
+		
+
+			});
+	$location.path('/forumview');
+		
+		
+		
+	}
+	
+	
 	 $scope.addForum=function()
 	 {
 		console.log("in add forum method")
@@ -38,14 +95,12 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 	 
 $scope.fetchforumbyid=function(idd)
 {
-	console.log("in fetchby id method")
+console.log('in fetch forum by id method'+idd)
 	 $http.get("http://localhost:8080/SayhiMiddleware/forums/getForumById/"+idd).then(function(response){
-		 console.log("Forum retrieve successfully")
+		
 
-			$scope.ForumByid=response.data; 
-		 console.log("Forum retrieve successfully")
-		 console.log("Forum name"+$scope.ForumByid.formname)
-		 console.log("Forum content"+$scope.ForumByid.formcontent)
+			$rootScope.ForumByid=response.data; 
+		
 			},function(error){
 				console.log("Error on retrieving forum")
 			});
@@ -53,34 +108,28 @@ $scope.fetchforumbyid=function(idd)
 	
 
 $http.get("http://localhost:8080/SayhiMiddleware/forums/checkIfMyForum/"+idd+"/"+$rootScope.currentuser.userid).then(function(response){
-	 $scope.forr=response.data;
-	 console.log($scope.forr)
-
+	$rootScope.fcheck=response.data;
+	
+	
 		
 
-/*if($scope.forr==null)
-	{
-	$scope.fstatus="SEND REQUEST";
-	console.log("send request")
-	}
-else if($scope.forr.status=='A')
-				{
-	$scope.fstatus="PENDING";	
 
-	console.log("pending")
-
-				}			
-else if($scope.forr.status=='YES')
-	{
-	$scope.fstatus="ENJOY DISCUSSION";
 	
 
-	console.log("enjoy discussion")
-
-	}*/
-		},function(error){
-
 		});
+
+
+$http.get("http://localhost:8080/SayhiMiddleware/forums/getAllForumComments/"+idd)
+.then(function(response)
+{
+	
+	$rootScope.gforumcomm=response.data;
+	
+	
+},function(error)
+{
+	
+});		
 $location.path('/forumview');
 }
 
@@ -90,25 +139,38 @@ $scope.fetchforumforedit=function(idd)
 	 $http.get("http://localhost:8080/SayhiMiddleware/forums/getForumById/"+idd).then(function(response){
 		 
 
-			$scope.forumforedit=response.data; 
-		 console.log("Forum retrieve successfully")
-		 console.log("Forum name"+$scope.forumforedit)
-		 console.log("Forum content"+$scope.forumforedit)
+			$rootScope.eforum=response.data; 
+		
 			},function(error){
 				console.log("Error on retrieving forum")
 			});
+	
+	$location.path('/forumforedit')
 
 }
 
 	 $scope.editForum=function(idd)
 	 {
 		console.log("in edit blog method")
-		 $http.post("http://localhost:8080/SayhiMiddleware/forums/updateForum/"+id,$scope.Forum).then(fetchAllForums(),function(response){
+		 $http.post("http://localhost:8080/SayhiMiddleware/forums/updateForum/"+idd+"/"+$scope.Forum.formname+"/"+$scope.Forum.formcontent).then(fetchAllForums(),function(response){
 			 console.log("Forum updated successfully");
 								
 			},function(error){
 				console.error("Error while updating Forum");
 			});
+		
+		
+		
+		 $http.get("http://localhost:8080/SayhiMiddleware/forums/getForumById/"+$rootScope.eforum.forumid).then(function(response){
+				$rootScope.eforum=response.data; 
+					
+				},function(error){
+				
+				});
+		 
+		 $location.path('/blog')
+		 
+		 
 		 
 	 }
 	
@@ -145,6 +207,56 @@ $scope.fetchforumforedit=function(idd)
 	
 	
 	
+	 $scope.sendforumrequests=function()
+	 {
+		console.log('in send froum request')
+		console.log($rootScope.ForumByid.forumid+$rootScope.currentuser.userid)
+		 $http.get("http://localhost:8080/SayhiMiddleware/forums/addForumReq/"+$rootScope.ForumByid.forumid+"/"+$rootScope.currentuser.userid).then(fetchForumByIdd($rootScope.ForumByid.forumid),function(response){
+			 console.log("Forumrequested successfully");
+		 });
+		
+		 $location.path('/forumview')
+	 }
+	 
+	 
+	 
+	 
+	 
+	 $scope.addForumComment=function()
+	 {
+		console.log("in add forumComment method")
+		console.log($rootScope.ForumByid.forumid+$rootScope.currentuser.email+$scope.ForumComments.forumcomm)
+
+		$http.get("http://localhost:8080/SayhiMiddleware/forums/addForumComments/"+$rootScope.ForumByid.forumid+"/"+$rootScope.currentuser.email+"/"+$scope.ForumComments.forumcomm).then(function(response){
+			 console.log("BlogComments added successfully")
+								
+			},function(error){
+				
+			});
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/forums/getAllForumComments/"+$rootScope.ForumByid.forumid)
+		.then(function(response)
+		{
+			
+			$rootScope.gforumcomm=response.data;
+			
+			
+		},function(error)
+		{
+			
+		});		
+		
+		$location.path('/forumview')	 
+		 
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	
 	
 	
 	
@@ -169,7 +281,14 @@ app.controller("forumrequestcontroller", function ($scope,$http,$location,$rootS
 			console.error("Error while deleting Forum");
 		});
 	}
+	
+	
 	fetchAllForumreq();
+	
+	
+	
+	
+	
 	
 	 $scope.acceptforumrequests=function(id)
 	 {
@@ -186,6 +305,9 @@ app.controller("forumrequestcontroller", function ($scope,$http,$location,$rootS
 			});
 		 
 	 }
+	 
+
+	 
 	
 	
 });

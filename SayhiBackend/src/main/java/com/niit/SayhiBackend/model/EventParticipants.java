@@ -9,49 +9,61 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-
 @Entity
 @Component
-@Table(name="JobApplications")
-public class JobApplications implements Serializable {
+@Table(name="EventParticipants")
+public class EventParticipants implements Serializable {
+	
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
+
+
+
+
+
 	@Id
     @GeneratedValue 
-    @Column(name="JobapplyId")
-	private int jobapplyid;
+    @Column(name="Participantid")
+	private int participantid;
 	
-	@Column(name="Jobid")
-	private int jobid;
+	@Column(name="EventId")
+	private int eventid;
 	
 	
 
 
 	@Column(name="UserId")
 	private int userid;
-	
-	public int getJobapplyid() {
-		return jobapplyid;
+	public int getParticipantid() {
+		return participantid;
 	}
 
 
-	public void setJobapplyid(int jobapplyid) {
-		this.jobapplyid = jobapplyid;
+
+
+	public void setParticipantid(int participantid) {
+		this.participantid = participantid;
 	}
 
 
-	public int getJobid() {
-		return jobid;
+
+
+	public int getEventid() {
+		return eventid;
 	}
 
 
-	public void setJobid(int jobid) {
-		this.jobid = jobid;
+
+
+	public void setEventid(int eventid) {
+		this.eventid = eventid;
 	}
+
+
 
 
 	public int getUserid() {
@@ -59,9 +71,12 @@ public class JobApplications implements Serializable {
 	}
 
 
+
+
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
-	
+
+
 
 }

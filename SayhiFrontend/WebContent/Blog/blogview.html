@@ -63,14 +63,13 @@ body{
       <div data-ng-controller="blogcontroller">
       
       
-    {{blogByid.blogname}}   {{blogByid.username}}  
+   
       
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
 
 	<div class="col-md-10">
-        <div class="panel panel-default">
-            <div class="panel-body">
+       
                <section class="post-heading">
                     <div class="row">
                     
@@ -85,36 +84,35 @@ body{
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="#" class="anchor-username"><h4 class="media-heading">{{blogByid.username}}</h4></a> 
+                                <a href="#" class="anchor-username"><h4 class="media-heading">{{gblog.username}}</h4></a> 
                                
                               </div>
                             </div>
                         </div>
-                         <div class="col-md-1">
-                             <a href="#"><i class="glyphicon glyphicon-chevron-down"></i></a>
-                         </div>
+                      
                     </div>             
                </section>
                  <section >
-                 <input type="text" data-ng-model="Blog.blogname"></p>
-                   <p >{{blogByid.blogname}}</p>
+               
+                   <p ><b>{{gblog.blogname}}</b></p>
                </section>
                <section class="post-body">
-                   <p>{{blogByid.blogcontent}}</p>
+                   <p>{{gblog.blogcontent}}</p>
+                   
+                   
+                   <h4><b>LIKES</b>{{gblog.likes}}        <b>Views</b>{{gblog.views}}</h4>
                </section>
                <section class="post-footer">
                    <hr>
                    <div class="post-footer-option container">
                         <ul class="list-unstyled">
                        
-                              <li> <div data-ng-click="approveBlog()" data-ng-show="currentuser.role=='ROLE_ADMIN' && blogByid.status=='A' "><a data-ng-click="approveBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i> APPROVE</a></div></li> 
-
                             
-                              <li><div data-ng-click="likeBlog()" data-ng-hide="currentuser.email==blogById.username"><a data-ng-click="likeBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i>Like</a></div></li>
-                              <li><div data-ng-click="dislikeBlog()" data-ng-hide="currentuser.email==blogById.username"><a data-ng-click="dislikeBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-down"></i> Dislike</a></div></li>  
+                            
+                              <li><div  data-ng-hide="currentuser.email==gblog.username"><a href="" data-ng-click="likeBlog(gblog.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i>Like</a></div></li>
                               
-                              <li><div data-ng-click="deleteBlog()" data-ng-show="currentuser.email==blogById.username"><a data-ng-click="deleteBlog(blogByid.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i> DELETE</a></div></li>
-                              <li><div data-ng-click="likeBlog()" data-ng-show="currentuser.email==blogById.username"><a href="#"><i class="glyphicon glyphicon-thumbs-down"></i> EDIT</a></div></li>                          </ul>
+                              <li><div  data-ng-show="currentuser.email==gblog.username"><a href="" data-ng-click="deleteBlog(gblog.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i> DELETE</a></div></li>
+                              <li><div  data-ng-show="currentuser.email==gblog.username"><a href="" data-ng-click=fetchforedit(gblog.blogid)><i class="glyphicon glyphicon-thumbs-down"></i> EDIT</a></div></li>                          </ul>
                    </div>
                    <div class="post-footer-comment-wrapper">
                        <div class="comment-form">
@@ -122,21 +120,72 @@ body{
                        </div>
                        <div class="comment">
                             <div class="media">
+                              
+                              <div class="media-body">
+                               
+                                <div  data-ng-hide="currentuser.email==gblog.username">
+                                 <h3>Comments</h3>
+                                 
+                                <div class="row">
+                                 <form class="col s12" data-ng-submit="addBlogComment()" >
+                                
+                                
+                                <div class="input-field col s6">  
+                           <div class="left-align">       
+                <input  type="text" id="blogcomment"  data-ng-model="BlogComments.blogcomm" required >
+                            <label for="blogcomment">Type your opinion</label>
+                             </div>
+                         </div>  
+                         
+                         
+                              <div class="input-field col s6">
+                            <p class="right-align">
+                                <button class="btn btn-large waves-effect waves-light" type="submit" >SUBMIT</button>
+                            </p>
+                        </div> 
+                                </form>
+                                </div>
+                                </div>
+                                <div data-ng-repeat="comm in gblogcomm">
+                                
+                                
+                                
+                                
+                                <section class="post-heading">
+                    <div class="row">
+                    
+                    
+                    
+                    
+                        <div class="col-md-11">
+                            <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="#" class="anchor-username"><h4 class="media-heading">Media heading</h4></a> 
-                                <a href="#" class="anchor-time">51 mins</a>
+                                <h4>{{comm.username}}</h4>
+                                 <h4>{{comm.blogcomm}}</h4>
+                               
+                              </div>
+                            </div>
+                        </div>
+                      
+                    </div>             
+               </section>
+               
+               
+               
+               
+                                
+                                </div>
                               </div>
                             </div>
                        </div>
                    </div>
                </section>
-            </div>
-        </div>   
+          
 	</div>
 
 

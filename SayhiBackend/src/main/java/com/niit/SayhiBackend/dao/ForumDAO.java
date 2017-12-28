@@ -13,6 +13,8 @@ public interface ForumDAO {
 	public boolean deleteForum(Forum forum);
 	public Forum getForum(int forumId);
 	public ArrayList<Forum> getAllForum();
+	public ArrayList<ForumRequests> getAllMyForum(int userid);
+	
 	
 	public boolean addForumComment(ForumComments forumcomment);
 	public boolean updateForumComment(ForumComments forumcomment);
@@ -26,8 +28,8 @@ public interface ForumDAO {
 	public boolean blockUser(ForumRequests forumrequest);
 	public ArrayList<ForumRequests> getAllForumRequest();
 	public ForumRequests getForumRequest(int ForumReqId);
-	public ArrayList<ForumRequests> getAllMyForum(int myid);	
+		
 	public ArrayList<ForumRequests> checkIfMyForum(int ForumId, int myid);
-	
+	public ArrayList<ForumRequests> forreqbyforid(int forumid);
 	
 }

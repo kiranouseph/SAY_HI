@@ -32,14 +32,117 @@
     
     <a href="#!/newblog"><button   style="width:95%">Writeblog</button></a>
     
-    search blogs
-    add blogs
-    list blogs
+   
+   
+    <div data-ng-repeat="myblo in myblogs">
+    
+    
+    <div class="card card-1" style="margin-top:2vh; padding: 30px;margin-right: 5%" >
+
+
+           
+                    
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <a href="#" class="anchor-username"><h4 class="media-heading">{{myblo.username}}</h4></a> 
+                              
+                              </div>
+                            </div>
+             
+            
+                   <h3><b>{{myblo.blogname}}</b></h3>
+                  
+                 <div data-ng-show="myblo.status=='A'">PENDING APPROVAL</div>
+                 <div data-ng-show="myblo.status=='YES'">APPROVED BLOG</div>
+              
+                 <div class="media">
+                  <div class="media-body">
+                  <h4>{{ myblo.blogcontent | limitTo: 80 }}</h4>
+                  
+                  </div>
+                   <div class="media-right">
+            
+                 
+                   <div class="btn-group"> <a  data-ng-click="maximum(myblo.blogid)" class="btn btn-primary">{{myblo.blogcontent.length > 60 ? 'READ FULL' : ''}}</a> </div>
+           
+           
+</div>
+  
+</div>
+<div class="row">
+
+<div class="col-s3">{{myblo.likes}}   Likes</div>
+
+<div class="col-s3">{{myblo.views}}  Views </div>
+</div>
+</div>
+    
+    
+    </div>
+    
+    
+    
     </div>
     <div id="test2" class="col s12">
-        search forums
 
-list forums
+
+
+
+<div data-ng-repeat="myfor in myforums">
+    
+    
+    <div class="card card-1" style="margin-top:2vh; padding: 30px;margin-right: 5%" >
+
+
+           
+                    
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <a href="#" class="anchor-username"><h4 class="media-heading">ADMIN</h4></a> 
+                              
+                              </div>
+                            </div>
+             
+            
+                   <h3><b>{{myfor.formname}}</b></h3>
+                  
+                
+              
+                 <div class="media">
+                  <div class="media-body">
+                  <h4>{{ myfor.formcontent | limitTo: 80 }}</h4>
+                  
+                  </div>
+                   <div class="media-right">
+            
+                 
+                   <div class="btn-group"> <a  data-ng-click="fetchforumbyid(myfor.forumid)" class="btn btn-primary">{{myfor.formcontent.length > 60 ? 'READ FULL' : ''}}</a> </div>
+           
+           
+</div>
+  
+</div>
+
+</div>
+    
+    
+    </div>
+    
+    
+    
+    
+    
+
     </div>
     <div id="test3" class="col s12">
    

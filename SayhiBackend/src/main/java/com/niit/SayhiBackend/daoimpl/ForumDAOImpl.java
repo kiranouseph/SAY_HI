@@ -160,7 +160,7 @@ public ArrayList<ForumComments> getAllForumCommentsById(int forumid) {
 		Session ssn=sessionFactory.openSession();
 		
 		
-		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumm="+forumid);
+		org.hibernate.Query q= ssn.createQuery("from ForumComments where forumid="+forumid);
 		ArrayList<ForumComments> l=(ArrayList<ForumComments>) q.list();
 		
         
@@ -242,14 +242,26 @@ public ArrayList<ForumRequests> getAllMyForum(int myid) {
 	
 }
 
-
+@Transactional
 public ArrayList<ForumRequests> checkIfMyForum(int ForumId, int myid) {
 	
 	Session session = sessionFactory.openSession();
-	ArrayList<ForumRequests> myforums=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where userid="+myid+" and forumid="+ForumId+" ").list();
+	ArrayList<ForumRequests> myforums=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where userid="+myid+" and forumid="+ForumId).list();
 	session.close();
 	return myforums;
 }
+
+@Transactional
+public ArrayList<ForumRequests> forreqbyforid(int forumid) {
+	Session session = sessionFactory.openSession();
+	ArrayList<ForumRequests> forumsbyforid=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where forumid="+forumid+" and status='YES'").list();
+	session.close();
+	return forumsbyforid;
+	
+}
+
+
+
 
 
 

@@ -260,6 +260,15 @@ public ArrayList<Blog> getAllBlogRequests()
 	return blogreq;	
 	
 }
+public ArrayList<Blog> getAllMyBlogs(String email) {
+	
+	
+	Session session = sessionFactory.openSession();
+	ArrayList<Blog> myblogs=(ArrayList<Blog>)session.createQuery("from Blog where username='"+email+"'").list();
+	session.close();
+	return myblogs;	
+	
+}
 
 
 

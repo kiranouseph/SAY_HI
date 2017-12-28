@@ -61,6 +61,15 @@
      <a data-ng-click="logout()" data-ng-controller="logoutcontroller">LOGOUT</a>
       </div></li>
     
+    
+     <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
+    <a href="#!/blog"  style="color:black">HOME</a>
+      </div></li>
+      
+      
+       <li><div data-ng-show="currentuser.role=='ROLE_USER' ">
+    <a href="#!/mywall"  style="color:black">MY WALL</a>
+      </div></li>
       
       
     

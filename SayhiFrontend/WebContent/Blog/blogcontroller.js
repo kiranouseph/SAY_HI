@@ -1,7 +1,7 @@
 app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 
 	 $scope.Blog={blogname:'',blogcontent:'',status:'A',likes:'0',dislikes:'0',views:'0',username:$rootScope.currentuser.email};
-	$scope.BlogComments={blogcomm:'',blogg:''};
+	$scope.BlogComments={blogcomm:'',blogid:'',userid:''};
 
 	function fetchAllBlogs()
 	{
@@ -19,7 +19,46 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	};
 	fetchAllBlogs();
 	
-	 $scope.maximum=function(idd)
+	function myallblogs()
+	{
+		console.log("in all my blogs method")
+		console.log($rootScope.currentuser.email)
+		$http.get("http://localhost:8080/SayhiMiddleware/blogs/getAllMyBlogs/"+$rootScope.currentuser.userid)
+		.then(function(response)
+		{
+			
+			$rootScope.myblogs=response.data;
+			
+						
+		},function(error)
+		{
+			console.log("Error on retrieving blogs")
+		});	
+		
+		
+	}
+	myallblogs();
+	
+	function fetchBlogById(idd)
+	{
+		
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
+				$scope.blogbyid=response.data;
+				$rootScope.gblog=response.data;
+				 
+				
+				console.log("blog fetched successfully")				
+				},function(error){
+					console.log("error in fetching blog")
+				});
+		
+	}
+	
+	
+	
+	
+	 $scope.maximum=getSelectedBlog
+	 function getSelectedBlog(idd)
 	 {
 		 console.log("in add max method------"+idd)
 		 
@@ -33,21 +72,36 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 		 console.log("view incremented")
 
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-				$scope.blogByid=response.data;
-				 console.log("-----"+$scope.blogByid.username+"-----"+$scope.blogByid.blogname)
+				$scope.blogbyid=response.data;
+				$rootScope.gblog=response.data;
+				 
+				
 				console.log("blog fetched successfully")				
 				},function(error){
 					console.log("error in fetching blog")
 				});
 	
 		
-		 
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getAllBlogComments/"+idd)
+			.then(function(response)
+			{
+				
+				$rootScope.gblogcomm=response.data;
+				console.log($rootScope.gblogcomm)
+				
+			},function(error)
+			{
+				
+			});		
 		
 		 
 		
 		 $location.path('/blogview')
 		 
 	 }
+	 
+	
+	 
 	 
 	 
 
@@ -63,61 +117,66 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 		$location.path('/blog')
 		 
 	 }
+
 	 
-	 $scope.fetchforedit=function()
+	 
+	 $scope.fetchforedit=function(idd)
 	 {
 		 
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-				$scope.blogforedit=response.data; 
-				console.log("blogname"+$scope.blogforedit.blogname)
-				console.log("username"+$scope.blogforedit.username)
-			
+				$rootScope.eblog=response.data; 
+					
 				},function(error){
 				
 				});
-			 
+		 $location.path('/blogforedit')	 
 	 }
 	 
 	 
 	 
 	 
 
-	 $scope.editBlog=function(idd)
+	 $scope.editBlog=function()
 	 {
-		console.log("in edit blog method")
-		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/updateBlog/"+idd,$scope.Blog).then(fetchBlog(idd),function(response){
+		
+	
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/updateBlog/"+$rootScope.eblog.blogid+"/"+$scope.Blog.blogname+"/"+$scope.Blog.blogcontent).then(function(response){
 			 console.log("Blog updated successfully");
 								
 			},function(error){
 				console.error("Error while updating blog");
 			});
 		 
+		 
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+$rootScope.eblog.blogid).then(function(response){
+				$rootScope.eblog=response.data; 
+					
+				},function(error){
+				
+				});
+		
+		$location.path('/blog')	 
+		 
 	 }
 	 
 	 $scope.deleteBlog=function(idd)
 	 {
 		console.log("in delete blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/deleteBlog/"+idd).then(fetchBlog(idd),function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/deleteBlog/"+idd).then(fetchAllBlogs(),function(response){
 			 console.log("Blog deleted successfully");
 								
 			},function(error){
 				console.error("Error while deleting blog");
 			});
+		
+		
+		
+		$location.path('/blog')	 
 		 
 	 }
 	 
 	 
-	 $scope.approveBlog=function(idd)
-	 {
-		console.log("in approve blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/approveBlog/"+idd).then(fetchBlog(idd),fetchAllBlogs(),function(response){
-			 console.log("Blog approved successfully");
-								
-			},function(error){
-				console.error("Error while approving blog");
-			});
-		 
-	 }
+	
 	 
 	 $scope.rejetcBlog=function(idd)
 	 {
@@ -128,18 +187,21 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 			},function(error){
 				console.error("Error while rejecting blog");
 			});
+		$location.path('/blog')	 
 		 
 	 }
 	 
 	 $scope.likeBlog=function(idd)
 	 {
 		console.log("in like blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/likeBlog/"+idd).then(fetchBlog(idd),function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/likeBlog/"+idd).then(fetchBlogById(idd),function(response){
 			 console.log("Blog liked successfully");
 								
 			},function(error){
 				console.error("Error while liking blog");
 			});
+		
+		$location.path('/blogview')	 
 		 
 	 }
 	 
@@ -147,26 +209,44 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 $scope.dislikeBlog=function(idd)
 	 {
 		console.log("in like blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/dislikeBlog/"+idd).then(fetchBlog(idd),function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/dislikeBlog/"+idd).then(fetchBlogById(idd),function(response){
 			 console.log("Blog disliked successfully");
 								
 			},function(error){
 				console.error("Error while disliking blog");
 			});
+		
+		$location.path('/blogview')	 
 		 
 	 }
 
 	 
 	 
-	 $scope.addBlogComment=function(idd)
+	 $scope.addBlogComment=function()
 	 {
 		console.log("in add blogComment method")
-		 $http.post("http://localhost:8080/SayhiMiddleware/blogs/addBlogComments/"+idd,$scope.BlogComments).then(function(response){
+		console.log($rootScope.gblog.blogid+$rootScope.currentuser.email+$scope.BlogComments.blogcomm)
+
+		$http.get("http://localhost:8080/SayhiMiddleware/blogs/addBlogComments/"+$rootScope.gblog.blogid+"/"+$rootScope.currentuser.email+"/"+$scope.BlogComments.blogcomm).then(function(response){
 			 console.log("BlogComments added successfully")
 								
 			},function(error){
-				console.error("Error while creating blogComments")
+				
 			});
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/blogs/getAllBlogComments/"+$rootScope.gblog.blogid)
+		.then(function(response)
+		{
+			
+			$rootScope.gblogcomm=response.data;
+			
+			
+		},function(error)
+		{
+			
+		});		
+		
+		$location.path('/blogview')	 
 		 
 	 }
 	 
@@ -180,6 +260,7 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 			},function(error){
 				console.error("Error while updating blogComments")
 			});
+		$location.path('/blog')	 
 		 
 	 }
 	 
@@ -193,6 +274,8 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 			},function(error){
 				console.error("Error while deleting blogcomments");
 			});
+		
+		$location.path('/blog')	 
 		 
 	 }
 	 

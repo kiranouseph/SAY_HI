@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 
 @Entity
-
+@Component
 @Table(name="BlogComments")
 public class BlogComments  {
 
@@ -36,8 +36,14 @@ public class BlogComments  {
 	@Column(name = "Blogid", nullable = false)
 	private int blogid;
 	
-	@Column(name = "Userid", nullable = false)
-	private int userid;
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	@Column(name = "Username", nullable = false)
+	private String username;
 	
 	
 	
@@ -49,12 +55,7 @@ public class BlogComments  {
 	public void setBlogid(int blogid) {
 		this.blogid = blogid;
 	}
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
+	
 	public int getBlogcomid() {
 		return blogcomid;
 	}

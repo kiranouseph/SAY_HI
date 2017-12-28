@@ -72,14 +72,14 @@ body{
                         <div class="col-md-11">
                             <div class="media">
                               <div class="media-left">
-                             <h3><b>{{jobbyid.company}}</b></h3>
-    	 <h3>Post for {{jobbyid.jobprofile}}</h3>
-    	 <h3>SALARY:{{jobbyid.salary}} Rupeees</h3>
+                             <h3><b>{{gjob.company}}</b></h3>
+    	 <h3>Post for {{gjob.jobprofile}}</h3>
+    	 <h3>SALARY:{{gjob.salary}} Rupeees</h3>
     	 
                               </div>
                               
+                              <div  data-ng-if="gcheck.length > 0">
                               
-                              <div data-ng-repeat="check in checkifapplied" data-ng-if="checkifapplied.length > 0">
                               
                                           <div class="media-right">
                              <button  style="width:95%">ALREADY APPLIED</button>
@@ -90,10 +90,10 @@ body{
                          
                             </div>
                             
-                                <div data-ng-repeat="check in checkifapplied" data-ng-if="checkifapplied.length == 0">
+                                <div  data-ng-if="gcheck.length  < 1">
                               
                                           <div class="media-right">
-                             <a data-ng-click="applyJob(jobbyid.jobid)"><button  style="width:95%">APPLY</button></a>
+                             <a data-ng-click="applyJob(gjob.jobid)"><button  style="width:95%">APPLY</button></a>
     	 
                               </div>
                               
@@ -117,12 +117,12 @@ body{
 			 <th>Company Description</th>
 		</tr>
 		<tr >
-			<td>{{jobbyid.qualification}}</td>
-			<td>{{jobbyid.jobdesc}}</td>
-			 <td>{{jobbyid.companydesc}}</td>
+			<td>{{gjob.qualification}}</td>
+			<td>{{gjob.jobdesc}}</td>
+			 <td>{{gjob.companydesc}}</td>
 		</tr>
 	</table>
-  
+  </div>
     </section>
                <section class="post-footer">
                    
