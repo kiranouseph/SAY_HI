@@ -100,6 +100,10 @@ app.config(function($routeProvider) {
         
     })
     
+     .when("/chat", {
+        templateUrl : "chat/chat.html",
+        
+    })
     
     
       .when("/blogview", {

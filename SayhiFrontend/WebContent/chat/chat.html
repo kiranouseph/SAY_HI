@@ -1,0 +1,15 @@
+<div data-ng-Controller="chatController">
+	<form data-ng-submit="addMessage()" name="chatMsg">
+
+	<input type="text" data-ng-model="message"/>
+	<span class="count" data-ng-bind=" max - message.length">140</span>
+	<button data-ng-disabled=" message.length>140 ||message.length==0">Send</button>
+	
+	</form>
+
+	<p data-ng-repeat="message in messages|orderBy:'time':true">
+		
+		<time>{{message.time | date: 'HH:mm'}}</time>
+		<span> {{message.message}}</span>
+	</p>
+</div>
