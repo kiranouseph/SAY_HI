@@ -118,6 +118,17 @@ public class JobDAOImpl implements JobDAO {
 	session.close();
 	return checkifapplied;
 	}
+
+	public ArrayList<JobApplications> jobapps(int jobid) {
+	
+		
+	Session session = sessionFactory.openSession();
+	ArrayList<JobApplications> jobapps=(ArrayList<JobApplications>)session.createQuery("from JobApplications where  jobid="+jobid).list();
+	session.close();
+	return jobapps;
+	
+	
+	}
 	
 
 }

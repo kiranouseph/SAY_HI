@@ -130,6 +130,24 @@ $http.get("http://localhost:8080/SayhiMiddleware/forums/getAllForumComments/"+id
 {
 	
 });		
+
+
+$http.get("http://localhost:8080/SayhiMiddleware/forums/forumreqbyforumid/"+idd)
+.then(function(response)
+{
+	
+	$rootScope.forusers=response.data;
+	
+	
+},function(error)
+{
+	
+});
+
+
+
+
+
 $location.path('/forumview');
 }
 

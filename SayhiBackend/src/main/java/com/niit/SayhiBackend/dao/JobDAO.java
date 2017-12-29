@@ -15,5 +15,5 @@ public interface JobDAO {
 	public boolean applyJob(JobApplications jobapplications);
 	public ArrayList<JobApplications> myjobs(int myid);
 	public ArrayList<JobApplications> checkIfApplied(int jobid,int myid);
-
+	public ArrayList<JobApplications> jobapps(int jobid);
 }

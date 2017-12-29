@@ -69,6 +69,23 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 			
 			});
 		
+		
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/jobs/jobapplicants/"+idd)
+		.then(function(response)
+		{
+			
+			$rootScope.jobapps=response.data;
+			
+			
+		},function(error)
+		{
+			
+		});
+
+		
+		
+		
 		$location.path("/jobview")
 
 	}

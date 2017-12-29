@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,15 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SayhiBackend.dao.JobDAO;
-
+import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Job;
 import com.niit.SayhiBackend.model.JobApplications;
+import com.niit.SayhiBackend.model.Users;
 
 @RestController
 @RequestMapping("/jobs")
 public class JobController {
 @Autowired
 JobDAO jobDAO;
+
+@Autowired
+UsersDAO userDAO;
+
 
 @RequestMapping(value="/addJob",method=RequestMethod.POST)
 public ResponseEntity<String> addJob(@RequestBody Job job){
@@ -128,4 +134,20 @@ public ArrayList<JobApplications> checkifapplied(@PathVariable("jobid") int jobi
 {
 	return jobDAO.checkIfApplied(jobid, myid);
 }
+
+@RequestMapping(value="/jobapplicants/{jobid}",method=RequestMethod.GET)
+public ArrayList<Users> jobapps(@PathVariable("jobid") int jobid)
+{ArrayList<Users> u=new ArrayList<Users>();
+	ArrayList<JobApplications> jobapps=jobDAO.jobapps(jobid);
+	for(JobApplications j:jobapps)
+	{
+		Users us=userDAO.getUser(j.getUserid());
+		u.add(us);
+	}
+	return u;
+}
+
+
+
+
 }
