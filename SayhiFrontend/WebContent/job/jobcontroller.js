@@ -7,7 +7,7 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		$http.get("http://localhost:8080/SayhiMiddleware/jobs/getAllJobs")
 
 		.then(function(response) {
-			$scope.jobsdata = response.data;
+			$rootScope.jobsdata = response.data;
 			console.log("all jobs fetched")
 		});
 		
@@ -16,7 +16,7 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		$http.get("http://localhost:8080/SayhiMiddleware/jobs/myjobs/"+$rootScope.currentuser.userid)
 
 		.then(function(response) {
-			$scope.myjobs = response.data;
+			$rootScope.myjobs = response.data;
 			console.log("all my jobs fetched")
 		});
 		
@@ -90,17 +90,16 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 
 	}
 	
-	$scope.fetchjobforedit=function()
+	$scope.fetchjobforedit=function(idd)
 	{
 		
-		$http.get('http://localhost:8080/SayhiMiddleware/jobs/getJob/'+idd).then(function(response) {
-			console.log('getjob method ok')
-			$scope.jobforedit=response.data;
-			console.log('jobname'+$scope.jobbyid.company)
-				console.log('jobname'+$scope.jobbyid.salary)
-				
+		$http.get("http://localhost:8080/SayhiMiddleware/jobs/getJob/"+idd).then(function(response) {
+			console.log('get job for edit method ok'+idd)
+			$rootScope.ejob=response.data;
+							
 				
 					});
+		$location.path('/jobforedit')
 		
 		
 	}
@@ -108,8 +107,14 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 	
 	$scope.editjob=function(idd)
 	{
-		
-		$http.get('http://localhost:8080/SayhiMiddleware/jobs/updateJob/'+idd).then(function(response) {
+		console.log(idd)
+		console.log($scope.Job.jobprofile)
+		console.log($scope.Job.jobdesc)
+		console.log($scope.Job.qualification)
+		console.log($scope.Job.salary)
+		console.log($scope.Job.company)
+		console.log($scope.Job.companydesc)
+		$http.get("http://localhost:8080/SayhiMiddleware/jobs/updateJob/"+idd+"/"+$scope.Job.jobprofile+"/"+$scope.Job.jobdesc+"/"+$scope.Job.qualification+"/"+$scope.Job.salary+"/"+$scope.Job.company+"/"+$scope.Job.companydesc).then(function(response) {
 		
 			 console.log("job updated successfully");
 				

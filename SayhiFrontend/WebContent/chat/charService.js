@@ -10,10 +10,12 @@ app.service('chatService', function($q , $timeout)
 	service.CHAT_TOPIC="/topic/message";
 	service.CHAT_BROKER="/app/chat";
 
-	service.send=function(message)
+	service.send=function(email,message)
 	{
+		
+		
 		var id=Math.floor(Math.random()*1000000);
-		socket.stomp.send(service.CHAT_BROKER,{priority:9},JSON.stringify({message:message,id:id}));
+		socket.stomp.send(service.CHAT_BROKER,{priority:9},JSON.stringify({message:message,email:email,id:id}));
 		messageIds.push(id);
 	};
 
@@ -34,6 +36,7 @@ app.service('chatService', function($q , $timeout)
 	{
 		var message=JSON.parse(data),out={};
 		out.message=message.message;
+		out.email=message.email;
 		out.time=new Date(message.time);
 		return out;
 	};

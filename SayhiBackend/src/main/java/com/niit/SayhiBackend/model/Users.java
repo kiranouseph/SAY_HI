@@ -63,7 +63,34 @@ public class Users implements Serializable{
 	@Column(name = "Isonline", nullable = false)
     private String isonline;
     
+	@Column(name = "image")
+    private String image;
 
+	@Column(name = "cover")
+    private String cover;
+
+
+	public String getCover() {
+		return cover;
+	}
+
+
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 
 

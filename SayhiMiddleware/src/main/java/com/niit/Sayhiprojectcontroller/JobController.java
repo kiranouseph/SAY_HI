@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SayhiBackend.dao.JobDAO;
@@ -86,9 +87,23 @@ return new ResponseEntity<String>("Job deletion error",HttpStatus.BAD_REQUEST);
 
 }
 
-@RequestMapping(value="/updateJob",method=RequestMethod.PUT)
-public ResponseEntity<String> updateBlog(@RequestBody Job job){
+@RequestMapping(value="/updateJob/{jid}/{jprof}/{jdesc}/{jqual}/{jsal}/{jcomp}/{jcompdesc}",method=RequestMethod.GET)
+public ResponseEntity<String> updateBlog(@RequestParam("jid") int jobid,@RequestParam("jprof") String jobprofile,@RequestParam("jdesc") String jobdesc,@RequestParam("jqaul") String qualifications,@RequestParam("jsal") int salary,@RequestParam("jcomp") String company,@RequestParam("jcompdesc") String companydesc){
+	System.out.println(jobid);
+	System.out.println(jobprofile);
+	System.out.println(jobdesc);
+	System.out.println(qualifications);
+	System.out.println(salary);
+	System.out.println(company);
+	System.out.println(companydesc);
 	
+	Job job=jobDAO.getjob(jobid);
+	job.setJobprofile(jobprofile);
+	job.setJobdesc(jobdesc);
+	job.setQualification(qualifications);
+	job.setSalary(salary);
+	job.setCompany(company);
+	job.setCompanydesc(companydesc);
 	boolean isSaved=jobDAO.updatejob(job);
 	if(isSaved)
 	return new ResponseEntity<String>("job update succcess",HttpStatus.OK);

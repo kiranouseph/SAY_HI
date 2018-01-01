@@ -100,6 +100,11 @@ app.config(function($routeProvider) {
         
     })
     
+      .when("/jobforedit", {
+        templateUrl : "Job/updatejob.html",
+        
+    })
+    
      .when("/chat", {
         templateUrl : "chat/chat.html",
         

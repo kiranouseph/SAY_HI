@@ -1,10 +1,14 @@
 package com.niit.Sayhiprojectcontroller;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
-import org.h2.engine.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.niit.SayhiBackend.dao.JobDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
@@ -66,7 +72,7 @@ JobDAO jobDAO;
 		}
 	
 	 @RequestMapping(value="/login",method=RequestMethod.POST)
-		public ResponseEntity<Users> login(@RequestBody Users user){
+		public ResponseEntity<Users> login(@RequestBody Users user,HttpSession http){
 		
 
 
@@ -78,7 +84,7 @@ JobDAO jobDAO;
 				System.out.println("3..."+tempuser.getPassword());
 			tempuser.setIsonline("YES");
 				userDAO.updateOnlineStatus(tempuser);
-				
+			http.setAttribute("currentuser",tempuser);	
 			return new ResponseEntity<Users>(tempuser,HttpStatus.OK);
 				
 				
@@ -94,7 +100,7 @@ JobDAO jobDAO;
 		public ResponseEntity<Job> getJob(){
 		
 			
-				return new ResponseEntity<Job>(jobDAO.getjob(201),HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<Job>(jobDAO.getjob(33),HttpStatus.BAD_REQUEST);
 			
 		}
 	 
@@ -110,4 +116,58 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 		userDAO.updateOnlineStatus(tempuser);
 		return new ResponseEntity<String>("Lgout success",HttpStatus.OK);		 
 }
+	 
+	 @RequestMapping(value="/up",method = RequestMethod.POST)
+	 public void upload(HttpServletRequest request,@RequestParam("uploadedFile") MultipartFile file,HttpSession session )
+	 {
+	 	  /* String filepath = request.getSession().getServletContext().getRealPath("/") + "resources/product/" + file.getOriginalFilename();
+	 		*/
+	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" + file.getOriginalFilename();
+	 		String img=file.getOriginalFilename();
+	 		System.out.println(img);
+	 		System.out.println(filepath);
+	 		try {
+	 			byte imagebyte[] = file.getBytes();
+	 			BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath));
+	 			fos.write(imagebyte);
+	 			fos.close();
+	 			} catch (IOException e) {
+	 			e.printStackTrace();
+	 			} catch (Exception e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 			}
+	 		Users user = (Users)session.getAttribute("currentuser");
+	 	System.out.println(user.getEmail());
+	 		user.setImage(img);
+	 	userDAO.updateOnlineStatus(user);
+	 }
+	 
+	 
+	 @RequestMapping(value="/upcover",method = RequestMethod.POST)
+	 public void uploadcover(HttpServletRequest request,@RequestParam("uploadedFile") MultipartFile file,HttpSession session )
+	 {
+	 	  /* String filepath = request.getSession().getServletContext().getRealPath("/") + "resources/product/" + file.getOriginalFilename();
+	 		*/
+	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" + file.getOriginalFilename();
+	 		String img=file.getOriginalFilename();
+	 		System.out.println(img);
+	 		System.out.println(filepath);
+	 		try {
+	 			byte imagebyte[] = file.getBytes();
+	 			BufferedOutputStream fos = new BufferedOutputStream(new FileOutputStream(filepath));
+	 			fos.write(imagebyte);
+	 			fos.close();
+	 			} catch (IOException e) {
+	 			e.printStackTrace();
+	 			} catch (Exception e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 			}
+	 		Users user = (Users)session.getAttribute("currentuser");
+	 	System.out.println(user.getEmail());
+	 		user.setCover(img);
+	 	userDAO.updateOnlineStatus(user);
+	 }
+	
 }
