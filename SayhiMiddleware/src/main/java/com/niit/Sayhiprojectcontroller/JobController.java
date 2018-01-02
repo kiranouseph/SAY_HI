@@ -88,7 +88,7 @@ return new ResponseEntity<String>("Job deletion error",HttpStatus.BAD_REQUEST);
 }
 
 @RequestMapping(value="/updateJob/{jid}/{jprof}/{jdesc}/{jqual}/{jsal}/{jcomp}/{jcompdesc}",method=RequestMethod.GET)
-public ResponseEntity<String> updateBlog(@RequestParam("jid") int jobid,@RequestParam("jprof") String jobprofile,@RequestParam("jdesc") String jobdesc,@RequestParam("jqaul") String qualifications,@RequestParam("jsal") int salary,@RequestParam("jcomp") String company,@RequestParam("jcompdesc") String companydesc){
+public ResponseEntity<String> updateBlog(@PathVariable("jid") int jobid,@PathVariable("jprof") String jobprofile,@PathVariable("jdesc") String jobdesc,@PathVariable("jqual") String qualifications,@PathVariable("jsal") int salary,@PathVariable("jcomp") String company,@PathVariable("jcompdesc") String companydesc){
 	System.out.println(jobid);
 	System.out.println(jobprofile);
 	System.out.println(jobdesc);

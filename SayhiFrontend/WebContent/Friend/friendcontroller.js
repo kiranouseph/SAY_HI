@@ -105,6 +105,70 @@ app.controller("friendcontroller", function ($scope,$http,$location,$rootScope) 
 		});
 	}
 	
+	$rootScope.friendpreview=function(friendname)
+	{
+		console.log(friendname);
+		$http.get("http://localhost:8080/SayhiMiddleware/user/getUserByEmail/"+friendname)
+
+		.then(function(response) {
+			$rootScope.friendpreviewdata = response.data;
+			
+			console.log($rootScope.friendpreviewdata.email);
+		
+		},function(error)
+		{
+			console.log("Error on retrieving forums")
+		});
+
+		$http.get("http://localhost:8080/SayhiMiddleware/user/ismyfriend/"+$rootScope.friendpreviewdata.userid+"/"+$rootScope.currentuser.userid)
+
+		.then(function(response) {
+			$rootScope.ismyfriend = response.data;
+		
+		},function(error)
+		{
+			
+		});
+		
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/user/friendsfriends/"+$rootScope.friendpreviewdata.userid+"/"+$rootScope.currentuser.userid)
+
+		.then(function(response) {
+			$rootScope.friendsfriends = response.data;
+		
+		},function(error)
+		{
+			
+		});
+		
+		
+		
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/blogs/getAllMyBlogs/"+$rootScope.friendpreviewdata.userid)
+		.then(function(response)
+		{
+			
+			$rootScope.friendblogs=response.data;
+			
+						
+		},function(error)
+		{
+			console.log("Error on retrieving blogs")
+		});	
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/forums/myforums/"+$rootScope.friendpreviewdata.userid)
+		.then(function(response)
+		{
+			
+			$rootScope.friendforums=response.data;
+			
+						
+		},function(error)
+		{
+			console.log("Error on retrieving blogs")
+		});	
+		$location.path("/friendwall")
+	}
 	
 	
 	

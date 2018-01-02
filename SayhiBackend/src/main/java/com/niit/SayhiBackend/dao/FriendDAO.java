@@ -19,4 +19,5 @@ public interface FriendDAO {
 public Users getUserById(int userid);
 public Friend acceptfriendrequest(Friend friend);
 
+
 }

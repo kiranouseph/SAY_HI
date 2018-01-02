@@ -20,20 +20,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.niit.SayhiBackend.dao.FriendDAO;
 import com.niit.SayhiBackend.dao.JobDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.model.Friend;
 import com.niit.SayhiBackend.model.Job;
 import com.niit.SayhiBackend.model.Users;
+import com.niit.SayhiBackend.model.friendpreview;
 
 @RestController
-
+@EnableWebMvc
 @RequestMapping("/user")
 public class UserController {
 @Autowired
 UsersDAO userDAO;
 @Autowired
 JobDAO jobDAO;	
+@Autowired
+FriendDAO friendDAO;	
 	
 
 	 @RequestMapping(value="/getAllUsers",method=RequestMethod.GET)
@@ -52,12 +59,34 @@ JobDAO jobDAO;
 	 @RequestMapping(value="/getUser/{userid}",method=RequestMethod.GET)
 		public ResponseEntity<Users> getUser(@PathVariable("userid") int userId){
 			
-		 if(userDAO.getUser(userId)==null){
-				
-			}
+		
 			return new ResponseEntity<Users>(userDAO.getUser(userId),HttpStatus.OK);
 					
 		}
+	
+	 @RequestMapping(value="/getUserByEmail/{useremail}",method=RequestMethod.GET)
+		public ResponseEntity<Users> getUserByEmail(@PathVariable("useremail") String useremail){
+			String useremaill=useremail+".com";
+			
+			Users tempuser=userDAO.getUserbyemail(useremaill);
+			
+			return new ResponseEntity<Users>(tempuser,HttpStatus.OK);		
+					
+		}
+	 
+	 @RequestMapping(value="/logout/{email}",method=RequestMethod.GET)
+		public ResponseEntity<String> logout(@PathVariable("email") String email){
+		 System.out.println(email);
+		 
+	 String emaill=email+".com";
+
+	 System.out.println(emaill);
+Users tempuser=userDAO.getUserbyemail(emaill);
+		 tempuser.setIsonline("NO");
+		userDAO.updateOnlineStatus(tempuser);
+		return new ResponseEntity<String>("Lgout success",HttpStatus.OK);		 
+}
+	 
 	 
 	 @RequestMapping(value="/register",method=RequestMethod.POST)
 		public ResponseEntity<Users> createUser(@RequestBody Users user){
@@ -104,21 +133,10 @@ JobDAO jobDAO;
 			
 		}
 	 
-	 @RequestMapping(value="/logout/{email}",method=RequestMethod.GET)
-		public ResponseEntity<String> logout(@PathVariable("email") String email){
-		 System.out.println(email);
-		 
-	 String emaill=email+".com";
-
-	 System.out.println(emaill);
-Users tempuser=userDAO.getUserbyemail(emaill);
-		 tempuser.setIsonline("NO");
-		userDAO.updateOnlineStatus(tempuser);
-		return new ResponseEntity<String>("Lgout success",HttpStatus.OK);		 
-}
+	 
 	 
 	 @RequestMapping(value="/up",method = RequestMethod.POST)
-	 public void upload(HttpServletRequest request,@RequestParam("uploadedFile") MultipartFile file,HttpSession session )
+	 public ModelAndView  upload(HttpServletRequest request,@RequestParam("uploadedFile") MultipartFile file,HttpSession session )
 	 {
 	 	  /* String filepath = request.getSession().getServletContext().getRealPath("/") + "resources/product/" + file.getOriginalFilename();
 	 		*/
@@ -141,11 +159,13 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 	System.out.println(user.getEmail());
 	 		user.setImage(img);
 	 	userDAO.updateOnlineStatus(user);
+	 	ModelAndView mv = new ModelAndView("backhome");
+		return mv;
 	 }
 	 
 	 
 	 @RequestMapping(value="/upcover",method = RequestMethod.POST)
-	 public void uploadcover(HttpServletRequest request,@RequestParam("uploadedFile") MultipartFile file,HttpSession session )
+	 public ModelAndView uploadcover(HttpServletRequest request,@RequestParam("uploadedFile") MultipartFile file,HttpSession session )
 	 {
 	 	  /* String filepath = request.getSession().getServletContext().getRealPath("/") + "resources/product/" + file.getOriginalFilename();
 	 		*/
@@ -168,6 +188,106 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 	System.out.println(user.getEmail());
 	 		user.setCover(img);
 	 	userDAO.updateOnlineStatus(user);
+	 	
+	 	ModelAndView mv = new ModelAndView("backhome");
+		return mv;
 	 }
+	 
+	 
+	 @RequestMapping(value="/ismyfriend/{userid}/{myid}",method = RequestMethod.GET)
+	 public ArrayList<Users> ismyfriend(@PathVariable("userid") int userid,@PathVariable("myid") int myid)
+	 {
+		 System.out.println("in is my friend controller");
+		 ArrayList<Friend> friends = (ArrayList<Friend>)userDAO.checkismyfriend(userid, myid);
+		ArrayList<Users> users= new  ArrayList<Users>();
+		for(Friend f:friends)
+		{
+			if(f.getU_ID()==myid)
+			{
+				users.add(userDAO.getUserbyId(f.getFRI_ID()));
+			}
+			else if(f.getFRI_ID()==myid)
+			{
+				users.add(userDAO.getUserbyId(f.getU_ID()));
+			} 
+			
+		}
+	 return users;
 	
 }
+	 
+	 
+	 @RequestMapping(value="/friendsfriends/{userid}/{myid}",method = RequestMethod.GET)
+	 public ArrayList<Users> friendsfriends(@PathVariable("userid") int userid,@PathVariable("myid") int myid )
+	 { 
+		 System.out.println(userid+" "+myid);
+	 ArrayList<Users> fp=new ArrayList<Users>(); 
+	 ArrayList<Friend> myfriends=(ArrayList<Friend>)friendDAO.getAllMyFriend(myid);
+	 ArrayList<String> myfriendsemail=new ArrayList<String>();
+	 for(Friend s:myfriends)
+	 {
+	 	if(s.getU_ID()==myid)
+	 	{
+	 	 myfriendsemail.add(userDAO.getUser(s.getFRI_ID()).getEmail());
+	 	}
+	 	else if(s.getFRI_ID()==myid)
+	 	{
+	 		System.out.println(userDAO.getUser(s.getU_ID()).getEmail());
+	 		
+	 		myfriendsemail.add(userDAO.getUser(s.getU_ID()).getEmail());
+	 	}
+	 }
+
+	 
+	 ArrayList<Friend> hisfriends=(ArrayList<Friend>)friendDAO.getAllMyFriend(userid);
+	 ArrayList<String> hisfriendsemail=new ArrayList<String>();
+	 for(Friend s:hisfriends)
+	 {
+	 	if(s.getU_ID()==userid)
+	 	{
+	 		hisfriendsemail.add(userDAO.getUser(s.getFRI_ID()).getEmail());
+	 	}
+	 	else if(s.getFRI_ID()==userid)
+	 	{
+	 		hisfriendsemail.add(userDAO.getUser(s.getU_ID()).getEmail());
+	 	}
+	 }
+
+	 for(String hs:hisfriendsemail)
+	 {
+		 Users u=userDAO.getUserbyId(myid);
+		if(hs==u.getEmail())
+		{
+			
+		}
+		else
+		{
+		 int count=0;
+		 
+		 for(String mf:myfriendsemail)
+		 {
+			 
+			 if(mf!=hs)
+			 {
+				 count++;
+			 }
+			 
+		 }
+		 
+		 if(count==myfriendsemail.size())
+		 {
+			 Users us=userDAO.getUserbyemail(hs);
+			 fp.add(us);
+					 
+		 }
+		}
+		 
+		 
+	 }
+	
+	 return fp;
+	 
+}
+
+}
+

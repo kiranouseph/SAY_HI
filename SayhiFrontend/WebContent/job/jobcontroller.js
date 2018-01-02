@@ -123,6 +123,8 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		
 		});
 		
+		$location.path("/blog")
+		
 		
 	}
 	

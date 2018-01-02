@@ -1,4 +1,4 @@
-var app = angular.module("SAYHI", ["ngRoute"]);
+var app = angular.module("SAYHI", ["ngRoute",'ngCookies']);
 app.config(function($routeProvider) {
 	
     $routeProvider
@@ -21,6 +21,7 @@ app.config(function($routeProvider) {
     })
       .when("/mywall", {
         templateUrl : "pages/mywall.html",
+   
         
     })
 
@@ -109,6 +110,10 @@ app.config(function($routeProvider) {
         templateUrl : "chat/chat.html",
         
     })
+      .when("/friendwall", {
+        templateUrl : "pages/friendpreview.html",
+        
+    })
     
     
       .when("/blogview", {
@@ -118,3 +123,14 @@ app.config(function($routeProvider) {
     
 });
 
+app.run(function($rootScope,$cookieStore){
+	console.log('i am in run function');
+
+	if($rootScope.currentuser==undefined)
+		{
+		$rootScope.currentuser=$cookieStore.get('user');
+		}
+	else{
+	
+	}
+});

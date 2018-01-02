@@ -25,8 +25,8 @@
 <div data-ng-controller="blogcontroller">
 <br>
 
-<a href="#!/newblog"><button   style="width:95%">Writeblog</button></a>
-  
+
+   <div  data-ng-hide="currentuser.role=='ROLE_ADMIN'"><a href="#!/newblog"><button   style="width:95%">Writeblog</button></a></div>
   
   
 <div data-ng-repeat="blogg in blogs">
@@ -42,7 +42,7 @@
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="#" class="anchor-username"><h4 class="media-heading">{{blogg.username}}</h4></a> 
+                                <a href="" data-ng-controller="friendcontroller" data-ng-click="friendpreview(blogg.username)" class="anchor-username"><h4 class="media-heading">{{blogg.username}}</h4></a> 
                               
                               </div>
                             </div>

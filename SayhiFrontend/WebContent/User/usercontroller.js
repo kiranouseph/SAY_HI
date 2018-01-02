@@ -1,6 +1,6 @@
 
 
-app.controller("registercontroller", function ($scope,$location,$http,$rootScope) {
+app.controller("registercontroller", function ($scope,$location,$http,$rootScope,$cookieStore) {
 	 $scope.msg = "Register  page";
 	 $scope.Users={firstname:'',lastname:'',email:'',password:'',role:'ROLE_USER',isonline:'NO'};
 	 $scope.register=function()
@@ -27,9 +27,9 @@ app.controller("registercontroller", function ($scope,$location,$http,$rootScope
 		 $http.post("http://localhost:8080/SayhiMiddleware/user/login",$scope.Users).then(function(response)
 				 {
 			
-			 
-			 $scope.Usersdet=response.data;
+			
 			 $rootScope.currentuser=response.data;
+			 $cookieStore.put('user',response.data);
 			 console.log("ROLE"+$rootScope.currentuser.role)
 			 $location.path("/blog")
 				 });

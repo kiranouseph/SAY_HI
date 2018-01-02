@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.model.Friend;
 import com.niit.SayhiBackend.model.Users;
 
 
@@ -103,7 +104,7 @@ public class UsersDAOImpl implements UsersDAO {
 		return user;
 		
 	}
-
+	@Transactional
 	public boolean checkLogin(Users user) {
 		try{
 			Session session=sessionFactory.openSession();
@@ -129,6 +130,9 @@ public class UsersDAOImpl implements UsersDAO {
 			return false;
 		}
 	}
+	
+	
+	@Transactional
 	public Users getUserbyemail(String email) {
 		Users user=new Users();
 		try{
@@ -146,7 +150,17 @@ public class UsersDAOImpl implements UsersDAO {
 		return user;
 		
 	}
+	
+	
+	@Transactional
+	public ArrayList<Friend> checkismyfriend(int userid, int myid) {
 
+		Session session = sessionFactory.openSession();
+		ArrayList<Friend> myfriends=(ArrayList<Friend>) session.createQuery("from Friend where (U_ID="+myid+" and FRI_ID="+userid+") or (U_ID="+userid+" or FRI_ID="+myid+") and (status='YES')").list();
+		session.close();
+		return myfriends;
+	}
+	
 
 	
 	

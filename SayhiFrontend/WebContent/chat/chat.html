@@ -335,8 +335,9 @@ ul {
       
       <div class="message-box message-partner"  >
         <time>{{message.time | date: 'HH:mm'}}</time>
+        <span> {{message.email}}:--</span>
 		<span> {{message.message}}</span>
-		<span> {{message.email}}</span>
+		
         </div>
       
       
@@ -344,10 +345,11 @@ ul {
        <div data-ng-hide="currentuser.email==message.email">
       
       
-      <div class="message-box message-partner" style="margin-left:0px" >
+      <div class="message-box message-partner" style="margin-right:800px" >
         <time>{{message.time | date: 'HH:mm'}}</time>
+        <span> {{message.email}}:--</span>
 		<span> {{message.message}}</span>
-		<span> {{message.email}}</span>
+		
         </div>
       
       
