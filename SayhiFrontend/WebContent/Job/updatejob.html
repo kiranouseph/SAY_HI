@@ -14,36 +14,36 @@
                    
                            <div class="input-field col s6">  
                            <div class="left-align">       
-                <input  type="text" id="jobprofile"  data-ng-model="Job.jobprofile"  data-ng-value="ejob.jobprofile" required >
+                <input  type="text" id="jobprofile"  data-ng-model="Job.jobprofile"  data-ng-value="ejob.jobprofile" data-ng-init="Job.jobprofile=ejob.jobprofile" required >
                             <label for="jobprofile">Job Profile</label>
                              </div>
                          </div>  
                  
                                <div class="input-field col s12">
-                   <textarea id="jobdesc" class="materialize-textarea" data-ng-model="Job.jobdesc" data-ng-value="ejob.jobdesc" required></textarea>
+                   <textarea id="jobdesc" class="materialize-textarea" data-ng-model="Job.jobdesc" data-ng-value="ejob.jobdesc" data-ng-init="Job.jobdesc=ejob.jobdesc"  required></textarea>
           <label for="jobdesc">Job Description</label>
             </div>
             
             <div class="input-field col s12">
-                   <textarea id="jobqualifications" class="materialize-textarea" data-ng-model="Job.qualification"  data-ng-value="ejob.qualification" required></textarea>
+                   <textarea id="jobqualifications" class="materialize-textarea" data-ng-model="Job.qualification"  data-ng-value="ejob.qualification" data-ng-init="Job.qualification=ejob.qualification" required></textarea>
           <label for="jobqualifications">Job Qualifications</label>
             </div>
                               <div class="input-field col s6">  
                              
-                <input  type="number" id="jobsalary"  data-ng-model="Job.salary" data-ng-value="ejob.salary" required >
+                <input  type="number" id="jobsalary"  data-ng-model="Job.salary" data-ng-value="ejob.salary" data-ng-init="Job.salary=ejob.salary" required >
                             <label for="jobsalary">Job Salary</label>
                          
                          </div>
                          
                                 <div class="input-field col s6">  
                              
-                <input  type="text" id="company"  data-ng-model="Job.company"  data-ng-value="ejob.company" required >
+                <input  type="text" id="company"  data-ng-model="Job.company"  data-ng-value="ejob.company" data-ng-init="Job.company=ejob.company" required >
                             <label for="company">Company</label>
                          
                          </div>      
                    
                       <div class="input-field col s12">
-                   <textarea id="companydesc" class="materialize-textarea" data-ng-model="Job.companydesc"  data-ng-value="ejob.companydesc"required></textarea>
+                   <textarea id="companydesc" class="materialize-textarea" data-ng-model="Job.companydesc"  data-ng-value="ejob.companydesc" data-ng-init="Job.companydesc=ejob.companydesc" required></textarea>
           <label for="jobqualifications">Company Description</label>
             </div>
                     

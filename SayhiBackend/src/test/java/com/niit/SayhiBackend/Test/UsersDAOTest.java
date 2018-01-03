@@ -78,13 +78,13 @@ public static UsersDAO userDAO;
 			
 		}
 		
-		@Ignore
+	
 		@Test
 		public void getUserByEmailTest()
 		{
 			
-			Users users=(Users)userDAO.getUserbyemail("k@gmail.com");
-			System.out.println(users.getEmail());
+			Users users=(Users)userDAO.getUserbyemail("j@gmail.com");
+			System.out.println(users.getFirstname());
 			
 		}
 		

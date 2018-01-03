@@ -96,7 +96,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     <a href="#!/newblog"><button   style="width:95%">Writeblog</button></a>
     
    
-   
+   <div data-ng-controller="blogcontroller">
     <div data-ng-repeat="myblo in myblogs">
     
     
@@ -148,15 +148,15 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     
     </div>
     
-    
+    </div>
     
     </div>
     <div id="test2" class="col s12">
 
 
 
-
-<div data-ng-repeat="myfor in myforums">
+<div data-ng-controller="forumcontroller">
+<div data-ng-repeat="myfor in myforum">
     
     
     <div class="card card-1" style="margin-top:2vh; padding: 30px;margin-right: 5%" >
@@ -201,7 +201,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     
     </div>
     
-    
+    </div>
     
     
     

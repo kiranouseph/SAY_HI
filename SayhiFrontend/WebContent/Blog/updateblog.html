@@ -12,7 +12,7 @@
                    
                            <div class="input-field col s6">  
                            <div class="left-align">       
-                <input  type="text" id="blogname"  data-ng-model="Blog.blogname" data-ng-value="eblog.blogname"required >
+                <input  type="text" id="blogname"  data-ng-model="Blog.blogname" data-ng-value="eblog.blogname" data-ng-init="Blog.blogname=eblog.blogname" required >
                             <label for="blogname"></label>
                              </div>
                          </div>  
@@ -23,7 +23,7 @@
                                <div class="input-field col s12">
                   
                   
-                   <textarea id="blogcontent" class="materialize-textarea" data-ng-model="Blog.blogcontent" data-ng-value="eblog.blogcontent" required></textarea>
+                   <textarea id="blogcontent" class="materialize-textarea" data-ng-model="Blog.blogcontent" data-ng-value="eblog.blogcontent" data-ng-init="Blog.blogcontent=eblog.blogcontent" required></textarea>
           <label for="blogcontent"></label>
           
           

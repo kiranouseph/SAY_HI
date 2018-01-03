@@ -25,13 +25,13 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 	
 	function myallforums()
 	{
-		console.log("in all my forums method")
+		
 	
 		$http.get("http://localhost:8080/SayhiMiddleware/forums/myforums/"+$rootScope.currentuser.userid)
 		.then(function(response)
 		{
 			
-			$rootScope.myforums=response.data;
+			$rootScope.myforum=response.data;
 			
 						
 		},function(error)
@@ -89,7 +89,7 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 			},function(error){
 				console.error("Error while adding adding forum")
 			});
-		$location.path('/forummanage')
+		$location.path('/blog')
 		 
 	 }
 	 

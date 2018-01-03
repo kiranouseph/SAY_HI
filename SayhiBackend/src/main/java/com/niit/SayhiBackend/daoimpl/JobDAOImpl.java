@@ -105,6 +105,7 @@ public class JobDAOImpl implements JobDAO {
 	}
 	@Transactional
 	public ArrayList<JobApplications> myjobs(int myid) {
+		System.err.println(myid);
 		Session session = sessionFactory.openSession();
 		ArrayList<JobApplications> jobapllicationlist=(ArrayList<JobApplications>)session.createQuery("from JobApplications where userid="+myid).list();
 		session.close();

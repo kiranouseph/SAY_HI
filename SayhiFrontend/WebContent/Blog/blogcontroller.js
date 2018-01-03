@@ -139,7 +139,7 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 $scope.editBlog=function()
 	 {
 		
-	
+	console.log($scope.Blog.blogname+" "+$scope.Blog.blogcontent)
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/updateBlog/"+$rootScope.eblog.blogid+"/"+$scope.Blog.blogname+"/"+$scope.Blog.blogcontent).then(function(response){
 			 console.log("Blog updated successfully");
 								

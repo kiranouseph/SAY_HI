@@ -26,13 +26,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.niit.SayhiBackend.dao.FriendDAO;
 import com.niit.SayhiBackend.dao.JobDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
+import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.Friend;
 import com.niit.SayhiBackend.model.Job;
 import com.niit.SayhiBackend.model.Users;
 import com.niit.SayhiBackend.model.friendpreview;
 
 @RestController
-@EnableWebMvc
+
 @RequestMapping("/user")
 public class UserController {
 @Autowired
@@ -64,23 +65,37 @@ FriendDAO friendDAO;
 					
 		}
 	
-	 @RequestMapping(value="/getUserByEmail/{useremail}",method=RequestMethod.GET)
-		public ResponseEntity<Users> getUserByEmail(@PathVariable("useremail") String useremail){
-			String useremaill=useremail+".com";
-			
-			Users tempuser=userDAO.getUserbyemail(useremaill);
-			
-			return new ResponseEntity<Users>(tempuser,HttpStatus.OK);		
-					
+	
+	 
+		@RequestMapping(value="/getUserByEmail/{useremail}",method=RequestMethod.GET)
+		public ResponseEntity<Users> userbyemail(@PathVariable("useremail") String useremail){
+		
+			 String useremaill=useremail+".com";
+				System.out.println(useremaill); 
+				Users tempuser=userDAO.getUserbyemail(useremaill);
+				System.out.println(tempuser.getFirstname());
+				System.out.println(tempuser.getLastname());
+		if(tempuser==null){
+			return new ResponseEntity<Users>(tempuser,HttpStatus.BAD_REQUEST);		
 		}
+		else
+		{
+		return new ResponseEntity<Users>(tempuser,HttpStatus.OK);	
+		}		
+		
+		
+		
+		}
+	 
+	
 	 
 	 @RequestMapping(value="/logout/{email}",method=RequestMethod.GET)
 		public ResponseEntity<String> logout(@PathVariable("email") String email){
 		 System.out.println(email);
 		 
 	 String emaill=email+".com";
-
-	 System.out.println(emaill);
+System.out.println(emaill);
+	 
 Users tempuser=userDAO.getUserbyemail(emaill);
 		 tempuser.setIsonline("NO");
 		userDAO.updateOnlineStatus(tempuser);

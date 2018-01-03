@@ -133,13 +133,18 @@ public ResponseEntity<String> applyJob(@PathVariable("jobid") int jobid,@PathVar
 
 @RequestMapping(value="/myjobs/{myid}",method=RequestMethod.GET)
 public ArrayList<Job> myjobs(@PathVariable("myid") int myid)
-{ArrayList<Job> myjobs=new ArrayList<Job>();
+{System.err.println(myid);
+	ArrayList<Job> myjobs=new ArrayList<Job>();
 	ArrayList<JobApplications> jobappli =jobDAO.myjobs(myid);
 	for(JobApplications jobapp:jobappli)
 	{
 		
-		myjobs.add(jobDAO.getjob(jobapp.getJobapplyid()));
+		myjobs.add(jobDAO.getjob(jobapp.getJobid()));
 		
+	}
+	for(Job j:myjobs)
+	{
+		System.out.println(j.getJobprofile());
 	}
 	return myjobs;
 }
