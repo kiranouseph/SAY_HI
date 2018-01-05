@@ -21,6 +21,12 @@ app.config(function($routeProvider) {
    controller:"friendcontroller",
         
     })
+    
+          .when("/picuplaod", {
+        templateUrl : "pages/mywall.html",
+   controller:"picuploadcontroller",
+        
+    })
 
 
     .when("/blog", {
@@ -66,6 +72,16 @@ app.config(function($routeProvider) {
     
       .when("/blogrequests", {
         templateUrl : "Blog/blogrequests.html",
+       
+        
+    })
+       .when("/eventrequests", {
+        templateUrl : "Events/eventrequests.html",
+       
+        
+    })
+        .when("/userrequests", {
+        templateUrl : "User/userrequests.html",
        
         
     })

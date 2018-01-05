@@ -53,8 +53,24 @@ FriendDAO friendDAO;
 		return user;		
 		}
 	 
-	 
+	 @RequestMapping(value="/getAllUsersreq",method=RequestMethod.GET)
+		public ArrayList<Users> getAllUserreq(){
+		 System.out.println("in rest controller getallusersreq");
+			ArrayList<Users> userreq=(ArrayList<Users>)userDAO.userrequests();
+			System.out.println("in rest controller getallusersreq");
 
+		return userreq;		
+		} 
+	 
+	 @RequestMapping(value="/approveusers/{username}",method=RequestMethod.GET)
+	 public void approveusers(@PathVariable("username") String username)
+	 {String email=username+".com";
+		 Users users =userDAO.getUserbyemail(email);
+		 users.setStatus("A");
+		 userDAO.approveusers(users);
+		 
+	 }
+	 
 	 
 	 
 	 @RequestMapping(value="/getUser/{userid}",method=RequestMethod.GET)
@@ -128,17 +144,35 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 				System.out.println("3..."+tempuser.getPassword());
 			tempuser.setIsonline("YES");
 				userDAO.updateOnlineStatus(tempuser);
+	tempuser.setErrorcode(200);
+	tempuser.setErrormessage("login success");
 			http.setAttribute("currentuser",tempuser);	
 			return new ResponseEntity<Users>(tempuser,HttpStatus.OK);
 				
 				
 			}
 			else
-			{
-				return new ResponseEntity<Users>(user,HttpStatus.BAD_REQUEST);
+			{ Users tempuser1=new Users();
+				if(userDAO.checkLoginsimp(user))
+				{
+				tempuser1.setErrorcode(200);
+				tempuser1.setErrormessage("You are noy yet approved by user");
+				return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
+				}
+				else
+				{
+					tempuser1.setErrorcode(200);
+					tempuser1.setErrormessage("email id or password incorrect");
+					return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
+					
+				}
+				
+				}
+				
+				
 			}
 			
-		}
+		
 	
 	 @RequestMapping(value="/job",method=RequestMethod.POST)
 		public ResponseEntity<Job> getJob(){
@@ -191,10 +225,10 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 		*/
 		 
 		 Users user = (Users)session.getAttribute("currentuser");
-		 	System.out.println(user.getEmail()+".jpg");
-		 		user.setCover(user.getEmail());
+		 	
+		 		user.setCover(user.getEmail()+"cover.jpg");
 		 	userDAO.updateOnlineStatus(user);
-	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" +user.getEmail()+".jpg";
+	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" +user.getEmail()+"cover.jpg";
 	 		String img=file.getOriginalFilename();
 	 		System.out.println(img);
 	 		System.out.println(filepath);

@@ -2,6 +2,7 @@ package com.niit.SayhiBackend.daoimpl;
 
 import java.util.ArrayList;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.niit.SayhiBackend.model.EventParticipants;
 import com.niit.SayhiBackend.model.Events;
 import com.niit.SayhiBackend.model.Job;
 import com.niit.SayhiBackend.model.JobApplications;
+import com.niit.SayhiBackend.model.Users;
 @Repository("eventDAO")
 public class EventDAOImpl implements EventDAO {
 
@@ -91,7 +93,7 @@ public boolean deleteEventpars(EventParticipants eventparticipants) {
 @Transactional
 	public ArrayList<Events> getAllevents() {
 		Session session = sessionFactory.openSession();
-		ArrayList<Events> eventlist=(ArrayList<Events>)session.createQuery("from Events").list();
+		ArrayList<Events> eventlist=(ArrayList<Events>)session.createQuery("from Events where status='A'").list();
 		session.close();
 		return eventlist;
 	}
@@ -135,6 +137,30 @@ public boolean deleteEventpars(EventParticipants eventparticipants) {
 		return eventpars;
 	}
 	
+	@Transactional
+	public ArrayList<Events> eventrequests()
+	{
+		Session session = sessionFactory.openSession();
+		ArrayList<Events> eventreq=(ArrayList<Events>) session.createQuery("from Events where status='P'").list();
+		session.close();
+		return eventreq;
+	}
 	
+	@Transactional
+	public boolean approveevent(Events events)
+	{
+		
+		
+		try {
+	  		sessionFactory.getCurrentSession().saveOrUpdate(events);
+	  		return true;
+	  	} catch (HibernateException e) {
+	  		// TODO Auto-generated catch block
+	  		e.printStackTrace();
+	  		return false;
+	  	}
+		
+	}
+	}
 	
-}
+

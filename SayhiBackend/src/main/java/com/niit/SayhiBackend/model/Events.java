@@ -35,6 +35,11 @@ public class Events implements Serializable {
 	public String eventvenue;
 	@Column(name="Username",nullable=false)
 	public String username;
+
+	@Column(name="Status",nullable=false)
+	public String status;
+
+	
 	public int getEventid() {
 		return eventid;
 	}
@@ -43,6 +48,12 @@ public class Events implements Serializable {
 	}
 	public String getEventname() {
 		return eventname;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public void setEventname(String eventname) {
 		this.eventname = eventname;

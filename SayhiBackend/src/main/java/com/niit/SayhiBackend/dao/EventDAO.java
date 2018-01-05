@@ -18,4 +18,6 @@ public interface EventDAO {
 	public ArrayList<EventParticipants> checkIfeveAppliied(int eventid,int myid);
 	public ArrayList<EventParticipants> eventpars(int eventid);
 	public boolean deleteEventpars(EventParticipants eventparticipants);
+	public ArrayList<Events> eventrequests();
+	public boolean approveevent(Events events);
 }

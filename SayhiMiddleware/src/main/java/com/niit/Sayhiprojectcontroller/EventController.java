@@ -71,6 +71,30 @@ UsersDAO userDAO;
 	}
 	
 	
+	@RequestMapping(value="/getAlleventreq",method=RequestMethod.GET)
+	public ArrayList<Events> getAllEventreq(){
+	 System.out.println("in rest controller getalleventsreq");
+		ArrayList<Events> eventreq=(ArrayList<Events>)eventDAO.eventrequests();
+		System.out.println("in rest controller getalleventsreq");
+
+	return eventreq;		
+	} 
+ 
+ @RequestMapping(value="/approveevents/{eventid}",method=RequestMethod.GET)
+ public void approveusers(@PathVariable("eventid") int eventid)
+ {
+	 Events event=eventDAO.getevent(eventid);
+	 event.setStatus("A");
+	
+	 eventDAO.approveevent(event);
+	 
+ }
+ 
+ 
+	
+	
+	
+	
 	@RequestMapping(value="/deleteEvent/{eventid}",method=RequestMethod.GET)
 	public ResponseEntity<String> deleteBlog(@PathVariable("eventid") int eventid){
 

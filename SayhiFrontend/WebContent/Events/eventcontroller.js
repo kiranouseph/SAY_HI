@@ -1,5 +1,5 @@
 app.controller("eventcontroller", function ($scope,$http,$location,$rootScope) {
-$scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.currentuser.email};	
+$scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.currentuser.email,status:'P'};	
 
 	function fetchAllEvents()
 	{
@@ -151,3 +151,55 @@ $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.curre
 	
 	
 });
+
+
+app.controller("eventrequestcontroller", function ($scope,$http,$location,$rootScope) {
+	function fetchAlleventreq()
+	{
+	
+	 $http.get("http://localhost:8080/SayhiMiddleware/events/getAlleventreq")
+	    .then(function(response)
+	    		{
+	    	
+	    
+		 $scope.eventrequests=response.data;
+	
+		 $location.path('/eventrequests')
+							
+		},function(error){
+			console.error("Error while fetching requets");
+		});
+	}
+	
+	
+	fetchAlleventreq();
+	
+	
+	
+	
+	
+	
+	 $scope.accepteventrequests=function(id)
+	 {
+		 
+		 
+		console.log("in event request  accept method")
+		 $http.get("http://localhost:8080/SayhiMiddleware/events/approveevents/"+id).then(fetchAlleventreq(),function(response){
+			 
+			 console.log("eventrequets accepted  successfully");
+			 $location.path('/eventrequests')
+								
+			},function(error){
+				console.error("Error while accepting eventrequets");
+			});
+		$location.path('/eventmanage')
+		 
+	 }
+	 
+
+	 
+	
+	
+});
+
+

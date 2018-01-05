@@ -16,5 +16,7 @@ public interface UsersDAO {
 		public Users getUserbyId(int uderid);
 		public Users getUserbyemail(String email);
 		public ArrayList<Friend> checkismyfriend(int userid,int myid);
-		
+		public ArrayList<Users> userrequests();
+		public boolean approveusers(Users users);
+		public boolean checkLoginsimp(Users user);
 }

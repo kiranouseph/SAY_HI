@@ -22,7 +22,7 @@ import java.util.Set;
 @Entity
 @Component
 @Table(name="USERS")
-public class Users implements Serializable{
+public class Users  extends Errormessages implements Serializable {
 	/**
 	 * 
 	 */
@@ -56,7 +56,20 @@ public class Users implements Serializable{
     
    
     
-  
+    @Column(name = "Status", nullable = false)
+    private String status;
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 
 
@@ -69,6 +82,8 @@ public class Users implements Serializable{
 	@Column(name = "cover")
     private String cover;
 
+	
+	
 
 	public String getCover() {
 		return cover;

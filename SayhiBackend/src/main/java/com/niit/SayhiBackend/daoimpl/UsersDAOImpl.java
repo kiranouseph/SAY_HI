@@ -108,9 +108,8 @@ public class UsersDAOImpl implements UsersDAO {
 	public boolean checkLogin(Users user) {
 		try{
 			Session session=sessionFactory.openSession();
-			System.out.println(user.getEmail());
-			System.out.println(user.getPassword());
-			Query query=session.createQuery("from Users where email='"+user.getEmail()+"' and password='"+user.getPassword()+"'");
+		
+			Query query=session.createQuery("from Users where (email='"+user.getEmail()+"' and password='"+user.getPassword()+"') and (status='A')");
 			
 			Users user1=(Users)query.list().get(0);
 			
@@ -130,6 +129,35 @@ public class UsersDAOImpl implements UsersDAO {
 			return false;
 		}
 	}
+	
+	@Transactional
+	public boolean checkLoginsimp(Users user) {
+		try{
+			Session session=sessionFactory.openSession();
+		
+			Query query=session.createQuery("from Users where (email='"+user.getEmail()+"' and password='"+user.getPassword()+"') and (status='P')");
+			
+			Users user1=(Users)query.list().get(0);
+			
+			if(user1==null)
+			{
+				
+				return false;
+			}
+			else
+			{
+				System.out.println("2.."+user1.getEmail());
+				System.out.println("2..."+user1.getPassword());
+				return true;
+			}
+		}catch(Exception e)
+		{
+			return false;
+		}
+	}
+	
+	
+	
 	
 	
 	@Transactional
@@ -161,6 +189,27 @@ public class UsersDAOImpl implements UsersDAO {
 		return myfriends;
 	}
 	
+@Transactional 
+public ArrayList<Users> userrequests()
+{
+	Session session = sessionFactory.openSession();
+	ArrayList<Users> userreq=(ArrayList<Users>) session.createQuery("from Users where status='P'").list();
+	session.close();
+	return userreq;
+}
+@Transactional
+public boolean approveusers(Users users)
+{
+	try {
+  		sessionFactory.getCurrentSession().saveOrUpdate(users);
+  		return true;
+  	} catch (HibernateException e) {
+  		// TODO Auto-generated catch block
+  		e.printStackTrace();
+  		return false;
+  	}
+	
+}
 
 	
 	

@@ -1,8 +1,21 @@
+app.controller("picuploadcontroller", function ($scope,$location,$http,$rootScope,$cookieStore) {
 
+	 $http.post("http://localhost:8080/SayhiMiddleware/user/login",$rootScope.currentuser).then(function(response)
+			 {
+		
+		
+		 $rootScope.currentuser=response.data;
+		 $cookieStore.put('user',response.data);
+		
+		
+			 });
+	
+	
+});
 
 app.controller("registercontroller", function ($scope,$location,$http,$rootScope,$cookieStore) {
 	 $scope.msg = "Register  page";
-	 $scope.Users={firstname:'',lastname:'',email:'',password:'',role:'ROLE_USER',isonline:'NO'};
+	 $scope.Users={firstname:'',lastname:'',email:'',password:'',role:'ROLE_USER',isonline:'NO',status:'P'};
 	 $scope.register=function()
 	 {
 		 console.log("in register controller angualar");
@@ -29,9 +42,20 @@ app.controller("registercontroller", function ($scope,$location,$http,$rootScope
 			
 			
 			 $rootScope.currentuser=response.data;
-			 $cookieStore.put('user',response.data);
+			 alert($rootScope.currentuser.errormessage)
+		if($rootScope.currentuser.errormessage=="You are noy yet approved by user" || $rootScope.currentuser.errormessage=="email id or password incorrect")
+			{
+			$location.path("/login")
+			
+			} 
+		else
+			{
+			$cookieStore.put('user',$scope.tempuser);
 			 console.log("ROLE"+$rootScope.currentuser.role)
 			 $location.path("/blog")
+			}
+			
+				 
 				 });
 		 
 	 }
@@ -40,7 +64,7 @@ app.controller("registercontroller", function ($scope,$location,$http,$rootScope
 
 
 
-app.controller("logoutcontroller", function ($scope,$location,$http,$rootScope) {
+app.controller("logoutcontroller", function ($scope,$location,$http,$rootScope,$cookieStore) {
 console.log("in logout controlelr")
 	 $scope.logout=function()
 	 {
@@ -50,6 +74,8 @@ console.log("in logout controlelr")
 				.then(function(response)
 				{
 					 $rootScope.currentuser=null;
+					 $cookieStore.remove('user');
+				
 					 $location.path("/login")
 					
 				},function(error)
@@ -66,3 +92,57 @@ console.log("in logout controlelr")
 
 	
 });
+
+
+
+app.controller("userrequestcontroller", function ($scope,$http,$location,$rootScope,$cookieStore) {
+	function fetchAlluserreq()
+	{
+	
+	 $http.get("http://localhost:8080/SayhiMiddleware/user/getAllUsersreq")
+	    .then(function(response)
+	    		{
+	    	
+	    
+		 $scope.userrequests=response.data;
+	
+		 $location.path('/userrequests')
+							
+		},function(error){
+			console.error("Error while fetching requests");
+		});
+	}
+	
+	
+	fetchAlluserreq();
+	
+	
+	
+	
+	
+	
+	 $scope.acceptuserrequests=function(id)
+	 {
+		 
+		 
+		console.log("in user request  accept method")
+		 $http.get("http://localhost:8080/SayhiMiddleware/user/approveusers/"+id).then(fetchAlluserreq(),function(response){
+			 
+			 console.log("userrequets accepted  successfully");
+			 $location.path('/userrequests')
+								
+			},function(error){
+				console.error("Error while accepting userrequets");
+			});
+		$location.path('/blog')
+		 
+	 }
+	 
+
+	 
+	
+	
+});
+
+
+
