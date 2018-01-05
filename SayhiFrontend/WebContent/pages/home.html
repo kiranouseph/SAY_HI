@@ -1,6 +1,12 @@
 <style>
 
 
+
+
+
+
+
+
 .photo-profile{
     border:1px solid #DDD;    
 }
@@ -15,7 +21,7 @@
       <ul class="tabs">
         <li class="tab col s4"><a href="#test1">BLOGS</a></li>
         <li class="tab col s4"><a href="#test2">FORUMS</a></li>
-        <li class="tab col s4 "><a href="#test3">JOBS</a></li>
+        <li class="tab col s4 "><a href="#test3">JOBS/EVENTS</a></li>
         
       </ul>
     </div>
@@ -26,7 +32,7 @@
 <br>
 
 
-   <div  data-ng-hide="currentuser.role=='ROLE_ADMIN'"><a href="#!/newblog"><button   style="width:95%">Writeblog</button></a></div>
+   <div  data-ng-hide="currentuser.role=='ROLE_ADMIN'"><center><a href="#!/newblog"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/pencil.png" style="width:50px;height:50px"><h2>Writeblog</h2></a></center></div>
   
   
 <div data-ng-repeat="blogg in blogs">
@@ -38,11 +44,11 @@
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                  <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{blogg.username}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="" data-ng-controller="friendcontroller" data-ng-click="friendpreview(blogg.username)" class="anchor-username"><h4 class="media-heading">{{blogg.username}}</h4></a> 
+                                <a href="" data-ng-controller="friendcontroller" data-ng-click="friendpreview(blogg.userid)" class="anchor-username"><h4 class="media-heading">{{blogg.username}}</h4></a> 
                               
                               </div>
                             </div>
@@ -86,6 +92,7 @@
     
     
     
+                   <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><center><a href="#!/newforum"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/forum.jpg" style="width:50px;height:50px"><h2>Start forum</h2></a></center></div>
     
   
 
@@ -101,7 +108,7 @@
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                  <img class="media-object photo-profile" data-ng-src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
@@ -142,7 +149,22 @@
     </div>
     </div>
     <div id="test3" class="col s12" style="margin-left: 5%;margin-right: 5%">
-    <div data-ng-controller="jobcontroller">
+    
+    
+    
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s6"><a href="#test5">JOBS</a></li>
+        <li class="tab col s6"><a  href="#test6">EVENTS</a></li>
+        
+      </ul>
+    </div>
+    
+    <div id="test5" class="col s12">
+    
+    
+        <div data-ng-controller="jobcontroller">
+                     <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><center><a href="#!/newjob"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/job.png" style="width:50px;height:50px"><h2>Add job</h2></a></center></div>
     
     	<div data-ng-repeat="jobb in jobsdata">
     	<div class="card card-1" style="margin-top:5vh;padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px">
@@ -161,10 +183,39 @@
    
 	</div>
 	</div>
-
+    </div>
+    </div>
+    <div id="test6" class="col s12">
+    <div data-ng-controller="eventcontroller">
+                     <div><center><a href="#!/newevent"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/event.png" style="width:50px;height:50px"><h2>Plan event</h2></a></center></div>
+    
+    
+        
+        
+    
+    	<div data-ng-repeat="eve in eventdata">
+    	<div class="card card-1" style="margin-top:5vh;padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px">
+    	
+    	 <h3><b>{{eve.eventname}}</b></h3>
+    	<h3>Hosted by:---{{eve.username}}</h3>  
+    	
+    	                  <div class="media">
+               
+                   <div class="media-left">
+                   <div class="btn-group"> <a  data-ng-click="getEvent(eve.eventid)" class="btn btn-primary">VIEW </a> </div>
+           
+</div>
+  
+</div>
+   
+	</div>
+	</div>
+ 
     
     
     </div>
+    </div>
+
     
     </div>
       
@@ -172,32 +223,31 @@
       </div>
       <div class="col s4">
       
-<table >
-<tr >
-<td>
-<div class="panel panel-default"  style="height:30vh">
-  <div class="panel-body">EVENTS</div>
+
+<div class="panel panel-default"  style="height:50vh">
+  <div class="panel-body">
+  <div data-ng-controller="registercontroller">
+  <img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{currentuser.image}}" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" style="width:100px;height:100px">
+ <h2>{{currentuser.firstname}}   {{currentuser.lastname}}</h2>
+                            <h2>{{currentuser.email}}</h2>
+  </div>
+  </div>
 </div>
-</td>
-</tr>
-<tr >
-<td>
 
-
+<img src="http://localhost:8080/SayhiFrontend/resources/images/chat.png" style="width:50px;height:50px">
 <a href="#!/chat"><button>ONLINE CHAT</button></a>
 
 
 
 
-</td>
-</tr>
-<tr >
-<td>
+
+
 
 
 <div class="panel panel-default"  style="height:30vh">
   <div class="panel-body">ONLINE FRIENDS<br>
   <div data-ng-controller="friendcontroller">
+
    <ul>
    <li data-ng-repeat="online in onlineusers">{{online.firstname}}  {{online.lastname}}</li>
    
@@ -218,10 +268,6 @@
 </div>
 
 
-</td>
-</tr>
-
-</table>
 
       
     </div>

@@ -26,25 +26,20 @@ public class Events implements Serializable {
 	@GeneratedValue
 	@Column(name="EventId",nullable=false)
 	public int eventid;
-	@Column(name="EventDate",nullable=false)
-	public Date eventdate;
+
 	@Column(name="EventName",nullable=false)
 	public String eventname;
 	@Column(name="EventDesc",nullable =false)
-	public String eventesc;
+	public String eventdesc;
 	@Column(name="EventVenue",nullable =false)
 	public String eventvenue;
+	@Column(name="Username",nullable=false)
+	public String username;
 	public int getEventid() {
 		return eventid;
 	}
 	public void setEventid(int eventid) {
 		this.eventid = eventid;
-	}
-	public Date getEventdate() {
-		return eventdate;
-	}
-	public void setEventdate(Date eventdate) {
-		this.eventdate = eventdate;
 	}
 	public String getEventname() {
 		return eventname;
@@ -52,11 +47,18 @@ public class Events implements Serializable {
 	public void setEventname(String eventname) {
 		this.eventname = eventname;
 	}
-	public String getEventesc() {
-		return eventesc;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setEventesc(String eventesc) {
-		this.eventesc = eventesc;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getEventdesc() {
+		return eventdesc;
+	}
+	public void setEventdesc(String eventdesc) {
+		this.eventdesc = eventdesc;
 	}
 	public String getEventvenue() {
 		return eventvenue;

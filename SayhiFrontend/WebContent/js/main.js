@@ -15,13 +15,10 @@ app.config(function($routeProvider) {
         templateUrl : "User/register.html",
         
     })
-   .when("/jobmanage", {
-        templateUrl : "Job/jobmanage.html",
-        
-    })
+   
       .when("/mywall", {
         templateUrl : "pages/mywall.html",
-   
+   controller:"friendcontroller",
         
     })
 
@@ -50,22 +47,15 @@ app.config(function($routeProvider) {
        
        
     })
+     .when("/newevent", {
+        templateUrl : "Events/newevent.html",
+       
+       
+    })
   
     
-     .when("/forumview", {
-        templateUrl : "forum/forumview.html",
-        controller:"forumcontroller",
-        
-    })
     
-        
-     .when("/jobview", {
-        templateUrl : "Job/jobview.html",
-        controller:"jobcontroller",
-        
-    })
-    
-    
+      
     
      .when("/forumrequests", {
         templateUrl : "forum/forumrequests.html",
@@ -89,7 +79,14 @@ app.config(function($routeProvider) {
         templateUrl : "Blog/blogmanage.html",
         
     })
-    
+    .when("/jobmanage", {
+        templateUrl : "Job/jobmanage.html",
+        
+    })
+      .when("/eventmanage", {
+        templateUrl : "Events/eventmanage.html",
+        
+    })
     
       .when("/blogforedit", {
         templateUrl : "Blog/updateblog.html",
@@ -105,6 +102,10 @@ app.config(function($routeProvider) {
         templateUrl : "Job/updatejob.html",
         
     })
+        .when("/eventforedit", {
+        templateUrl : "Events/updateevent.html",
+        
+    })
     
      .when("/chat", {
         templateUrl : "chat/chat.html",
@@ -115,7 +116,24 @@ app.config(function($routeProvider) {
         
     })
     
+     .when("/forumview", {
+        templateUrl : "forum/forumview.html",
+        controller:"forumcontroller",
+        
+    })
     
+        
+     .when("/jobview", {
+        templateUrl : "Job/jobview.html",
+        controller:"jobcontroller",
+        
+    })
+    
+     .when("/eventview", {
+        templateUrl : "Events/eventview.html",
+        controller:"eventcontroller",
+        
+    })
       .when("/blogview", {
         templateUrl : "Blog/blogview.html",
   

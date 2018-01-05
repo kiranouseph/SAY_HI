@@ -64,66 +64,60 @@ body{
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
 <div class="container">
-	<div class="col-md-5">
+	<div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-body">
                <section class="post-heading">
                     <div class="row">
-                        <div class="col-md-11">
+                        <div class="col-md-12">
                             <div class="media">
                               <div class="media-left">
-                              <h2>  Event name </h2>
+                              <h2>{{gevent.eventname}}</h2>
                               </div>
                               <div class="media-left">
-                              <h2>  DATE </h2>
+                              <h2>AT:  {{gevent.eventvenue}}</h2>
                               </div>
-                             
                             </div>
                         </div>
-                        
-                    </div>             
-               
-                
+                    </div>  
 <div class="row">
     <div class="col s12">
-   EVENT DESC
+   {{gevent.eventdesc}}
     </div>
-    
-   
-    
     </div>
-    
-  
     </section>
+          <div  data-ng-if="evecheck.length > 0">
+                                          <div class="media-right">
+                             <button  style="width:95%">YOU ARE GOING THIS EVENT</button>
+                              </div>
+                            </div>
+                                <div  data-ng-if="evecheck.length  < 1">
+                                          <div class="media-right">
+                             <a data-ng-click="applyevent(gevent.eventid)"><button  style="width:95%">INTERESTED</button></a>
+                              </div>
+                         </div>
+                         
+                         <div  data-ng-show="currentuser.email==gevent.username"><a href="" data-ng-click="fetcheventforedit(gevent.eventid)"><i class="glyphicon glyphicon-pencil"></i>EDIT</a></div>
+                         <div  data-ng-show="currentuser.email==gevent.username"><a href="" data-ng-click="deleteevent(gevent.eventid)"><i class="glyphicon glyphicon-trash"></i>DELETE</a></div>
+                         
+                            </div>
                <section class="post-footer">
                    <hr>
-                   <div class="post-footer-option container">
-                        <ul class="list-unstyled">
-                       
-                              <li> <div data-ng-click="approveBlog()" data-ng-show="currentuser.role=='ADMIN'"><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i>DELETE</a></div></li>
-
-                            
-                              <li><div data-ng-click="likeBlog()" ><a href="#">INTERESTED</a></div></li>
-                              <li><div data-ng-click="likeBlog()" ><a href="#">GOING</a></div></li>
-                    </ul>
-                   </div>
+                  
                    <div class="post-footer-comment-wrapper">
-                       <div class="comment-form">
-                           
-                       </div>
+                       <div data-ng-repeat="eve in eventpars">
                        <div class="comment">
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                  <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{eve.email}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="32" height="32" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
-                               <h4>OTHERS COMING ARE</h4>
-                                
-                                
+                               {{eve.email}}
                               </div>
                             </div>
+                       </div>
                        </div>
                    </div>
                </section>

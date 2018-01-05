@@ -32,7 +32,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     <div class="media">
                               <div class="media-left">
                               <br>
-                              <img src="http://localhost:8080/SayhiFrontend/resources/images/{{currentuser.image}}" style="width:100px;height:100px">
+                              <img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{currentuser.image}}" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" style="width:100px;height:100px">
                               <form method="POST" enctype="multipart/form-data" action="http://localhost:8080/SayhiMiddleware/user/up">
                   
                     <input type="file" name="uploadedFile" value="Profile pic">
@@ -93,7 +93,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     </div>
     <div id="test1" class="col s12">
     
-    <a href="#!/newblog"><button   style="width:95%">Writeblog</button></a>
+    <div  data-ng-hide="currentuser.role=='ROLE_ADMIN'"><center><a href="#!/newblog"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/pencil.png" style="width:50px;height:50px"><h2>Writeblog</h2></a></center></div>
     
    
    <div data-ng-controller="blogcontroller">
@@ -108,7 +108,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                  <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{myblo.username}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
@@ -153,6 +153,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     </div>
     <div id="test2" class="col s12">
 
+                 <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><center><a href="#!/newforum"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/forum.jpg" style="width:50px;height:50px"><h2>Start forum </h2></a></center></div>
 
 
 <div data-ng-controller="forumcontroller">
@@ -219,6 +220,9 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     </div>
      <div id="test5" class="col s12">
      <div data-ng-controller="jobcontroller">
+     
+                 <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><center><a href="#!/newjob"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/job.png" style="width:50px;height:50px"><h2>Add Job</h2></a></center></div>
+     
      <div data-ng-repeat="jobb in myjobs">
      
      
@@ -245,8 +249,37 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
      
      </div>
       <div id="test6" class="col s12">
-      My events
+     
       
+      
+      
+           <div data-ng-controller="eventcontroller">
+            <div ><center><a href="#!/newevent"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/event.png" style="width:50px;height:50px"><h2>Plan event</h2></a></center></div>
+     <div data-ng-repeat="eventt in myevents">
+     
+     
+     <div class="card card-1" style="margin-top:5vh;padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px">
+    	
+    	     	 <h3><b>{{eventt.eventname}}</b></h3>
+    	 <h3>Hosted by:---{{eventt.username}}</h3>
+    	
+    	                  <div class="media">
+               
+                   <div class="media-left">
+                   <div class="btn-group"> <a  data-ng-click="getEvent(eventt.eventid)" class="btn btn-primary">VIEW </a> </div>
+           
+</div>
+  
+</div>
+	</div>
+	
+	
+     
+     </div>
+     </div>
+     
+     
+     
       </div>
     </div>
      <div id="test4" class="col s12">
@@ -278,7 +311,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
 
       
         <!-- Thumbnail Images -->
-        <div class="thumbnail">  <img src="https://addons.cdn.mozilla.net/static//img/zamboni/anon_user.png" alt="Avatar" style="width:50px;height:50px"> 
+        <div class="thumbnail">  <img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{myfri.image}}"  onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" alt="Avatar" style="width:50px;height:50px"> 
           <!-- Offer Tag-->
        
           <div class="caption prod-caption"> 
@@ -309,7 +342,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
 
       
         <!-- Thumbnail Images -->
-        <div class="thumbnail">  <img src="https://addons.cdn.mozilla.net/static//img/zamboni/anon_user.png" alt="Avatar" style="width:50px;height:50px"> 
+        <div class="thumbnail">  <img  data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{other.image}}" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" alt="Avatar" style="width:50px;height:50px"> 
           <!-- Offer Tag-->
        
           <div class="caption prod-caption"> 
@@ -345,7 +378,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
 
       
         <!-- Thumbnail Images -->
-        <div class="thumbnail">  <img src="https://addons.cdn.mozilla.net/static//img/zamboni/anon_user.png" alt="Avatar" style="width:50px;height:50px"> 
+        <div class="thumbnail">  <img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{reqs.image}}" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" alt="Avatar" style="width:50px;height:50px"> 
           <!-- Offer Tag-->
        
           <div class="caption prod-caption"> 

@@ -170,6 +170,14 @@ $scope.fetchforumforedit=function(idd)
 	 $scope.editForum=function(idd)
 	 {
 		console.log("in edit blog method")
+		if($scope.Forum.formname==null)
+			{
+			$scope.Forum.formname=$rootScope.ForumByid.formname;
+			}
+		if($scope.Forum.formcontent==null)
+			{
+			$scope.Forum.formcontent=$rootScope.ForumByid.formcontent;
+			}
 		 $http.post("http://localhost:8080/SayhiMiddleware/forums/updateForum/"+idd+"/"+$scope.Forum.formname+"/"+$scope.Forum.formcontent).then(fetchAllForums(),function(response){
 			 console.log("Forum updated successfully");
 								
@@ -203,7 +211,8 @@ $scope.fetchforumforedit=function(idd)
 			},function(error){
 				console.error("Error while deleting Forum");
 			});
-		 
+		
+		 $location.path('/blog')
 	 }
 	
 
@@ -321,6 +330,7 @@ app.controller("forumrequestcontroller", function ($scope,$http,$location,$rootS
 			},function(error){
 				console.error("Error while accepting forumrequets Forum");
 			});
+		$location.path('/forummanage')
 		 
 	 }
 	 

@@ -73,9 +73,20 @@ public class ForumController {
 	
 	@RequestMapping(value="/deleteForum/{forumid}",method=RequestMethod.GET)
 	public ResponseEntity<Forum> deleteForum(@PathVariable("forumid") int forumId){
-	
+
 	Forum forum=forumDAO.getForum(forumId);
 	forumDAO.deleteForum(forum);
+	ArrayList<ForumRequests> fr=forumDAO.getAllForumRequestAll(forumId);
+	for(ForumRequests f:fr)
+	{
+		forumDAO.deleteForumRequest(f);
+	}
+	
+	ArrayList<ForumComments> fc=forumDAO.getAllForumCommentsById(forumId);
+	for(ForumComments fcc:fc)
+	{
+		forumDAO.deleteForumComment(fcc);
+	}
 	if(forumDAO.getForum(forumId)==null){
 		
 	}

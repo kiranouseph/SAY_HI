@@ -145,6 +145,25 @@ public class ForumDAOImpl implements ForumDAO {
 	}
 	}
 
+	
+	@Transactional
+	public boolean deleteForumRequest(ForumRequests forumreq)
+	{
+		try
+	{
+	sessionFactory.getCurrentSession().delete(forumreq);
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}
+	}
+
+	
+	
+	
 
 	@Transactional
 	public ForumComments getForumComment(int commentId) {
@@ -212,6 +231,16 @@ public boolean blockUser(ForumRequests forumrequest) {
 	System.out.println(e);
 	return false;
 	}	
+}
+
+
+@Transactional
+public ArrayList<ForumRequests> getAllForumRequestAll(int forumid) {
+	Session session = sessionFactory.openSession();
+	ArrayList<ForumRequests> forumReqList=(ArrayList<ForumRequests>)session.createQuery("from ForumRequests where forumid="+forumid).list();
+	session.close();
+	return forumReqList;
+
 }
 
 @Transactional

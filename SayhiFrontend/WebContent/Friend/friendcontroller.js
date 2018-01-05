@@ -105,22 +105,28 @@ app.controller("friendcontroller", function ($scope,$http,$location,$rootScope) 
 		});
 	}
 	
-	$rootScope.friendpreview=function(friendname)
+	$rootScope.friendpreview=function(friendid)
 	{
-		console.log(friendname);
-		$http.get("http://localhost:8080/SayhiMiddleware/user/getUserByEmail/"+friendname)
+		if(friendid==$rootScope.currentuser.userid)
+			{
+			$location.path("/mywall")
+			}
+		else
+			{
+		$http.get("http://localhost:8080/SayhiMiddleware/user/getUser/"+friendid)
 
 		.then(function(response) {
 			$rootScope.friendpreviewdata = response.data;
-			
+			$scope.fr=response.data;
 			console.log($rootScope.friendpreviewdata.email);
-		
+			console.log($rootScope.friendpreviewdata.userid);
+			console.log($rootScope.currentuser.userid);
 		},function(error)
 		{
 			console.log("Error on retrieving forums")
 		});
 
-		$http.get("http://localhost:8080/SayhiMiddleware/user/ismyfriend/"+$rootScope.friendpreviewdata.userid+"/"+$rootScope.currentuser.userid)
+	$http.get("http://localhost:8080/SayhiMiddleware/user/ismyfriend/"+$rootScope.friendpreviewdata.userid+"/"+$rootScope.currentuser.userid)
 
 		.then(function(response) {
 			$rootScope.ismyfriend = response.data;
@@ -169,7 +175,7 @@ app.controller("friendcontroller", function ($scope,$http,$location,$rootScope) 
 		});	
 		$location.path("/friendwall")
 	}
-	
+	}
 	
 	
 });

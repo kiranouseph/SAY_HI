@@ -41,7 +41,7 @@ public ResponseEntity<String> addJob(@RequestBody Job job){
 }
 
 @RequestMapping(value="/getJob/{jobid}",method=RequestMethod.GET,headers = "Accept=application/json")
-public ResponseEntity<Job> getBlog(@PathVariable("jobid") int jobId){
+public ResponseEntity<Job> getJob(@PathVariable("jobid") int jobId){
 
 System.out.println("In get job controller"+jobId);
 if(jobDAO.getjob(jobId)==null){
@@ -78,6 +78,11 @@ public ResponseEntity<String> deleteBlog(@PathVariable("jobid") int jobId){
 Job job=jobDAO.getjob(jobId);
 if(jobDAO.deletejob(job))
 {
+	ArrayList<JobApplications> ja=jobDAO.jobapps(jobId);
+	for(JobApplications jaa:ja)
+	{
+		jobDAO.deletejobApp(jaa);
+	}
 	return new ResponseEntity<String>("Job deleted successfully",HttpStatus.OK);	
 }
 return new ResponseEntity<String>("Job deletion error",HttpStatus.BAD_REQUEST);	

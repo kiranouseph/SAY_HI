@@ -1,5 +1,14 @@
-
-
+<script type="text/javascript">
+    function Validate() {
+    	        var password = document.getElementById("pass").value;
+        var confirmPassword = document.getElementById("conpass").value;
+        if (password != confirmPassword) {
+        	 document.getElementById("error").innerHTML = "PASSWORD MISMATCH";
+            return false;
+        }
+        return true;
+    }
+</script>
 <style>
 .sqs-block { 
       margin-left: -30px; 
@@ -68,7 +77,7 @@ input{
                  
                         <div class="input-field col s12">
                   
-                 <input  type="password" data-ng-model="Users.password"   required>
+                 <input  type="password" data-ng-model="Users.password" id="pass"  required>
                             <label for="passs">Password</label>
                           
                    
@@ -76,7 +85,7 @@ input{
                     
                       <div class="input-field col s12">
                   
-                 <input  type="password"    required>
+                 <input  type="password"   id="conpass" required>
                             <label for="pass">Re-enter Password</label>
                           
                    
@@ -86,7 +95,7 @@ input{
       
                 
             
-
+<centre><div id="error"></div></centre>
    
      
                 
@@ -106,7 +115,7 @@ input{
                
                      <div class="input-field col s12">
                             <p class="right-align">
-                                <button class="btn btn-large waves-effect waves-light" type="submit">REGISTER</button>
+                                <button class="btn btn-large waves-effect waves-light" type="submit" onclick="return Validate()">REGISTER</button>
                             </p>
                         </div>
                         

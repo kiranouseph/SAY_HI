@@ -1,6 +1,6 @@
 app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	 
-	 $scope.Blog={blogname:'',blogcontent:'',status:'A',likes:'0',dislikes:'0',views:'0',username:$rootScope.currentuser.email};
+	 $scope.Blog={blogname:'',blogcontent:'',status:'A',likes:'0',dislikes:'0',views:'0',username:$rootScope.currentuser.email,userid:$rootScope.currentuser.userid};
 	$scope.BlogComments={blogcomm:'',blogid:'',userid:''};
 
 	function fetchAllBlogs()
@@ -138,8 +138,15 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 
 	 $scope.editBlog=function()
 	 {
-		
-	console.log($scope.Blog.blogname+" "+$scope.Blog.blogcontent)
+		console.log($scope.Blog.blogcontent)
+if($scope.Blog.blogcontent==null)
+	{
+	$scope.Blog.blogcontent=$rootScope.eblog.blogcontent;
+	}
+		if($scope.Blog.blogname==null){
+			$scope.Blog.blogname=$rootScope.eblog.blogname;
+		}
+		console.log($scope.Blog.blogcontent)
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/updateBlog/"+$rootScope.eblog.blogid+"/"+$scope.Blog.blogname+"/"+$scope.Blog.blogcontent).then(function(response){
 			 console.log("Blog updated successfully");
 								
@@ -317,6 +324,8 @@ app.controller("blogrequestcontroller", function ($scope,$http,$location,$rootSc
 			},function(error){
 				console.error("Error while accepting blogrequests Forum");
 			});
+		 
+		 $location.path('/blogmanage')
 		 
 	 }
 	

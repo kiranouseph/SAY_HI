@@ -105,10 +105,21 @@ public class BlogController {
 	@RequestMapping(value="/deleteBlog/{blogid}",method=RequestMethod.GET)
 	public ResponseEntity<String> deleteBlog(@PathVariable("blogid") int blogId){
 	
+	
+		
 		Blog blog=blogDAO.getBlog(blogId);
 	if(blogDAO.deleteBlog(blog))
 	{
+		ArrayList<BlogComments> bc=blogDAO.getAllBlogComments(blogId);
+	for(BlogComments bcc:bc)
+	{
+	blogDAO.deleteBlogComment(bcc);	
+	}
 		return new ResponseEntity<String>("Blog deleted successfully",HttpStatus.OK);	
+		
+			
+		
+		
 	}
 	else
 	{

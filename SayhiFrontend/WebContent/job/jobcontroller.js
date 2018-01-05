@@ -108,12 +108,44 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 	$scope.editjob=function(idd)
 	{
 		console.log(idd)
-		console.log($scope.Job.jobprofile)
-		console.log($scope.Job.jobdesc)
-		console.log($scope.Job.qualification)
-		console.log($scope.Job.salary)
-		console.log($scope.Job.company)
-		console.log($scope.Job.companydesc)
+	if($scope.Job.jobprofile==null)
+		{
+		
+		$scope.Job.jobprofile=$rootScope.ejob.jobprofile;
+			}
+		
+		if($scope.Job.jobdesc==null)
+		{
+		
+		$scope.Job.jobprofile=$rootScope.ejob.jobdesc;
+			}
+		
+		
+		if($scope.Job.qualification==null)
+		{
+		
+		$scope.Job.jobprofile=$rootScope.ejob.qualification;
+			}
+		
+		
+		if($scope.Job.salary==null)
+		{
+		
+		$scope.Job.jobprofile=$rootScope.ejob.salary;
+			}
+		
+		
+		if($scope.Job.company==null)
+		{
+		
+		$scope.Job.jobprofile=$rootScope.ejob.company;
+			}
+		
+		if($scope.Job.companydesc==null)
+		{
+		
+		$scope.Job.jobprofile=$rootScope.ejob.companydesc;
+			}
 		$http.get("http://localhost:8080/SayhiMiddleware/jobs/updateJob/"+idd+"/"+$scope.Job.jobprofile+"/"+$scope.Job.jobdesc+"/"+$scope.Job.qualification+"/"+$scope.Job.salary+"/"+$scope.Job.company+"/"+$scope.Job.companydesc).then(function(response) {
 		
 			 console.log("job updated successfully");

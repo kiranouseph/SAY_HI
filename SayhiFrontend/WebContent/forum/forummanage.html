@@ -71,7 +71,8 @@
 </tr>
 <tr data-ng-repeat="for in forums">
 <td>{{for.formname}}</td>
-<td>VIEW</td>
+<td>  <a href="" data-ng-click="fetchforumbyid(for.forumid)">VIEW</a></td>
+<td><div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deleteForum(for.forumid)>DELETE</a></div></td>
 </tr>
 </table>
 </div>

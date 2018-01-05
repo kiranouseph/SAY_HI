@@ -32,7 +32,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{fr
     <div class="media">
                               <div class="media-left">
                               <br>
-                              <img src="http://localhost:8080/SayhiFrontend/resources/images/{{friendpreviewdata.image}}" style="width:100px;height:100px">
+                              <img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{friendpreviewdata.image}}" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'"" style="width:100px;height:100px">
          
                               </div>
                                     
@@ -98,7 +98,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{fr
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">
+                                  <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{fblogs.username}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">
                                 </a>
                               </div>
                               <div class="media-body">
@@ -213,15 +213,15 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{fr
 
       
         <!-- Thumbnail Images -->
-        <div class="thumbnail">  <img src="https://addons.cdn.mozilla.net/static//img/zamboni/anon_user.png" alt="Avatar" style="width:50px;height:50px"> 
+        <div class="thumbnail">  <img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{other.email}}"  onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" alt="Avatar" style="width:50px;height:50px"> 
           <!-- Offer Tag-->
        
           <div class="caption prod-caption"> 
-            <div class="pro-name">{{friendsfriends.firstname}}  {{friendsfriends.lastname}}</div>
+            <div class="pro-name">{{other.firstname}}  {{other.lastname}}</div>
            
             <p>
            
-            </p><div class="btn-group"> <a data-ng-click="insertFriend(friendsfriends.userid)" class="btn btn-primary">ADD FRIEND</a> </div>
+            </p><div class="btn-group"> <a data-ng-click="insertFriend(other.userid)" class="btn btn-primary">ADD FRIEND</a> </div>
           </div>
         </div>
 </div>

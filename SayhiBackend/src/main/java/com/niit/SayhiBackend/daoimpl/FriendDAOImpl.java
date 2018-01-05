@@ -114,6 +114,15 @@ ArrayList<Friend> myfriends=(ArrayList<Friend>)q.list();
 return myfriends;
 	}
 
+@Transactional
+public ArrayList<Friend> getAllMyFriendpend(int myid) {
+	Session session = sessionFactory.openSession();
+	Query q= session.createQuery("from Friend where (U_ID="+myid+" or FRI_ID="+myid+")");
+ArrayList<Friend> myfriends=(ArrayList<Friend>)q.list();
+return myfriends;
+	}
+
+
 //fetching all pending entries like we not acceped or he not accepted
 @Transactional
 public ArrayList<Friend> getAllpendingentries(int myid) {

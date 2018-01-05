@@ -18,6 +18,6 @@ public interface FriendDAO {
 	public ArrayList<Friend> getAllPendingrequests( int userid);
 public Users getUserById(int userid);
 public Friend acceptfriendrequest(Friend friend);
-
+public ArrayList<Friend> getAllMyFriendpend(int myid);
 
 }

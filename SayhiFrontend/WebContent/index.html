@@ -53,7 +53,7 @@
     <ul class="nav navbar-nav navbar-right">
     
       <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
-      <a href="#!/mywall"  style="color: black">Hi {{currentuser.email}}</a>  
+      <a href=""  style="color: black">Hi {{currentuser.email}}</a>  
        </div> </li>
      
   
@@ -70,7 +70,7 @@
       
       
       <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
-     <a data-ng-click="logout()" data-ng-controller="logoutcontroller">LOGOUT</a>
+     <a data-ng-click="logout()" data-ng-controller="logoutcontroller" style="color: black">LOGOUT</a>
       </div></li>
     
     
@@ -146,6 +146,6 @@
 <script src="forum/forumcontroller.js"></script>
 <script src="chat/chatcontroller.js"></script>
 <script src="chat/charService.js"></script>
-
+<script src="Events/eventcontroller.js"></script>
 </body>
 </html>

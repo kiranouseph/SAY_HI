@@ -136,7 +136,7 @@ body{
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
-                                  <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="32" height="32" alt="...">
+                                
                                 </a>
                               </div>
                               <div class="media-body">
@@ -147,7 +147,7 @@ body{
                                
                                <div data-ng-repeat="jb in jobapps">
                                
-                               <img class="media-object photo-profile" src="http://0.gravatar.com/avatar/38d618563e55e6082adf4c8f8c13f3e4?s=40&d=mm&r=g" width="40" height="40" alt="...">{{jb.email}}
+                               <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{jb.email}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'"  width="40" height="40" alt="...">{{jb.email}}
                                
                                
                                </div>

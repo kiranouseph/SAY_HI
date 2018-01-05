@@ -58,7 +58,16 @@ public class Blog  {
 	
 	@Column(name = "Username", nullable = false)
     private String username;
+	
+	@Column(name = "UserId", nullable = false)
+    private String userid;
 
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getUsername() {
 		return username;
 	}

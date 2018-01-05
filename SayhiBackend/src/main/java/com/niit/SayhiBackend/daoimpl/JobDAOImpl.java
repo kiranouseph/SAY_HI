@@ -67,6 +67,25 @@ public class JobDAOImpl implements JobDAO {
 		}
 		
 	}
+	
+	@Transactional
+	public boolean deletejobApp(JobApplications jobapplication) {
+		
+
+		try
+		{
+		sessionFactory.getCurrentSession().delete(jobapplication);
+		return true;
+		}
+		catch(Exception e)
+		{
+		System.out.println(e);
+		return false;
+		}
+		
+	}
+	
+	
 	@Transactional
 	public Job getjob(int jobId) {
 		

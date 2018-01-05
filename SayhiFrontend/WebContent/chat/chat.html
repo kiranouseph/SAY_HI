@@ -315,14 +315,14 @@ ul {
 </style>
 
 <div class="row">
-<div class="col 12">
+<div class="col12 ">
 
 <div data-ng-Controller="chatController">
 <div class="chatbox-holder">
   <div class="chatbox">
     <div class="chatbox-top">
       <div class="chatbox-avatar">
-        <a  href=""><img src="https://gravatar.com/avatar/2449e413ade8b0c72d0a15d153febdeb?s=512&d=https://codepen.io/assets/avatars/user-avatar-512x512-6e240cf350d2f1cc07c2bed234c3a3bb5f1b237023c204c782622e80d6b212ba.png" style="height:100%;width:100%"/></a> 
+        <a  href=""><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{currentuser.image}}" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" style="height:100%;width:100%"/></a> 
       </div>
     </div>
     
@@ -334,6 +334,7 @@ ul {
       
       
       <div class="message-box message-partner"  >
+       <img  data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{currentuser.email}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">
         <time>{{message.time | date: 'HH:mm'}}</time>
         <span> {{message.email}}:--</span>
 		<span> {{message.message}}</span>
@@ -346,6 +347,8 @@ ul {
       
       
       <div class="message-box message-partner" style="margin-right:800px" >
+             <img  data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{message.email}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">
+      
         <time>{{message.time | date: 'HH:mm'}}</time>
         <span> {{message.email}}:--</span>
 		<span> {{message.message}}</span>

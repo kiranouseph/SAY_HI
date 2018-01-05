@@ -155,9 +155,16 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 {
 	 	  /* String filepath = request.getSession().getServletContext().getRealPath("/") + "resources/product/" + file.getOriginalFilename();
 	 		*/
-	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" + file.getOriginalFilename();
-	 		String img=file.getOriginalFilename();
-	 		System.out.println(img);
+		 
+		 Users user = (Users)session.getAttribute("currentuser");
+		 	System.out.println(user.getEmail());
+		 		user.setImage(user.getEmail()+".jpg");
+		 	userDAO.updateOnlineStatus(user); 
+		 	
+		 	
+	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" + user.getEmail()+".jpg";
+	 		
+	 		
 	 		System.out.println(filepath);
 	 		try {
 	 			byte imagebyte[] = file.getBytes();
@@ -170,10 +177,8 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 			// TODO Auto-generated catch block
 	 			e.printStackTrace();
 	 			}
-	 		Users user = (Users)session.getAttribute("currentuser");
-	 	System.out.println(user.getEmail());
-	 		user.setImage(img);
-	 	userDAO.updateOnlineStatus(user);
+	 		
+	 	
 	 	ModelAndView mv = new ModelAndView("backhome");
 		return mv;
 	 }
@@ -184,7 +189,12 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 {
 	 	  /* String filepath = request.getSession().getServletContext().getRealPath("/") + "resources/product/" + file.getOriginalFilename();
 	 		*/
-	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" + file.getOriginalFilename();
+		 
+		 Users user = (Users)session.getAttribute("currentuser");
+		 	System.out.println(user.getEmail()+".jpg");
+		 		user.setCover(user.getEmail());
+		 	userDAO.updateOnlineStatus(user);
+	 	    String filepath ="C:/Users/user/eclipse-workspace/SayhiFrontend/WebContent/resources/images/" +user.getEmail()+".jpg";
 	 		String img=file.getOriginalFilename();
 	 		System.out.println(img);
 	 		System.out.println(filepath);
@@ -199,10 +209,7 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 			// TODO Auto-generated catch block
 	 			e.printStackTrace();
 	 			}
-	 		Users user = (Users)session.getAttribute("currentuser");
-	 	System.out.println(user.getEmail());
-	 		user.setCover(img);
-	 	userDAO.updateOnlineStatus(user);
+	 		
 	 	
 	 	ModelAndView mv = new ModelAndView("backhome");
 		return mv;
@@ -237,7 +244,7 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 { 
 		 System.out.println(userid+" "+myid);
 	 ArrayList<Users> fp=new ArrayList<Users>(); 
-	 ArrayList<Friend> myfriends=(ArrayList<Friend>)friendDAO.getAllMyFriend(myid);
+	 ArrayList<Friend> myfriends=(ArrayList<Friend>)friendDAO.getAllMyFriendpend(myid);
 	 ArrayList<String> myfriendsemail=new ArrayList<String>();
 	 for(Friend s:myfriends)
 	 {
