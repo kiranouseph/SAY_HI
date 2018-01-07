@@ -196,6 +196,24 @@ app.controller("eventrequestcontroller", function ($scope,$http,$location,$rootS
 		 
 	 }
 	 
+	 
+	 
+	 $scope.rejecteventrequests=function(id)
+	 {
+		 
+		 
+		console.log("in event request  reject method")
+		 $http.get("http://localhost:8080/SayhiMiddleware/events/rejectevents/"+id).then(fetchAlleventreq(),function(response){
+			 
+			 console.log("eventrequets rejected  successfully");
+			 $location.path('/eventrequests')
+								
+			},function(error){
+				console.error("Error while rejecting eventrequets");
+			});
+		$location.path('/eventmanage')
+		 
+	 }
 
 	 
 	

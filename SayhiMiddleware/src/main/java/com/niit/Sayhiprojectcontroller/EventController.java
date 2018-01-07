@@ -3,6 +3,8 @@ package com.niit.Sayhiprojectcontroller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +32,12 @@ public class EventController {
 @Autowired
 UsersDAO userDAO;
 	@RequestMapping(value="/addEvent",method=RequestMethod.POST)
-	public ResponseEntity<String> addEvent(@RequestBody Events events){
-		System.out.println("hai");
+	public ResponseEntity<String> addEvent(@RequestBody Events events,HttpSession session){
+		 Users user = (Users)session.getAttribute("currentuser");
+		if(user.getRole()=="ROLE_ADMIN")
+		{
+			events.setStatus("A");
+		}
 		boolean isSaved=eventDAO.addEvent(events);
 		if(isSaved)
 		return new ResponseEntity<String>("event added ok",HttpStatus.OK);
@@ -91,7 +97,17 @@ UsersDAO userDAO;
  }
  
  
+ @RequestMapping(value="/rejectevents/{eventid}",method=RequestMethod.GET)
+ public void rejectusers(@PathVariable("eventid") int eventid)
+ {
+	 Events event=eventDAO.getevent(eventid);
+	 event.setStatus("R");
 	
+	 eventDAO.rejectevent(event);
+	 
+ }
+ 
+ 	
 	
 	
 	

@@ -42,15 +42,19 @@ app.controller("registercontroller", function ($scope,$location,$http,$rootScope
 			
 			
 			 $rootScope.currentuser=response.data;
-			 alert($rootScope.currentuser.errormessage)
-		if($rootScope.currentuser.errormessage=="You are noy yet approved by user" || $rootScope.currentuser.errormessage=="email id or password incorrect")
+			 if($rootScope.currentuser.errormessage!="login success")
+				 {
+				 alert($rootScope.currentuser.errormessage)
+				 }
+			
+		if($rootScope.currentuser.errormessage=="You are not yet approved by admin" || $rootScope.currentuser.errormessage=="You rejected please contact admin" || $rootScope.currentuser.errormessage=="You are not registered yet" || $rootScope.currentuser.errormessage=="email id or password incorrect")
 			{
 			$location.path("/login")
 			
 			} 
 		else
 			{
-			$cookieStore.put('user',$scope.tempuser);
+			$cookieStore.put('user', $rootScope.currentuser);
 			 console.log("ROLE"+$rootScope.currentuser.role)
 			 $location.path("/blog")
 			}
@@ -138,6 +142,24 @@ app.controller("userrequestcontroller", function ($scope,$http,$location,$rootSc
 		 
 	 }
 	 
+	 
+	 
+	 $scope.rejectuserrequests=function(id)
+	 {
+		 
+		 
+		console.log("in user request  reject method")
+		 $http.get("http://localhost:8080/SayhiMiddleware/user/rejectusers/"+id).then(fetchAlluserreq(),function(response){
+			 
+			 console.log("userrequets rejected  successfully");
+			 $location.path('/userrequests')
+								
+			},function(error){
+				console.error("Error while rejecting userrequets");
+			});
+		$location.path('/blog')
+		 
+	 }
 
 	 
 	

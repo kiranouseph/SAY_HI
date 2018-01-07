@@ -111,17 +111,15 @@ public class UsersDAOImpl implements UsersDAO {
 		
 			Query query=session.createQuery("from Users where (email='"+user.getEmail()+"' and password='"+user.getPassword()+"') and (status='A')");
 			
-			Users user1=(Users)query.list().get(0);
+			ArrayList<Users> user1=(ArrayList<Users>)query.list();
 			
-			if(user1==null)
+			if(user1.isEmpty())
 			{
 				
 				return false;
 			}
 			else
 			{
-				System.out.println("2.."+user1.getEmail());
-				System.out.println("2..."+user1.getPassword());
 				return true;
 			}
 		}catch(Exception e)
@@ -132,30 +130,42 @@ public class UsersDAOImpl implements UsersDAO {
 	
 	@Transactional
 	public boolean checkLoginsimp(Users user) {
-		try{
+		
 			Session session=sessionFactory.openSession();
 		
-			Query query=session.createQuery("from Users where (email='"+user.getEmail()+"' and password='"+user.getPassword()+"') and (status='P')");
+			Query query=session.createQuery("from Users where email='"+user.getEmail()+"' and password='"+user.getPassword()+"'");
 			
-			Users user1=(Users)query.list().get(0);
-			
-			if(user1==null)
+			ArrayList<Users> user1=(ArrayList<Users>)query.list();
+			if(user1.isEmpty())
 			{
-				
 				return false;
 			}
 			else
 			{
-				System.out.println("2.."+user1.getEmail());
-				System.out.println("2..."+user1.getPassword());
 				return true;
 			}
-		}catch(Exception e)
-		{
-			return false;
-		}
+		
+		
 	}
 	
+	@Transactional
+	public boolean checkLoginsemail(Users user) {
+		
+			Session session=sessionFactory.openSession();
+		
+			Query query=session.createQuery("from Users where email='"+user.getEmail()+"'");
+			ArrayList<Users> us=(ArrayList<Users>)query.list();
+			if(us.isEmpty())
+				{
+				return false;
+				}
+			else
+			{
+				return true;
+			}
+						
+		
+	}
 	
 	
 	
@@ -212,6 +222,24 @@ public boolean approveusers(Users users)
 }
 
 	
+
+
+@Transactional
+public boolean rejectusers(Users users)
+{
+	try {
+  		sessionFactory.getCurrentSession().saveOrUpdate(users);
+  		return true;
+  	} catch (HibernateException e) {
+  		// TODO Auto-generated catch block
+  		e.printStackTrace();
+  		return false;
+  	}
+	
+}
+
+
+
 	
 
 }

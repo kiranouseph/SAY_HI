@@ -333,7 +333,22 @@ app.controller("forumrequestcontroller", function ($scope,$http,$location,$rootS
 		$location.path('/forummanage')
 		 
 	 }
-	 
+	 $scope.rejectforumrequests=function(id)
+	 {
+		 
+		 
+		console.log("in forum reject  accept method")
+		 $http.get("http://localhost:8080/SayhiMiddleware/forums/rejectForumRequests/"+id).then(fetchAllForumreq(),function(response){
+			 
+			 console.log("Forumrequests rejected  successfully");
+			 $location.path('/forumrequests')
+								
+			},function(error){
+				console.error("Error while rejecting forumrequets Forum");
+			});
+		$location.path('/forummanage')
+		 
+	 }
 
 	 
 	

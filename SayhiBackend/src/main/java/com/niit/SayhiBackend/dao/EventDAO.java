@@ -20,4 +20,5 @@ public interface EventDAO {
 	public boolean deleteEventpars(EventParticipants eventparticipants);
 	public ArrayList<Events> eventrequests();
 	public boolean approveevent(Events events);
+	public boolean rejectevent(Events events);
 }

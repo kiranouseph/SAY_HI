@@ -57,7 +57,7 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	
 	
 	
-	 $scope.maximum=getSelectedBlog
+	 $rootScope.maximum=getSelectedBlog
 	 function getSelectedBlog(idd)
 	 {
 		 console.log("in add max method------"+idd)
@@ -323,6 +323,25 @@ app.controller("blogrequestcontroller", function ($scope,$http,$location,$rootSc
 								
 			},function(error){
 				console.error("Error while accepting blogrequests Forum");
+			});
+		 
+		 $location.path('/blogmanage')
+		 
+	 }
+	 
+	 
+	 $scope.rejectblogrequests=function(id)
+	 {
+		 
+		 console.log('in acceptblog request method')
+		
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/rejectblogRequests/"+id).then(fetchAllblogreq(),function(response){
+			 
+		console.log("accepted successfully")
+			 $location.path('/blogrequests')
+								
+			},function(error){
+				console.error("Error while rejecting blogrequests Forum");
 			});
 		 
 		 $location.path('/blogmanage')

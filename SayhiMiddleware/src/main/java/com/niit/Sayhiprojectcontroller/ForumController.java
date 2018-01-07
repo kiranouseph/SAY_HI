@@ -272,6 +272,18 @@ forumDAO.deleteForumComment(forumComments);
 boolean IsSaved=forumDAO.acceptForumRequest(fr);
 	}
 	
+	
+	@RequestMapping(value="/rejectForumRequests/{forumReqId}",method=RequestMethod.GET)
+	public void rejectForumRequets(@PathVariable("forumReqId") int forumreqid)
+	{
+		ForumRequests fr=forumDAO.getForumRequest(forumreqid);
+		fr.setStatus("R");
+boolean IsSaved=forumDAO.rejectForumRequest(fr);
+	}
+	
+	
+	
+	
 	@RequestMapping(value="/forumreqbyforumid/{forumid}",method=RequestMethod.GET)
 	public ArrayList<Users> getforumusers(@PathVariable("forumid") int forumid)
 	{ArrayList<Users> users=new ArrayList<Users>(); 

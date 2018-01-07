@@ -19,4 +19,8 @@ public interface UsersDAO {
 		public ArrayList<Users> userrequests();
 		public boolean approveusers(Users users);
 		public boolean checkLoginsimp(Users user);
+		public boolean checkLoginsemail(Users user);
+		public boolean rejectusers(Users users);
+		
+	
 }

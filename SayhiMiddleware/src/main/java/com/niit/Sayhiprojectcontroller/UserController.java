@@ -71,6 +71,15 @@ FriendDAO friendDAO;
 		 
 	 }
 	 
+	 @RequestMapping(value="/rejectusers/{username}",method=RequestMethod.GET)
+	 public void rejectusers(@PathVariable("username") String username)
+	 {String email=username+".com";
+		 Users users =userDAO.getUserbyemail(email);
+		 users.setStatus("R");
+		 userDAO.rejectusers(users);
+		 
+	 }
+	 
 	 
 	 
 	 @RequestMapping(value="/getUser/{userid}",method=RequestMethod.GET)
@@ -132,7 +141,9 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 		}
 	
 	 @RequestMapping(value="/login",method=RequestMethod.POST)
-		public ResponseEntity<Users> login(@RequestBody Users user,HttpSession http){
+		public ResponseEntity<Users> login(@RequestBody Users user,HttpSession http)
+	 
+	 {
 		
 
 
@@ -140,8 +151,7 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 			if(userDAO.checkLogin(user))
 			{
 				 Users tempuser=userDAO.getUserbyemail(user.getEmail());
-				System.out.println("3..."+tempuser.getEmail());
-				System.out.println("3..."+tempuser.getPassword());
+			
 			tempuser.setIsonline("YES");
 				userDAO.updateOnlineStatus(tempuser);
 	tempuser.setErrorcode(200);
@@ -152,25 +162,59 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 				
 			}
 			else
-			{ Users tempuser1=new Users();
-				if(userDAO.checkLoginsimp(user))
+			{
+			Users tempuser1=new Users();
+			
+			if(userDAO.checkLoginsimp(user))
+			{
+				Users tempuser=userDAO.getUserbyemail(user.getEmail());
+				
+				if(tempuser.getStatus().equals("P"))
 				{
-				tempuser1.setErrorcode(200);
-				tempuser1.setErrormessage("You are noy yet approved by user");
-				return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
-				}
+			tempuser1.setErrorcode(200);
+			tempuser1.setErrormessage("You are not yet approved by admin");
+			return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
+			}
 				else
 				{
 					tempuser1.setErrorcode(200);
-					tempuser1.setErrormessage("email id or password incorrect");
+					tempuser1.setErrormessage("You rejected please contact admin");
 					return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
-					
 				}
 				
-				}
 				
 				
 			}
+			
+			else
+			{
+				if(userDAO.checkLoginsemail(user))
+				
+				{
+						tempuser1.setErrorcode(200);
+						tempuser1.setErrormessage("email id or password incorrect");
+						return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
+					}
+					else
+					{
+						tempuser1.setErrorcode(200);
+						tempuser1.setErrormessage("You are not registered yet");
+						return new ResponseEntity<Users>(tempuser1,HttpStatus.OK);
+					}
+			
+				
+				
+				
+			}
+			
+			
+					
+				}
+			
+				}
+				
+				
+			
 			
 		
 	

@@ -219,6 +219,25 @@ public boolean acceptForumRequest(ForumRequests forumrequest) {
 	}
 }
 
+
+
+@Transactional
+public boolean rejectForumRequest(ForumRequests forumrequest) {
+	try
+	{
+	sessionFactory.getCurrentSession().saveOrUpdate(forumrequest);
+	return true;
+	}
+	catch(Exception e)
+	{
+	System.out.println(e);
+	return false;
+	}
+}
+
+
+
+
 @Transactional
 public boolean blockUser(ForumRequests forumrequest) {
 	try

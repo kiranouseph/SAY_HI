@@ -161,6 +161,25 @@ public boolean deleteEventpars(EventParticipants eventparticipants) {
 	  	}
 		
 	}
+	
+	
+	@Transactional
+	public boolean rejectevent(Events events)
+	{
+		
+		
+		try {
+	  		sessionFactory.getCurrentSession().saveOrUpdate(events);
+	  		return true;
+	  	} catch (HibernateException e) {
+	  		// TODO Auto-generated catch block
+	  		e.printStackTrace();
+	  		return false;
+	  	}
+		
+	}
+	
+	
 	}
 	
 
