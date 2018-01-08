@@ -93,7 +93,7 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 		 
 	 }
 	 
-$scope.fetchforumbyid=function(idd)
+$rootScope.fetchforumbyid=function(idd)
 {
 console.log('in fetch forum by id method'+idd)
 	 $http.get("http://localhost:8080/SayhiMiddleware/forums/getForumById/"+idd).then(function(response){
@@ -172,11 +172,11 @@ $scope.fetchforumforedit=function(idd)
 		console.log("in edit blog method")
 		if($scope.Forum.formname==null)
 			{
-			$scope.Forum.formname=$rootScope.ForumByid.formname;
+			$scope.Forum.formname=$rootScope.eforum.formname;
 			}
 		if($scope.Forum.formcontent==null)
 			{
-			$scope.Forum.formcontent=$rootScope.ForumByid.formcontent;
+			$scope.Forum.formcontent=$rootScope.eforum.formcontent;
 			}
 		 $http.post("http://localhost:8080/SayhiMiddleware/forums/updateForum/"+idd+"/"+$scope.Forum.formname+"/"+$scope.Forum.formcontent).then(fetchAllForums(),function(response){
 			 console.log("Forum updated successfully");
@@ -234,7 +234,7 @@ $scope.fetchforumforedit=function(idd)
 	
 	
 	
-	 $scope.sendforumrequests=function()
+	 $rootScope.sendforumrequests=function()
 	 {
 		console.log('in send froum request')
 		console.log($rootScope.ForumByid.forumid+$rootScope.currentuser.userid)
@@ -317,7 +317,7 @@ app.controller("forumrequestcontroller", function ($scope,$http,$location,$rootS
 	
 	
 	
-	 $scope.acceptforumrequests=function(id)
+	 $rootScope.acceptforumrequests=function(id)
 	 {
 		 
 		 
@@ -333,7 +333,7 @@ app.controller("forumrequestcontroller", function ($scope,$http,$location,$rootS
 		$location.path('/forummanage')
 		 
 	 }
-	 $scope.rejectforumrequests=function(id)
+	 $rootScope.rejectforumrequests=function(id)
 	 {
 		 
 		 

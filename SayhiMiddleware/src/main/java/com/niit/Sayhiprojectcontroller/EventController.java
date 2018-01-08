@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SayhiBackend.dao.EventDAO;
+import com.niit.SayhiBackend.dao.NotificationsDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.EventParticipants;
 import com.niit.SayhiBackend.model.Events;
 import com.niit.SayhiBackend.model.JobApplications;
+import com.niit.SayhiBackend.model.Notifications;
 import com.niit.SayhiBackend.model.Users;
 
 @RestController
@@ -28,6 +30,8 @@ public class EventController {
 	@Autowired 
 	EventDAO eventDAO;
 	
+	@Autowired 
+	NotificationsDAO notificationsDAO;
 
 @Autowired
 UsersDAO userDAO;
@@ -38,11 +42,17 @@ UsersDAO userDAO;
 		{
 			events.setStatus("A");
 		}
-		boolean isSaved=eventDAO.addEvent(events);
-		if(isSaved)
-		return new ResponseEntity<String>("event added ok",HttpStatus.OK);
-		else
-			return new ResponseEntity<String>("event add error",HttpStatus.BAD_REQUEST);
+		Events eve =eventDAO.addEvent(events);
+		
+		
+		EventParticipants eventparticipants=new EventParticipants();
+		eventparticipants.setEventid(eve.getEventid());
+		eventparticipants.setUserid(user.getUserid());
+		boolean isSaved=eventDAO.applyevent(eventparticipants);
+		
+			return new ResponseEntity<String>("events added applied  successfully",HttpStatus.OK);
+		
+	
 		
 	}
 	
@@ -94,6 +104,14 @@ UsersDAO userDAO;
 	
 	 eventDAO.approveevent(event);
 	 
+	 
+	 String noti="your event:"+event.eventname+" is approved";
+	 Notifications not=new Notifications();
+	 not.setName(noti);
+	 not.setUsername(event.getUsername());
+	 
+	 notificationsDAO.addNotifications(not);
+	 
  }
  
  
@@ -104,6 +122,13 @@ UsersDAO userDAO;
 	 event.setStatus("R");
 	
 	 eventDAO.rejectevent(event);
+	 
+	 String noti="your event:"+event.eventname+" is rejected";
+	 Notifications not=new Notifications();
+	 not.setName(noti);
+	 not.setUsername(event.getUsername());
+	 
+	 notificationsDAO.addNotifications(not);
 	 
  }
  
@@ -129,13 +154,15 @@ UsersDAO userDAO;
 
 
 	}
-	@RequestMapping(value="/updateEvent/{eventid}/{eventdate}/{eventname}/{eventesc}/{eventvenue}",method=RequestMethod.GET)
-	public ResponseEntity<String> updateEvents(@PathVariable("eventid") int eventid,@PathVariable("eventdate") Date eventdate,@PathVariable("eventname") String eventname,@PathVariable("eventesc") String eventesc,@PathVariable("eventvenue") String eventvenue){
+	@RequestMapping(value="/updateEvent/{eventid}/{eventname}/{eventesc}/{eventvenue}",method=RequestMethod.GET)
+	public ResponseEntity<String> updateEvents(HttpSession session,@PathVariable("eventid") int eventid,@PathVariable("eventname") String eventname,@PathVariable("eventesc") String eventesc,@PathVariable("eventvenue") String eventvenue){
 	
-		Events event=new Events();
-		event.setEventid(eventid);
+		Events event=eventDAO.getevent(eventid);
 		
+		event.setStatus("P");
 		event.setEventname(eventname);
+		
+	
 		event.setEventdesc(eventesc);
 		event.setEventvenue(eventvenue);
 	

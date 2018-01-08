@@ -56,7 +56,7 @@ $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.curre
 		});
 	}
 	
-	$scope.getEvent = function(idd)
+	$rootScope.getEvent = function(idd)
 	{
 		
 		$http.get('http://localhost:8080/SayhiMiddleware/events/getEvent/'+idd).then(function(response) {
@@ -125,14 +125,14 @@ $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.curre
 		
 		if($scope.Events.eventdesc==null)
 		{
-		$scope.Events.eventname=$rootScope.editevent.eventdesc;
+		$scope.Events.eventdesc=$rootScope.editevent.eventdesc;
 		}
 		
 		if($scope.Events.eventvenue==null)
 		{
-		$scope.Events.eventname=$rootScope.editevent.eventvenue;
+		$scope.Events.eventvenue=$rootScope.editevent.eventvenue;
 		}
-		$http.get("http://localhost:8080/SayhiMiddleware/events/updateJob/"+idd+"/"+$scope.Events.eventname+"/"+$scope.Events.eventdesc+"/"+$scope.Events.eventvenue).then(function(response) {
+		$http.get("http://localhost:8080/SayhiMiddleware/events/updateEvent/"+idd+"/"+$scope.Events.eventname+"/"+$scope.Events.eventdesc+"/"+$scope.Events.eventvenue).then(function(response) {
 		
 			 console.log("event updated successfully");
 				
@@ -179,7 +179,7 @@ app.controller("eventrequestcontroller", function ($scope,$http,$location,$rootS
 	
 	
 	
-	 $scope.accepteventrequests=function(id)
+	 $rootScope.accepteventrequests=function(id)
 	 {
 		 
 		 
@@ -198,7 +198,7 @@ app.controller("eventrequestcontroller", function ($scope,$http,$location,$rootS
 	 
 	 
 	 
-	 $scope.rejecteventrequests=function(id)
+	 $rootScope.rejecteventrequests=function(id)
 	 {
 		 
 		 

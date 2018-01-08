@@ -153,18 +153,67 @@ app.config(function($routeProvider) {
       .when("/blogview", {
         templateUrl : "Blog/blogview.html",
   
+    })
+    .when("/noti", {
+        templateUrl : "Notifications/notifications.html",
+  
     });
     
 });
 
-app.run(function($rootScope,$cookieStore){
-	console.log('i am in run function');
-
-	if($rootScope.currentuser==undefined)
+app.run( function ($rootScope, $location, $cookieStore, $http) 
 		{
-		$rootScope.currentuser=$cookieStore.get('user');
-		}
-	else{
-	
-	}
-});
+		 $rootScope.$on('$locationChangeStart', function (event, next, current) 
+					 {
+						 console.log("$locationChangeStart")
+						    
+						 var userPages = ['/noti','/login','/register','/mywall','/picupload','/newblog','/newevent','/blogforedit','/eventforedit','/friendpreview'];
+				 var adminPages = ['/login','/register','/newforum','/newjob','newevent','forumrequests','userrequests','/blogrequests','/eventrequests','/forummanage','/blogmanage','/jobmanage','/eventmanage','/forumforedit','/jobforedit','/eventforedit'];
+						 
+						 var currentPage = $location.path();
+						 
+						 var isUserPage = $.inArray(currentPage, userPages);
+						 var isAdminPage = $.inArray(currentPage, adminPages);
+						 
+						 var isLoggedIn = $rootScope.currentuser.email;
+					        
+					     console.log("isLoggedIn:" +isLoggedIn)
+					     console.log("isUserPage:" +isUserPage)
+					     console.log("isAdminPage:" +isAdminPage)
+					        
+					        if(!isLoggedIn)
+					        	{
+					        	
+					        		if(isUserPage!=-1 || isAdminPage!=-1)  
+					        	 	{
+						        	  console.log("Navigating to login page:")
+						        	  alert("You need to Login first!")
+						        	  $location.path('/login');
+						         	}
+					        	}
+					        
+							 else //logged in
+					        	{
+					        	
+								 var role = $rootScope.currentuser.role;
+								 if(isAdminPage!=-1 && role!='ROLE_ADMIN' )
+									 {
+									  alert("You cannot view this page as a " + role )
+									  $location.path('/blog');
+									 }
+								 if(isUserPage!=-1 && role!='ROLE_USER' )
+								 {
+								  alert("You cannot view this page as a " + role )
+								  $location.path('/blog');
+								 }
+								 
+					        	}
+					 });
+					 
+					 // to keep the user logged in after page refresh
+				    $rootScope.currentuser = $cookieStore.get('user') || {};
+				    if ($rootScope.currentuser)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.currentuser; 
+				    }
+				});

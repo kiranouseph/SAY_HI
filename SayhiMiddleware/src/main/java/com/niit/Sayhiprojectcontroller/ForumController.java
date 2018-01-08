@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SayhiBackend.dao.ForumDAO;
+import com.niit.SayhiBackend.dao.NotificationsDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Forum;
 import com.niit.SayhiBackend.model.ForumComments;
 import com.niit.SayhiBackend.model.ForumRequests;
+import com.niit.SayhiBackend.model.Notifications;
 import com.niit.SayhiBackend.model.Users;
 
 @RestController
@@ -25,7 +27,8 @@ public class ForumController {
 	ForumDAO forumDAO;
 	@Autowired 
 	UsersDAO usersDAO;
-	
+	@Autowired 
+	NotificationsDAO notificationsDAO;
 	
 	@RequestMapping(value="/getAllForums",method=RequestMethod.GET)
 	public  ArrayList<Forum> getAllForums(){
@@ -270,6 +273,14 @@ forumDAO.deleteForumComment(forumComments);
 		ForumRequests fr=forumDAO.getForumRequest(forumreqid);
 		fr.setStatus("YES");
 boolean IsSaved=forumDAO.acceptForumRequest(fr);
+
+String noti="your forumrequest for forum:"+fr.getForumname()+" is approved";
+Notifications not=new Notifications();
+not.setName(noti);
+not.setUsername(fr.getUsername());
+
+notificationsDAO.addNotifications(not);
+
 	}
 	
 	
@@ -279,6 +290,12 @@ boolean IsSaved=forumDAO.acceptForumRequest(fr);
 		ForumRequests fr=forumDAO.getForumRequest(forumreqid);
 		fr.setStatus("R");
 boolean IsSaved=forumDAO.rejectForumRequest(fr);
+String noti="your forumrequest for forum:"+fr.getForumname()+" is approved";
+Notifications not=new Notifications();
+not.setName(noti);
+not.setUsername(fr.getUsername());
+
+notificationsDAO.addNotifications(not);
 	}
 	
 	

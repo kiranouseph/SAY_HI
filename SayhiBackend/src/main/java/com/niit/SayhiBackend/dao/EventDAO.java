@@ -8,7 +8,7 @@ import com.niit.SayhiBackend.model.Events;
 
 public interface EventDAO {
 	
-	public boolean addEvent(Events event);
+	public Events addEvent(Events event);
 	public boolean updateEvent(Events event);
 	public boolean deleteEvent(Events event);
 	public Events getevent(int eventid);

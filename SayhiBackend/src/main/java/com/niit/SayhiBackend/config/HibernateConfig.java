@@ -24,6 +24,7 @@ import com.niit.SayhiBackend.dao.ForumCommentDAO;
 import com.niit.SayhiBackend.dao.ForumDAO;
 import com.niit.SayhiBackend.dao.FriendDAO;
 import com.niit.SayhiBackend.dao.JobDAO;
+import com.niit.SayhiBackend.dao.NotificationsDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.daoimpl.BlogCommentDAOImpl;
 import com.niit.SayhiBackend.daoimpl.BlogDAOImpl;
@@ -32,6 +33,7 @@ import com.niit.SayhiBackend.daoimpl.ForumCommentDAOImpl;
 import com.niit.SayhiBackend.daoimpl.ForumDAOImpl;
 import com.niit.SayhiBackend.daoimpl.FriendDAOImpl;
 import com.niit.SayhiBackend.daoimpl.JobDAOImpl;
+import com.niit.SayhiBackend.daoimpl.NotificationsDAOImpl;
 import com.niit.SayhiBackend.daoimpl.UsersDAOImpl;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
@@ -43,6 +45,7 @@ import com.niit.SayhiBackend.model.ForumRequests;
 import com.niit.SayhiBackend.model.Friend;
 import com.niit.SayhiBackend.model.Job;
 import com.niit.SayhiBackend.model.JobApplications;
+import com.niit.SayhiBackend.model.Notifications;
 import com.niit.SayhiBackend.model.Users;
 
 
@@ -71,6 +74,7 @@ public class HibernateConfig
 	        sessionBuilder.addAnnotatedClass(JobApplications.class);
 	        sessionBuilder.addAnnotatedClass(Events.class); 
 	        sessionBuilder.addAnnotatedClass(EventParticipants.class);
+	        sessionBuilder.addAnnotatedClass(Notifications.class);
 	        
 	       
 	        
@@ -175,6 +179,15 @@ public class HibernateConfig
 			System.out.println("Events DAO object Created");
 			return new EventDAOImpl(sessionFactory);
 		}
+	    
+	    @Autowired    
+	    @Bean(name="NotificationsDAO")
+	    public NotificationsDAO getNotificationsDAO(SessionFactory sessionFactory)
+		{
+			System.out.println("Events DAO object Created");
+			return new NotificationsDAOImpl(sessionFactory);
+		}
+	 	 
 	 	 
 	 
 

@@ -63,10 +63,9 @@ body{
      <div data-ng-controller="jobcontroller">
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
-<div class="container">
+
 	<div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
+       
                <section class="post-heading">
                     <div class="row">
                         <div class="col-md-11">
@@ -102,8 +101,8 @@ body{
                               
                          </div>
                             </div>
-                             <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchjobforedit(gjob.jobid)> EDIT</a></div>
-                            
+                             <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchjobforedit(gjob.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/edit.ico" style="width:50px;height:50px">EDIT</a></div>
+                            <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deletejob(gjob.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div>
                             
                             
                             
@@ -159,10 +158,9 @@ body{
                        </div>
                    </div>
                </section>
-            </div>
-        </div>   
+         
 	</div>
-</div>
+
 
 </div>
 

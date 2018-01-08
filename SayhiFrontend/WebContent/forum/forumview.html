@@ -60,13 +60,12 @@ body{
 }
       </style>
       
-      
+<h4>FORUM VIEW</h4>      
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
 
-	<div class="col-md-10">
-        <div class="panel panel-default">
-            <div class="panel-body">
+	<div class="col-md-12">
+       
                <section class="post-heading">
                     <div class="row">
                         <div class="col-md-11">
@@ -87,7 +86,13 @@ body{
                          </div>
                     </div>             
                </section>
+               
+               
+               
                <div data-ng-controller="forumcontroller">
+                 
+                 
+                 
                  <section >
                    <p>{{ForumByid.formname}}</p>
                </section>
@@ -95,23 +100,37 @@ body{
                    <p>{{ForumByid.formcontent}}</p>
                    
                    
-                   <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchforumforedit(ForumByid.forumid)> EDIT</a></div>
-                   <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deleteForum(ForumByid.forumid)>DELETE</a></div>
+                  
                    
                    
                    <div  data-ng-if="fcheck.length > 0">
                    <div data-ng-repeat="f in fcheck">
-<div data-ng-show="f.status=='A'"><button>PENDING REQUEST</button></div>      
-<div data-ng-show="f.status=='YES'"><button>ENJOY DISCUSSION</button></div>                       
+<div data-ng-show="f.status=='A'"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/pending.png" style="width:50px;height:50px"><button>PENDING REQUEST</button></div>      
+<div data-ng-show="f.status=='YES'"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px"><button>ENJOY DISCUSSION</button></div>                       
                    </div>
                    </div>
                    
                    <div data-ng-if="fcheck.length < 1">
                   <div  data-ng-hide="currentuser.role=='ROLE_ADMIN'">  
-                <a href="" data-ng-click="sendforumrequests()">SEND REQUEST</a>
+                <a href="" data-ng-click="sendforumrequests()"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/request.png" style="width:50px;height:50px"><button>SEND REQUEST</button></a>
                    </div>
                    </div>
+                   </section>
+                    <section class="post-footer">
+                    <div class="post-footer-option container">
+                        <ul class="list-unstyled">
+                        <li> <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchforumforedit(ForumByid.forumid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/edit.ico" style="width:50px;height:50px">EDIT</a></div><li>
+                   <li><div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deleteForum(ForumByid.forumid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div><li>
+                        
+                        
+                        </ul>
+                        </div>
+                        
+                        
+                        </section>
+                        <section>
                    <div  data-ng-show="currentuser.role=='ROLE_ADMIN'">
+                   Forum participants
                    <div data-ng-repeat="fusers in forusers">
                    
                    <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{fusers.email}}.jpg"  onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'" width="40" height="40" alt="...">{{fusers.email}}
@@ -122,14 +141,16 @@ body{
                    
                    </div>
                    
-               </section>
-               <section class="post-footer">
-                 
+              </section>
+              
+              
+              
+               <section>
                
+               
+                <div  data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
                    <div class="post-footer-comment-wrapper">
-                       <div class="comment-form">
-                           
-                       </div>
+                      
                        <div class="comment">
                             <div class="media">
                               
@@ -138,10 +159,6 @@ body{
                               <div  data-ng-if="fcheck.length > 0">
                    <div data-ng-repeat="f in fcheck">
                    <div data-ng-show="f.status=='YES'">
-                               
-                               
-                               
-                               
                                          <h3>Comments</h3>
                                 
                                 <div class="row">
@@ -173,16 +190,7 @@ body{
                                 
                                 </form>
                                 </div>
-                                
-                                
-                                
-                                
-                                
-                                                          <div data-ng-repeat="comm in gforumcomm">
-                                
-                                
-                                
-                                
+                                  <div data-ng-repeat="comm in gforumcomm">
                                 <section class="post-heading">
                     <div class="row">
                     
@@ -197,8 +205,8 @@ body{
                                 </a>
                               </div>
                               <div class="media-body">
-                                <h4>{{comm.username}}</h4>
-                                 <h4>{{comm.forumcomm}}</h4>
+                                <h2>{{comm.username}}</h2>
+                                 <h3>{{comm.forumcomm}}</h3>
                                
                               </div>
                             </div>
@@ -228,13 +236,18 @@ body{
                             </div>
                        </div>
                    </div>
+                   </div>
                </section>
                </div>
-            </div>
-        </div>   
+               </div>
+            
+            
+            
+            
+        
 	</div>
 
 
-</div>
+
 
 

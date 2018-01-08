@@ -58,6 +58,21 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		console.log("Error on retrieving job")
 	});
 	
+		
+		
+		$scope.deletejob = function(idd)
+		{
+			
+			$http.get('http://localhost:8080/SayhiMiddleware/jobs/getJob/'+idd).then(function(response) {
+				
+			
+			
+		},function(error){
+			
+		});
+			
+		}	
+			
 				
 				
 					

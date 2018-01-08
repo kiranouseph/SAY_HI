@@ -1,8 +1,11 @@
 package com.niit.config;
 
+import java.util.Properties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
@@ -34,6 +37,25 @@ public class SpringConfig extends WebMvcConfigurerAdapter{
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
+    
+	@Bean
+	public JavaMailSenderImpl javaMailSenderImpl(){
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+		//Set gmail email id
+		mailSender.setUsername("kiranouseph@gmail.com");
+		//Set gmail email password
+		mailSender.setPassword("keerthykiran");
+		Properties prop = mailSender.getJavaMailProperties();
+		prop.put("mail.transport.protocol", "smtp");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.starttls.enable", "true");
+		prop.put("mail.debug", "true");
+		return mailSender;
+	}
+    
+    
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

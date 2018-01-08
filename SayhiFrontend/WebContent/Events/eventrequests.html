@@ -1,3 +1,4 @@
+<h4>EVENT REQUESTS</h4>
 <div data-ng-controller="eventrequestcontroller">
 
 <div class="card card-1" style="margin-top:25px;margin-right: 25px;margin-left: 25px">
@@ -16,9 +17,9 @@
             <td>{{eventreq.username}}</td>
             <td>{{eventreq.eventname}}</td>
            
-            <td>  <div class="btn-group"> <a data-ng-click="accepteventrequests(eventreq.eventid)"  class="btn btn-primary">APPROVE</a></div> </td>
-                      <td>  <div class="btn-group"> <a data-ng-click="rejecteventrequests(eventreq.eventid)"  class="btn btn-primary">REJECT</a></div> </td>
-          
+            <td> <a data-ng-click="accepteventrequests(eventreq.eventid)"  ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">APPROVE</a> </td>
+                      <td>  <a data-ng-click="rejecteventrequests(eventreq.eventid)"  ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">REJECT</a> </td>
+          <td>  <a  data-ng-click="getEvent(eventreq.eventid)" ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/view.png" style="width:50px;height:50px">VIEW </a>  </td>
           </tr>
        
         </tbody>

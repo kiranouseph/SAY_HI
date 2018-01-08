@@ -311,7 +311,7 @@ app.controller("blogrequestcontroller", function ($scope,$http,$location,$rootSc
 	}
 	fetchAllblogreq();
 	
-	 $scope.acceptblogrequests=function(id)
+	 $rootScope.acceptblogrequests=function(id)
 	 {
 		 
 		 console.log('in acceptblog request method')
@@ -330,7 +330,7 @@ app.controller("blogrequestcontroller", function ($scope,$http,$location,$rootSc
 	 }
 	 
 	 
-	 $scope.rejectblogrequests=function(id)
+	 $rootScope.rejectblogrequests=function(id)
 	 {
 		 
 		 console.log('in acceptblog request method')

@@ -1,3 +1,4 @@
+<h4>FORUM REQUESTS</h4>
 <div data-ng-controller="forumrequestcontroller">
 
 <div class="card card-1" style="margin-top:25px;margin-right: 25px;margin-left: 25px">
@@ -17,8 +18,8 @@
             <td>{{forumreq.username}}</td>
             <td>{{forumreq.forumname}}</td>
            
-            <td>  <div class="btn-group"> <a data-ng-click="acceptforumrequests(forumreq.forreqid)"  class="btn btn-primary">ACCEPT</a></div> </td>
-            <td>  <div class="btn-group"> <a data-ng-click="rejectforumrequests(forumreq.forreqid)"  class="btn btn-primary">REJECT</a></div> </td>
+            <td>   <a data-ng-click="acceptforumrequests(forumreq.forreqid)" ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">ACCEPT</a></td>
+            <td>   <a data-ng-click="rejectforumrequests(forumreq.forreqid)"  ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">REJECT</a> </td>
          
           </tr>
        

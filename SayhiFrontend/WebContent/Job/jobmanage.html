@@ -1,3 +1,4 @@
+<h4>JOB MANAGE</h4>
 <div class="card card-1" style="margin-top:5vh;margin-left:50px;margin-right: 50px;padding-left: 20px; padding-right: 20px; padding-top: 20px; padding-bottom: 20px">
   <div class="row">
     <div class="col s12">
@@ -20,7 +21,8 @@
 </tr>
 <tr data-ng-repeat="jobb in jobsdata">
 <td>{{jobb.jobprofile}}</td>
-<td>  <a href="" data-ng-click="getjob(jobb.jobid)">VIEW</a></td>
+<td>  <a href="" data-ng-click="getjob(jobb.jobid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/view.png" style="width:50px;height:50px">VIEW</a></td>
+<td>       <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deletejob(jobb.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div></td>
 </tr>
 </table>
     	 

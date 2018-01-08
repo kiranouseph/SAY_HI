@@ -29,16 +29,16 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 @Transactional
-	public boolean addEvent(Events event) {
+	public Events addEvent(Events event) {
 		try
 		{
 		sessionFactory.getCurrentSession().save(event);
-		return true;
+		return event;
 		}
 		catch(Exception e)
 		{
 		System.out.println(e);
-		return false;
+		return event;
 		}
 	}
 
@@ -141,7 +141,7 @@ public boolean deleteEventpars(EventParticipants eventparticipants) {
 	public ArrayList<Events> eventrequests()
 	{
 		Session session = sessionFactory.openSession();
-		ArrayList<Events> eventreq=(ArrayList<Events>) session.createQuery("from Events where status='P'").list();
+		ArrayList<Events> eventreq=(ArrayList<Events>) session.createQuery("from Events where (status='P' or status='R')").list();
 		session.close();
 		return eventreq;
 	}

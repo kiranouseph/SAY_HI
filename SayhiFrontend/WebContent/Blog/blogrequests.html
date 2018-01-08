@@ -1,3 +1,4 @@
+<h4>BLOG REQUESTS</h4>
 <div data-ng-controller="blogrequestcontroller">
 
 <div class="card card-1" style="margin-top:25px;margin-right: 25px;margin-left: 25px">
@@ -17,9 +18,9 @@
             <td>{{blogreq.username}}</td>
             <td>{{blogreq.blogname}}</td>
            
-            <td>  <div class="btn-group"> <a data-ng-click="acceptblogrequests(blogreq.blogid)"  class="btn btn-primary">ACCEPT</a></div> </td>
-                      <td>  <div class="btn-group"> <a data-ng-click="rejectblogrequests(blogreq.blogid)"  class="btn btn-primary">REJECT</a></div> </td>
-                                <td>  <div class="btn-group"> <a data-ng-click="maximum(blogreq.blogid)"  class="btn btn-primary">VIEW</a></div> </td>
+            <td>   <a data-ng-click="acceptblogrequests(blogreq.blogid)"  ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">ACCEPT</a></td>
+                      <td>  <a data-ng-click="rejectblogrequests(blogreq.blogid)"  ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">REJECT</a> </td>
+                                <td>   <a data-ng-click="maximum(blogreq.blogid)"  ><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/view.png" style="width:50px;height:50px">VIEW</a> </td>
           
           </tr>
        

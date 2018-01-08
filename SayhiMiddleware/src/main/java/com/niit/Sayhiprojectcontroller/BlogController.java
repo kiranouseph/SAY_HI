@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.niit.SayhiBackend.dao.BlogDAO;
+import com.niit.SayhiBackend.dao.NotificationsDAO;
 import com.niit.SayhiBackend.dao.UsersDAO;
 import com.niit.SayhiBackend.model.Blog;
 import com.niit.SayhiBackend.model.BlogComments;
+import com.niit.SayhiBackend.model.Notifications;
 import com.niit.SayhiBackend.model.Users;
 
 
@@ -28,7 +30,8 @@ public class BlogController {
 	@Autowired 
 	UsersDAO userDAO;
 	
-	
+	@Autowired 
+	NotificationsDAO notificationsDAO;
 
 	@RequestMapping(value="/getAllBlogs",method=RequestMethod.GET,headers = "Accept=application/json")
 	public ArrayList<Blog> getAllBlogs(){
@@ -155,11 +158,27 @@ public class BlogController {
 	@RequestMapping(value="/approveBlog/{blogId}",method=RequestMethod.GET)
 	public ResponseEntity<String> approveBlog(@PathVariable("blogId") int blogId){
 		Blog blog=blogDAO.getBlog(blogId);
-		blog.setStatus("Y");
+		blog.setStatus("YES");
 		
 		boolean isSaved=blogDAO.updateBlog(blog);
 		if(isSaved)
+		{
+			 String noti="your blog:"+blog.getBlogname()+" is approved";
+			 Notifications not=new Notifications();
+			 not.setName(noti);
+			 not.setUsername(blog.getUsername());
+			 
+			 notificationsDAO.addNotifications(not);
+			
+			
 		return new ResponseEntity<String>("Blog approved successfully",HttpStatus.OK);
+		
+		 
+		
+		
+		
+		
+		}
 		else
 			return new ResponseEntity<String>("Problem in approving blog",HttpStatus.BAD_REQUEST);
 		
@@ -170,11 +189,20 @@ public class BlogController {
 	@RequestMapping(value="/rejectBlog/{blogId}",method=RequestMethod.GET)
 	public ResponseEntity<String> rejectBlog(@PathVariable("blogId") int blogId){
 		Blog blog=blogDAO.getBlog(blogId);
-		blog.setStatus("N");
+		blog.setStatus("NO");
 		
 		boolean isSaved=blogDAO.updateBlog(blog);
 		if(isSaved)
+		{
+			
+			 String noti="your blog:"+blog.getBlogname()+" is rejected";
+			 Notifications not=new Notifications();
+			 not.setName(noti);
+			 not.setUsername(blog.getUsername());
+			 
+			 notificationsDAO.addNotifications(not);	
 		return new ResponseEntity<String>("Blog rejected successfully",HttpStatus.OK);
+		}
 		else
 			return new ResponseEntity<String>("Problem in rejecting blog",HttpStatus.BAD_REQUEST);
 		
@@ -322,6 +350,31 @@ blogcomment.setBlogcomm(blogcomm);
 	Blog blog=blogDAO.getBlog(blogid);
 	blog.setStatus("YES");
 	blogDAO.updateBlog(blog);
+	
+	String noti="your blog:"+blog.getBlogname()+" is approved";
+	 Notifications not=new Notifications();
+	 not.setName(noti);
+	 not.setUsername(blog.getUsername());
+	 
+	 notificationsDAO.addNotifications(not);
+	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
+	
+	}
+	
+	
+	@RequestMapping(value="/rejectblogRequests/{blogid}",method=RequestMethod.GET)
+	public ResponseEntity<Blog> rejectBlogRequest(@PathVariable("blogid") int blogid)
+	{
+	Blog blog=blogDAO.getBlog(blogid);
+	blog.setStatus("NO");
+	blogDAO.updateBlog(blog);
+	
+	String noti="your blog:"+blog.getBlogname()+" is rejected";
+	 Notifications not=new Notifications();
+	 not.setName(noti);
+	 not.setUsername(blog.getUsername());
+	 
+	 notificationsDAO.addNotifications(not);
 	return new ResponseEntity<Blog>(blog,HttpStatus.OK);
 	
 	}

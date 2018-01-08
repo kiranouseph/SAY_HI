@@ -59,14 +59,13 @@ body{
     background-color:#F6F7F8;
 }
       </style>
-      
+ <h4> EVENT VIEW</h4>    
       <div data-ng-controller="blogcontroller">
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
-<div class="container">
+
 	<div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
+        
                <section class="post-heading">
                     <div class="row">
                         <div class="col-md-12">
@@ -97,14 +96,28 @@ body{
                               </div>
                          </div>
                          
-                         <div  data-ng-show="currentuser.email==gevent.username"><a href="" data-ng-click="fetcheventforedit(gevent.eventid)"><i class="glyphicon glyphicon-pencil"></i>EDIT</a></div>
-                         <div  data-ng-show="currentuser.email==gevent.username"><a href="" data-ng-click="deleteevent(gevent.eventid)"><i class="glyphicon glyphicon-trash"></i>DELETE</a></div>
                          
-                            </div>
+                         <section class="post-footer">
+                    <div class="post-footer-option container">
+                        <ul class="list-unstyled">
+                        
+                         <li><div  data-ng-show="currentuser.role=='ROLE_ADMIN' && gevent.status=='A'"><a href="" data-ng-click="rejecteventrequests(gevent.eventid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">REJECT</a></div></li>
+                           <li>     <div  data-ng-show="currentuser.role=='ROLE_ADMIN' && gevent.status=='P'"><a href="" data-ng-click="accepteventrequests(gevent.eventid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">APPROVE</a></div></li>                              
+                            <li>    <div  data-ng-show="currentuser.role=='ROLE_ADMIN' && gevent.status=='R'"><a href="" data-ng-click="accepteventrequests(gevent.eventid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">APPROVE</a></div></li>
+                        <li> <div  data-ng-show="currentuser.email==gevent.username"><a href="" data-ng-click="fetcheventforedit(gevent.eventid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/edit.ico" style="width:50px;height:50px">EDIT</a></div></li>
+                         <li><div  data-ng-show="currentuser.email==gevent.username"><a href="" data-ng-click="deleteevent(gevent.eventid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div></li>
+                        
+                        </ul>
+                        </div>
+                        </section>
+                                       
+                         
+                    
                <section class="post-footer">
                    <hr>
                   
                    <div class="post-footer-comment-wrapper">
+                   PARTICIPANTS
                        <div data-ng-repeat="eve in eventpars">
                        <div class="comment">
                             <div class="media">
@@ -121,12 +134,12 @@ body{
                        </div>
                    </div>
                </section>
-            </div>
+               
+       
         </div>   
-	</div>
-</div>
 
 </div>
 
-
 </div>
+
+

@@ -122,6 +122,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
                   
                  <div data-ng-show="myblo.status=='A'">PENDING APPROVAL</div>
                  <div data-ng-show="myblo.status=='YES'">APPROVED BLOG</div>
+                  <div data-ng-show="myblo.status=='NO'">REJECTED BLOG</div>
               
                  <div class="media">
                   <div class="media-body">
@@ -262,6 +263,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
     	
     	     	 <h3><b>{{eventt.eventname}}</b></h3>
     	 <h3>Hosted by:---{{eventt.username}}</h3>
+    	  <div data-ng-show="eventt.status=='P'">PENDING APPROVAL</div>
     	
     	                  <div class="media">
                

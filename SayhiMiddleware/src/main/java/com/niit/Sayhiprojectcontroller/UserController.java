@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +45,8 @@ UsersDAO userDAO;
 JobDAO jobDAO;	
 @Autowired
 FriendDAO friendDAO;	
-	
+@Autowired
+private MailSender sendmail;
 
 	 @RequestMapping(value="/getAllUsers",method=RequestMethod.GET)
 		public ArrayList<Users> getAllUser(){
@@ -68,6 +72,19 @@ FriendDAO friendDAO;
 		 Users users =userDAO.getUserbyemail(email);
 		 users.setStatus("A");
 		 userDAO.approveusers(users);
+		 
+		 SimpleMailMessage emaile = new SimpleMailMessage();
+	        emaile.setTo(users.getEmail());
+	        emaile.setSubject("Thanks for registering to SAY_HI");
+	        emaile.setText("Make your blogs !! Express you rideas through forums!!! Participate in the events, apply jobs  and build your carrier!!! Make friends And chat with them an d improve your social life .Warm greetings from SAY_HI Team/n Any queries please contact "
+	        		+ "kiran ouseph/n"
+	        		+ "NIIT LTD/n"
+	        		+ "8129925706/n"
+	        		+ "kiranouseph@gmail.com");
+	         
+	        // sends the e-mail
+	        sendmail.send(emaile);
+		 
 		 
 	 }
 	 

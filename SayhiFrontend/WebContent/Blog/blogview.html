@@ -64,7 +64,7 @@ body{
       
       
    
-      
+ <h4>BLOG VIEW</h4>     
 <div class="card card-1" style="margin-top:15vh;margin-left: 5vh;margin-right: 5vh">
 
 
@@ -109,10 +109,12 @@ body{
                        
                             
                             
-                              <li><div  data-ng-hide="currentuser.email==gblog.username"><a href="" data-ng-click="likeBlog(gblog.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i>Like</a></div></li>
-                              
-                              <li><div  data-ng-show="currentuser.email==gblog.username"><a href="" data-ng-click="deleteBlog(gblog.blogid)"><i class="glyphicon glyphicon-thumbs-up"></i> DELETE</a></div></li>
-                              <li><div  data-ng-show="currentuser.email==gblog.username"><a href="" data-ng-click=fetchforedit(gblog.blogid)><i class="glyphicon glyphicon-thumbs-down"></i> EDIT</a></div></li>                          </ul>
+                              <li><div  data-ng-hide="currentuser.email==gblog.username"><a href="" data-ng-click="likeBlog(gblog.blogid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/like.png" style="width:50px;height:50px">Like</a></div></li>
+                               <li><div  data-ng-show="currentuser.role=='ROLE_ADMIN' && gblog.status=='YES'"><a href="" data-ng-click="rejectblogrequests(gblog.blogid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">REJECT</a></div></li>
+                                <li><div  data-ng-show="currentuser.role=='ROLE_ADMIN' && gblog.status=='A'"><a href="" data-ng-click="acceptblogrequests(gblog.blogid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">APPROVE</a></div></li>
+                                 <li><div   data-ng-show="currentuser.role=='ROLE_ADMIN' && gblog.status=='NO'"><a href="" data-ng-click="acceptblogrequests(gblog.blogid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px">APPROVE</a></div></li>
+                              <li><div  data-ng-show="currentuser.email==gblog.username"><a href="" data-ng-click="deleteBlog(gblog.blogid)"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div></li>
+                              <li><div  data-ng-show="currentuser.email==gblog.username"><a href="" data-ng-click=fetchforedit(gblog.blogid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/edit.ico" style="width:50px;height:50px">EDIT</a></div></li>                          </ul>
                    </div>
                    <div class="post-footer-comment-wrapper">
                        <div class="comment-form">

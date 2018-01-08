@@ -7,7 +7,7 @@
 <script>
         var timer = setTimeout(function() 
         {
-            window.location.href='http://localhost:8080/SayhiFrontend/#!/mywall'
+            window.location.href='http://localhost:8080/SayhiFrontend/#!/picuplaod'
         }, 1);
     </script>
 
