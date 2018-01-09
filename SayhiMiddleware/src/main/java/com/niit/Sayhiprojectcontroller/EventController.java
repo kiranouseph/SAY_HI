@@ -38,8 +38,10 @@ UsersDAO userDAO;
 	@RequestMapping(value="/addEvent",method=RequestMethod.POST)
 	public ResponseEntity<String> addEvent(@RequestBody Events events,HttpSession session){
 		 Users user = (Users)session.getAttribute("currentuser");
-		if(user.getRole()=="ROLE_ADMIN")
+		 System.out.println(user.getEmail());
+		if(user.getRole().equals("ROLE_ADMIN"))
 		{
+			System.out.println("admin event");;
 			events.setStatus("A");
 		}
 		Events eve =eventDAO.addEvent(events);

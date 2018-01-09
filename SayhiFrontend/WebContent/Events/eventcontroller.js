@@ -1,4 +1,4 @@
-app.controller("eventcontroller", function ($scope,$http,$location,$rootScope) {
+app.controller("eventcontroller", function ($scope,$http,$location,$rootScope,$cookieStore) {
 $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.currentuser.email,status:'P'};	
 
 	function fetchAllEvents()
@@ -61,7 +61,7 @@ $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.curre
 		
 		$http.get('http://localhost:8080/SayhiMiddleware/events/getEvent/'+idd).then(function(response) {
 			$rootScope.gevent=response.data;
-		
+			$cookieStore.put('event',$rootScope.gevent);	
 		
 		
 	},function(error){
@@ -74,7 +74,7 @@ $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.curre
 		
 		$http.get('http://localhost:8080/SayhiMiddleware/events/checkifappliedevent/'+idd+"/"+$rootScope.currentuser.userid).then(function(response) {
 			$rootScope.evecheck=response.data;
-		
+			$cookieStore.put('evecheck',$rootScope.evecheck);
 			
 			
 			});
@@ -86,7 +86,7 @@ $scope.Events={eventname:'',eventdesc:'',eventvenue:'',username:$rootScope.curre
 		{
 			
 			$rootScope.eventpars=response.data;
-			
+			$cookieStore.put('eventpars',$rootScope.eventpars);	
 			
 		},function(error)
 		{

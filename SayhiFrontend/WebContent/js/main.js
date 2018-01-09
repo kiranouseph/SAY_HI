@@ -167,8 +167,8 @@ app.run( function ($rootScope, $location, $cookieStore, $http)
 					 {
 						 console.log("$locationChangeStart")
 						    
-						 var userPages = ['/noti','/login','/register','/mywall','/picupload','/newblog','/newevent','/blogforedit','/eventforedit','/friendpreview'];
-				 var adminPages = ['/login','/register','/newforum','/newjob','newevent','forumrequests','userrequests','/blogrequests','/eventrequests','/forummanage','/blogmanage','/jobmanage','/eventmanage','/forumforedit','/jobforedit','/eventforedit'];
+						 var userPages = ['/noti','/mywall','/newblog','/blogforedit','/friendpreview'];
+				 var adminPages = ['/newforum','/newjob','forumrequests','userrequests','/blogrequests','/eventrequests','/forummanage','/blogmanage','/jobmanage','/eventmanage','/forumforedit','/jobforedit'];
 						 
 						 var currentPage = $location.path();
 						 
@@ -201,11 +201,7 @@ app.run( function ($rootScope, $location, $cookieStore, $http)
 									  alert("You cannot view this page as a " + role )
 									  $location.path('/blog');
 									 }
-								 if(isUserPage!=-1 && role!='ROLE_USER' )
-								 {
-								  alert("You cannot view this page as a " + role )
-								  $location.path('/blog');
-								 }
+								 
 								 
 					        	}
 					 });
@@ -216,4 +212,84 @@ app.run( function ($rootScope, $location, $cookieStore, $http)
 				    {
 				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.currentuser; 
 				    }
+				    
+				    // to keep the blog view in after page refresh
+				    $rootScope.gblog = $cookieStore.get('blog') || {};
+				    if ($rootScope.gblog)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.gblog; 
+				    }
+				    
+				    
+				    $rootScope.gblogcomm = $cookieStore.get('blogcomm') || {};
+				    if ($rootScope.gblogcomm)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.gblogcomm; 
+				    }
+				    
+				    // to keep the event view in after page refresh
+				    
+				    $rootScope.gevent = $cookieStore.get('event') || {};
+				    if ($rootScope.gevent)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.gevent; 
+				    }
+				    
+				   
+				    $rootScope.evecheck = $cookieStore.get('evecheck') || {};
+				    if ($rootScope.evecheck)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.evecheck; 
+				    }
+				    
+				    
+				    $rootScope.eventpars = $cookieStore.get('eventpars') || {};
+				    if ($rootScope.eventpars)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.eventpars; 
+				    }
+				    
+				    // to keep the job view  in after page refresh
+					$rootScope.gjob = $cookieStore.get('job') || {};
+				    if (	$rootScope.gjob)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + 	$rootScope.gjob; 
+				    }
+				    
+				    $rootScope.gcheck = $cookieStore.get('jobcheck') || {};
+				    if (	$rootScope.gcheck)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + 	$rootScope.gcheck; 
+				    }
+				    
+				    $rootScope.jobapps = $cookieStore.get('jobapps') || {};
+				    if (	$rootScope.jobapps)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + 	$rootScope.jobapps; 
+				    }
+				    
+				    // to keep the forum view  in after page refresh
+				    
+				    $rootScope.ForumByid = $cookieStore.get('forum') || {};
+				    if ($rootScope.ForumByid)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' + $rootScope.ForumByid; 
+				    }
+				    
+				    $rootScope.fcheck = $cookieStore.get('forumcheck') || {};
+				    if ($rootScope.fcheck)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' +$rootScope.fcheck; 
+				    }
+				    
+				    
+				    $rootScope.gforumcomm = $cookieStore.get('forumcomm') || {};
+				    if ($rootScope.gforumcomm)
+				    {
+				        $http.defaults.headers.common['Authorization'] = 'Basic' +$rootScope.gforumcomm; 
+				    }
+				    
+				    
+				    
+				    
 				});

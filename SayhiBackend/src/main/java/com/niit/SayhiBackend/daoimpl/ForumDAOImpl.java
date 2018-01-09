@@ -309,7 +309,13 @@ public ArrayList<ForumRequests> forreqbyforid(int forumid) {
 }
 
 
-
+@Transactional
+public ForumRequests myforreq(String email,int forumid)
+{
+	Session session = sessionFactory.openSession();
+	ForumRequests forumsreme=(ForumRequests)session.createQuery("from ForumRequests where forumid="+forumid+" and username='"+email+"'").list().get(0);
+	return forumsreme;
+}
 
 
 

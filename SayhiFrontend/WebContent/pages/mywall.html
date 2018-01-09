@@ -306,8 +306,9 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
      
      <div data-ng-repeat="myfri in myfriends">
 
+     <div data-ng-hide="currentuser.role=='ROLE_ADMIN'">
      
-     <div class="col-lg-3 col-sm-3 hero-feature text-center">
+          <div class="col-lg-3 col-sm-3 hero-feature text-center">
 
 
 
@@ -325,7 +326,10 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
           </div>
         </div>
 </div>
+    
      
+     </div>
+ 
      
      </div>
  </div>
@@ -338,7 +342,10 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
   <div data-ng-controller="friendcontroller">    
  
       <div data-ng-repeat="other in otherusers">
-     <div class="col-lg-3 col-sm-3 hero-feature text-center">
+      
+      
+       <div data-ng-hide="currentuser.role=='ROLE_ADMIN'">
+           <div class="col-lg-3 col-sm-3 hero-feature text-center">
 
 
 
@@ -356,6 +363,9 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
           </div>
         </div>
 </div>
+       
+       </div>
+ 
      
   </div>
       
@@ -373,6 +383,7 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
            
            <div data-ng-repeat="reqs in myfriendreqs">
 
+<div data-ng-hide="currentuser.role=='ROLE_ADMIN'">
 
      <div class="col-lg-3 col-sm-3 hero-feature text-center">
 
@@ -393,6 +404,8 @@ background-image: url("http://localhost:8080/SayhiFrontend/resources/images/{{cu
         </div>
 </div>
      
+</div>
+
      
      
   </div>

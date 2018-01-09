@@ -208,6 +208,17 @@ forumDAO.deleteForumComment(forumComments);
 	}
 	
 	
+	@RequestMapping(value="/leaveforum/{forumid}/{myid}",method=RequestMethod.GET)
+	public void leaveforum(@PathVariable("myid") int myid,@PathVariable("forumid") int forumid)
+	{
+		Users user=(Users)usersDAO.getUser(myid);
+		ForumRequests fr=forumDAO.myforreq(user.getEmail(), forumid);
+		forumDAO.deleteForumRequest(fr);
+		
+		
+	}
+	
+	
 	
 	@RequestMapping(value="/checkIfMyForum/{forumid}/{myid}",method=RequestMethod.GET)
 	public ResponseEntity<ArrayList<ForumRequests>> getcheckifmyforum(@PathVariable("forumid") int forumId,@PathVariable("myid") int myid){

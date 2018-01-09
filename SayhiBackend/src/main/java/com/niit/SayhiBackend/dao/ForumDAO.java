@@ -34,4 +34,5 @@ public interface ForumDAO {
 	public ArrayList<ForumRequests> getAllForumRequestAll(int forumid);
 	public boolean deleteForumRequest(ForumRequests forumreq);
 	public boolean rejectForumRequest(ForumRequests forumrequest);
+	public ForumRequests myforreq(String email,int forumid);
 }

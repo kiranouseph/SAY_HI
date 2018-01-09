@@ -23,7 +23,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-cookies.min.js"></script>
-
+	
 <style>
 
 
@@ -52,6 +52,52 @@
     </div>
     <ul class="nav navbar-nav navbar-right">
     
+    
+        
+     <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
+    <a href="#!/blog"  style="color:black">HOME</a>
+      </div></li>
+      
+      
+       <li><div data-ng-show="currentuser.role=='ROLE_USER' ">
+    <a href="#!/mywall"  style="color:black">MY WALL</a>
+      </div></li>
+      
+      
+    
+      
+      
+      <li><div data-ng-show="currentuser.role=='ROLE_ADMIN'">
+      <div class="dropdown">
+  <a class="dropdown-toggle"  style="color:black" data-toggle="dropdown">REQUESTS
+  <span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="#!/blogrequests">BLOG</a></li>
+    <li><a href="#!/forumrequests">FORUM</a></li>
+    <li><a href="#!/userrequests">USERS</a></li>
+    <li><a href="#!/eventrequests">EVENTS</a></li>
+      </ul>
+</div>
+      
+      </div></li> 
+      
+      
+           <li><div data-ng-show="currentuser.role=='ROLE_ADMIN'">
+      <div class="dropdown">
+  <a class="dropdown-toggle"   style="color:black" data-toggle="dropdown">MANAGE
+  <span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="#!/blogmanage">BLOG</a></li>
+    <li><a href="#!/forummanage">FORUM</a></li>
+    <li><a href="#!/jobmanage">JOBS</a></li>
+    <li><a href="#!/eventmanage">EVENTS</a></li>
+  </ul>
+</div>
+      
+      </div></li> 
+      
+      
+    
       <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
       <a href=""  style="color: black">Hi {{currentuser.email}}</a>  
        </div> </li>
@@ -73,51 +119,7 @@
      <a data-ng-click="logout()" data-ng-controller="logoutcontroller" style="color: black">LOGOUT</a>
       </div></li>
     
-    
-     <li><div data-ng-show="currentuser.role=='ROLE_ADMIN' || currentuser.role=='ROLE_USER' ">
-    <a href="#!/blog"  style="color:black">HOME</a>
-      </div></li>
-      
-      
-       <li><div data-ng-show="currentuser.role=='ROLE_USER' ">
-    <a href="#!/mywall"  style="color:black">MY WALL</a>
-      </div></li>
-      
-      
-    
-      
-      
-      <li><div data-ng-show="currentuser.role=='ROLE_ADMIN'">
-      <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">REQUESTS
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#!/blogrequests">BLOG</a></li>
-    <li><a href="#!/forumrequests">FORUM</a></li>
-    <li><a href="#!/userrequests">USERS</a></li>
-    <li><a href="#!/eventrequests">EVENTS</a></li>
-      </ul>
-</div>
-      
-      </div></li> 
-      
-      
-           <li><div data-ng-show="currentuser.role=='ROLE_ADMIN'">
-      <div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">MANAGE
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="#!/blogmanage">BLOG</a></li>
-    <li><a href="#!/forummanage">FORUM</a></li>
-    <li><a href="#!/jobmanage">JOBS</a></li>
-    <li><a href="#!/eventmanage">EVENTS</a></li>
-  </ul>
-</div>
-      
-      </div></li> 
-      
-      
-      
+  
       
         
       
@@ -137,8 +139,11 @@
 
 
 
-<div ng-view></div>
+<div data-ng-view></div>
 
+
+
+ 
 
 <script src="js/main.js"></script>
 <script src="User/usercontroller.js"></script>

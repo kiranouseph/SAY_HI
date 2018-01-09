@@ -147,7 +147,8 @@ Users tempuser=userDAO.getUserbyemail(emaill);
 	 
 	 @RequestMapping(value="/register",method=RequestMethod.POST)
 		public ResponseEntity<Users> createUser(@RequestBody Users user){
-			System.out.println("In register controller");
+			user.setFirstname(user.getFirstname().toUpperCase());
+			user.setLastname(user.getLastname().toUpperCase());
 			boolean isSaved=userDAO.saveUser(user);
 			if(isSaved) {
 			return new ResponseEntity<Users>(user,HttpStatus.OK);

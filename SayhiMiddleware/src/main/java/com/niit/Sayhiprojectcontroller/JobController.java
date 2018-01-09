@@ -72,7 +72,7 @@ public ArrayList<Job> getAllJobs(){
 
 
 
-@RequestMapping(value="/deleteJob/{jobid}",method=RequestMethod.DELETE)
+@RequestMapping(value="/deleteJob/{jobid}",method=RequestMethod.GET)
 public ResponseEntity<String> deleteBlog(@PathVariable("jobid") int jobId){
 
 Job job=jobDAO.getjob(jobId);

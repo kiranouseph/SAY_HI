@@ -1,4 +1,4 @@
-app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
+app.controller("forumcontroller", function ($scope,$http,$location,$rootScope,$cookieStore) {
 	console.log("in forum controller")
 	$scope.Forum={formname:'',formcontent:''};
 	$scope.ForumComments={forumcomm:'',forumid:'',userid:'',username:''};
@@ -55,7 +55,7 @@ app.controller("forumcontroller", function ($scope,$http,$location,$rootScope) {
 				
 
 				$rootScope.ForumByid=response.data; 
-			
+				
 				},function(error){
 					console.log("Error on retrieving forum")
 				});
@@ -100,7 +100,7 @@ console.log('in fetch forum by id method'+idd)
 		
 
 			$rootScope.ForumByid=response.data; 
-		
+			$cookieStore.put('forum',$rootScope.ForumByid);
 			},function(error){
 				console.log("Error on retrieving forum")
 			});
@@ -109,7 +109,7 @@ console.log('in fetch forum by id method'+idd)
 
 $http.get("http://localhost:8080/SayhiMiddleware/forums/checkIfMyForum/"+idd+"/"+$rootScope.currentuser.userid).then(function(response){
 	$rootScope.fcheck=response.data;
-	
+	$cookieStore.put('forumcheck',$rootScope.fcheck);
 	
 		
 
@@ -124,7 +124,7 @@ $http.get("http://localhost:8080/SayhiMiddleware/forums/getAllForumComments/"+id
 {
 	
 	$rootScope.gforumcomm=response.data;
-	
+	$cookieStore.put('forumcomm',$rootScope.gforumcomm);
 	
 },function(error)
 {
@@ -242,9 +242,20 @@ $scope.fetchforumforedit=function(idd)
 			 console.log("Forumrequested successfully");
 		 });
 		
-		 $location.path('/forumview')
+		 $location.path('/blog')
 	 }
 	 
+	 
+	 $rootScope.leaveforum=function()
+	 {
+		
+		
+		 $http.get("http://localhost:8080/SayhiMiddleware/forums/leaveforum/"+$rootScope.ForumByid.forumid+"/"+$rootScope.currentuser.userid).then(fetchForumByIdd($rootScope.ForumByid.forumid),function(response){
+			 
+		 });
+		
+		 $location.path('/blog')
+	 }
 	 
 	 
 	 

@@ -1,4 +1,4 @@
-app.controller("jobcontroller", function ($scope,$http,$location,$rootScope) {
+app.controller("jobcontroller", function ($scope,$http,$location,$rootScope,$cookieStore) {
 $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',companydesc:''};	
 
 	function fetchAllJobs()
@@ -51,6 +51,7 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		
 		$http.get('http://localhost:8080/SayhiMiddleware/jobs/getJob/'+idd).then(function(response) {
 			$rootScope.gjob=response.data;
+			$cookieStore.put('job',$rootScope.gjob);	
 			console.log($rootScope.gjob.jobprofile+$rootScope.gjob.company)
 		
 		
@@ -60,25 +61,14 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 	
 		
 		
-		$scope.deletejob = function(idd)
-		{
-			
-			$http.get('http://localhost:8080/SayhiMiddleware/jobs/getJob/'+idd).then(function(response) {
-				
-			
-			
-		},function(error){
-			
-		});
-			
-		}	
-			
+	
 				
 				
 					
 		
 		$http.get('http://localhost:8080/SayhiMiddleware/jobs/checkifapplied/'+idd+"/"+$rootScope.currentuser.userid).then(function(response) {
 			$rootScope.gcheck=response.data;
+			$cookieStore.put('jobcheck',$rootScope.gcheck);
 			console.log(gcheck)
 			
 			
@@ -91,7 +81,7 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		{
 			
 			$rootScope.jobapps=response.data;
-			
+			$cookieStore.put('jobapps',$rootScope.gcheck);
 			
 		},function(error)
 		{
@@ -104,6 +94,22 @@ $scope.Job={jobprofile:'',jobdesc:'',qualification:'',salary:'',company:'',compa
 		$location.path("/jobview")
 
 	}
+	
+	$rootScope.deletejob = function(idd)
+	{
+		
+		$http.get('http://localhost:8080/SayhiMiddleware/jobs/deleteJob/'+idd).then(function(response) {
+			
+		
+		
+	},function(error){
+		
+	});
+		
+		$location.path("/blog")
+		
+	}	
+		
 	
 	$scope.fetchjobforedit=function(idd)
 	{

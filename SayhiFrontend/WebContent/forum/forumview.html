@@ -22,10 +22,11 @@ a{
     color:#47649F;
 }
 
-body{
-    font-family:'helvetica';    
-}
 
+body{
+    font-family:'cursive';  
+    font-size: 20px;  
+}
 /*-- Bootstrap Override Style --*/
 
 
@@ -68,7 +69,7 @@ body{
        
                <section class="post-heading">
                     <div class="row">
-                        <div class="col-md-11">
+                        <div class="col-md-12">
                             <div class="media">
                               <div class="media-left">
                                 <a href="#">
@@ -76,14 +77,11 @@ body{
                                 </a>
                               </div>
                               <div class="media-body">
-                                <a href="#" class="anchor-username"><h4 class="media-heading">ADMIN</h4></a> 
-                                
+                                <a href="#" class="anchor-username"><h4 style="font-size: 25px" class="media-heading"><b>ADMIN</b></h4></a>
                               </div>
                             </div>
                         </div>
-                         <div class="col-md-1">
-                            
-                         </div>
+                        
                     </div>             
                </section>
                
@@ -94,7 +92,7 @@ body{
                  
                  
                  <section >
-                   <p>{{ForumByid.formname}}</p>
+                   <p><b>{{ForumByid.formname}}</b></p>
                </section>
                <section class="post-body">
                    <p>{{ForumByid.formcontent}}</p>
@@ -106,15 +104,21 @@ body{
                    <div  data-ng-if="fcheck.length > 0">
                    <div data-ng-repeat="f in fcheck">
 <div data-ng-show="f.status=='A'"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/pending.png" style="width:50px;height:50px"><button>PENDING REQUEST</button></div>      
-<div data-ng-show="f.status=='YES'"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px"><button>ENJOY DISCUSSION</button></div>                       
+<div data-ng-show="f.status=='YES'"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/approve.jpg" style="width:50px;height:50px"><button data-ng-click="leaveforum()">LEAVE FORUM</button></div>                       
                    </div>
                    </div>
+                   
+                   
+                   
                    
                    <div data-ng-if="fcheck.length < 1">
                   <div  data-ng-hide="currentuser.role=='ROLE_ADMIN'">  
                 <a href="" data-ng-click="sendforumrequests()"><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/request.png" style="width:50px;height:50px"><button>SEND REQUEST</button></a>
                    </div>
                    </div>
+                   
+                   
+                   
                    </section>
                     <section class="post-footer">
                     <div class="post-footer-option container">

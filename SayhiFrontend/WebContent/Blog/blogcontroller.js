@@ -1,4 +1,4 @@
-app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
+app.controller("blogcontroller", function ($scope,$http,$location,$rootScope,$cookieStore) {
 	 
 	 $scope.Blog={blogname:'',blogcontent:'',status:'A',likes:'0',dislikes:'0',views:'0',username:$rootScope.currentuser.email,userid:$rootScope.currentuser.userid};
 	$scope.BlogComments={blogcomm:'',blogid:'',userid:''};
@@ -43,7 +43,7 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 	{
 		
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-				$scope.blogbyid=response.data;
+				
 				$rootScope.gblog=response.data;
 				 
 				
@@ -63,17 +63,14 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 		 console.log("in add max method------"+idd)
 		 
 		 
-		  $http.get("http://localhost:8080/SayhiMiddleware/blogs/incview/"+idd).then(function(response){
-			
-			},function(error){
-			
-			});
+		 
 		 
 		 console.log("view incremented")
 
 		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
-				$scope.blogbyid=response.data;
+				$rootScope.blogbyid=response.data;
 				$rootScope.gblog=response.data;
+				$cookieStore.put('blog',$rootScope.gblog);
 				 
 				
 				console.log("blog fetched successfully")				
@@ -88,11 +85,17 @@ app.controller("blogcontroller", function ($scope,$http,$location,$rootScope) {
 				
 				$rootScope.gblogcomm=response.data;
 				console.log($rootScope.gblogcomm)
-				
+				$cookieStore.put('blogcomm',$rootScope.gblogcomm);
 			},function(error)
 			{
 				
-			});		
+			});
+		 
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/incview/"+idd).then(function(response){
+				
+			},function(error){
+			
+			});
 		
 		 
 		
@@ -201,12 +204,25 @@ if($scope.Blog.blogcontent==null)
 	 $scope.likeBlog=function(idd)
 	 {
 		console.log("in like blog method")
-		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/likeBlog/"+idd).then(fetchBlogById(idd),function(response){
+		 $http.get("http://localhost:8080/SayhiMiddleware/blogs/likeBlog/"+idd).then(function(response){
 			 console.log("Blog liked successfully");
 								
 			},function(error){
 				console.error("Error while liking blog");
 			});
+		
+		
+		$http.get("http://localhost:8080/SayhiMiddleware/blogs/getBlogById/"+idd).then(function(response){
+			
+			$rootScope.gblog=response.data;
+			 
+			
+			console.log("blog fetched successfully")				
+			},function(error){
+				console.log("error in fetching blog")
+			});
+		
+		s
 		
 		$location.path('/blogview')	 
 		 

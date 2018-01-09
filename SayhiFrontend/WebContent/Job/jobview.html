@@ -22,8 +22,10 @@ a{
     color:#47649F;
 }
 
+
 body{
-    font-family:'helvetica';    
+    font-family:'cursive';  
+    font-size: 20px;  
 }
 
 /*-- Bootstrap Override Style --*/
@@ -71,7 +73,7 @@ body{
                         <div class="col-md-11">
                             <div class="media">
                               <div class="media-left">
-                             <h3><b>{{gjob.company}}</b></h3>
+                             <h3 style="font-size: 25px"><b>{{gjob.company}}</b></h3>
     	 <h3>Post for {{gjob.jobprofile}}</h3>
     	 <h3>SALARY:{{gjob.salary}} Rupeees</h3>
     	 
@@ -101,10 +103,16 @@ body{
                               
                          </div>
                             </div>
-                             <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchjobforedit(gjob.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/edit.ico" style="width:50px;height:50px">EDIT</a></div>
-                            <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deletejob(gjob.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div>
+                            
+                             <div class="post-footer-option container">
+                        <ul class="list-unstyled">
                             
                             
+                            <li> <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=fetchjobforedit(gjob.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/edit.ico" style="width:50px;height:50px">EDIT</a></div></li>
+                           <li> <div  data-ng-show="currentuser.role=='ROLE_ADMIN'"><a href="" data-ng-click=deletejob(gjob.jobid)><img data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/reject.png" style="width:50px;height:50px">DELETE</a></div></li>
+                            
+                            </ul>
+                            </div>
                             
                             
                         </div>
@@ -146,8 +154,27 @@ body{
                                
                                <div data-ng-repeat="jb in jobapps">
                                
-                               <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{jb.email}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'"  width="40" height="40" alt="...">{{jb.email}}
-                               
+ <section class="post-heading">
+                    <div class="row">
+                    
+                    
+                    
+                    
+                        <div class="col-md-11">
+                            <div class="media">
+                              <div class="media-left">
+                                <a href="#">
+                                  <img class="media-object photo-profile" data-ng-src="http://localhost:8080/SayhiFrontend/resources/images/{{jb.email}}.jpg" onerror="this.src='http://localhost:8080/SayhiFrontend/resources/images/ava.jpg'"  width="40" height="40" alt="...">
+                                </a>
+                              </div>
+                              <div class="media-body">
+                                <h4>{{jb.email}}</h4>
+                              </div>
+                            </div>
+                        </div>
+                      
+                    </div>             
+               </section>                               
                                
                                </div>
                                </div>
